@@ -1,8 +1,8 @@
-# MATLAB Fall 2014 â€“ Research Plan (Template)
+# MATLAB Fall 2014 - Research Plan (Template)
 (text between brackets to be removed)
 
 > * Group Name: Partizani
-> * Group participants names: Bjelobrk Zoran, WŠlchli Ruben
+> * Group participants names: Bjelobrk Zoran, W\"alchli Ruben
 > * Project Title: Refinement of a Inter-Group Violence Model
 
 ## General Introduction
@@ -19,7 +19,7 @@ The model is made up of two categories of actors: civilians and soldiers. The ci
 
 The only task of the soldiers is it to prevent inter-group violence from happening. They arrest civilians, which have attacked a member of the an other ethnic group.
 
-The civilians will engage in aggression agains other ethnicities based on their perceived hardship, the perceived legitimacy of the other groups, their individual risk aversion and the estimated arrest probability.
+The civilians will engage in aggression agains other ethnicities based on their perceived hardship, the perceived legitimacy of the other groups, their individual risk aversion, individual violence threshold and the estimated arrest probability.
 
 In contrast to the reference model from the literature, the spreading of information about outbursts of violence and its effect on the perceived hardship and legitimacy will also be investigated. In our opinion changes in those variables due to previous developments is key for the propagation of the simulation. Distribution of information is always associated with a certain degree of error. The effect of this "noise" will be examined too.
 
@@ -27,6 +27,12 @@ In contrast to the reference model from the literature, the spreading of informa
 
 
 ## Fundamental Questions
+
+What different dynamics do emerge, when a third ethnic group is introduced into the scenario?
+
+What would be a realistic model for the effect of violent events and arrests on the individual perceived legitimacy of the other ethnic groups and the individual perceived hardship? What effect on the outcome of the simulation do such additional interactions have?
+
+How can information spreading be incorporated realistically into such a model? What effect does uncertainty in the transmission of information on the outcome of the simulation?
 
 (At the end of the project you want to find the answer to these questions)
 (Formulate a few, clear questions. Articulate them in sub-questions, from the more general to the more specific. )
