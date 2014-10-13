@@ -16,7 +16,7 @@ Throughout human history there has always been violent conflicts between members
 
 The model is made up of two categories of actors: civilians and soldiers. The civilians are further divided into three different ethnic groups. This is an expansion compared to the model described in literature. In our opinion, a situation with more than two ethnic groups is particularly interesting.
 
-The only task of the soldiers is it to prevent inter-group violence from happening. They do this via arresting civilians, who have attacked members of the an other ethnic group. The arrested civilians are transferred to the jail for a random amount of time and then again released on to the map.
+The only task of the soldiers is it to prevent inter-group violence from happening. They do this via arresting civilians, who have attacked members of an other ethnic group. The arrested civilians are transferred to the jail for a random amount of time and then again released on to the map.
 
 The civilians will engage in aggression agains other ethnicities based on their perceived hardship, the perceived legitimacy of the other groups, their assumed arrest probability, their individual risk aversion and their violence threshold. In our model, the violence threshold is a characteristic of the single civilian in contrast to being a global parameter for all civilians in the literature model. By this, we hope to incorporate also the individual levels of extremism of the civilians into the model.
 
