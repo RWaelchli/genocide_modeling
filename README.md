@@ -37,9 +37,9 @@ Those social-interaction models are always a strong simplification of the real-w
 
 ## Fundamental Questions
 
-What different dynamics do emerge, when a third ethnic group is introduced into the scenario?
+What different dynamics do emerge, when a third ethnic group is introduced into the scenario compared to the results presented in literature?
 
-Is our model of the effect of violent events and arrests on the individual perceived legitimacy of the other ethnic groups and the individual perceived hardship realistic? What effect on the outcome of the simulation do such additional interactions have?
+Is our expansion of the model concerning the effect of violent events and arrests on the individual perceived legitimacy of the other ethnic groups and the individual perceived hardship realistic? What effect on the outcome of the simulation do such additional interactions have compared to the literature model?
 
 How can information spreading be incorporated realistically into such a model? What effect does uncertainty in the transmission of information on the outcome of the simulation?
 
