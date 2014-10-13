@@ -60,6 +60,10 @@ Interesting is also the effect of information spreading.  The effects on perceiv
 
 ## References 
 
+Epstein, J. M.: "Modeling civil violence: An agent-based computational approach", 2002, Colloquium. This reference contains the base model used in this project.
+
+Bhavani, R.; Backer, D.: "Localized Ethnic Conflict and Genocide", 2000. This reference contains some inspiration regarding the information spreading.
+
 (Add the bibliographic references you intend to use)
 (Explain possible extension to the above models)
 (Code / Projects Reports of the previous year)
