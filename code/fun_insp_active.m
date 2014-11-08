@@ -23,7 +23,7 @@ for k=-range:range
             end
             
             % Check if there is an active agent on the inspected field:
-            if map(i_temp,j_temp).type ~= 0 && map(i_temp,j_temp).type ~= 4 && map(i_temp,j_temp).state == 1
+            if map(i_temp,j_temp).type ~= 0 && map(i_temp,j_temp).type ~= 3 && map(i_temp,j_temp).state == 1
                 active = [active;i_temp j_temp];
             end
         end

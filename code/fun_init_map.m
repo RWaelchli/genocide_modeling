@@ -22,12 +22,30 @@ n_fields = N^2; % number of fields on the map
 n_civ = n_fields*rho_tot*(1-soldier_to_civ); % total number of civilians
 n_1 = n_civ*pop_frac(1); % number of civilians 1
 n_2 = n_civ*pop_frac(2); % number of civilians 2
-n_3 = n_civ*pop_frac(3); % number of civilians 3
 n_soldier = n_fields*rho_tot*soldier_to_civ; % number of soliders
 
 
 L = 0.3;
 T = 0.1;
+
+% Initialization of the Cops:
+for k=1:n_soldier
+    
+    % Choose random position on the map:
+    i = unidrnd(N);
+    j = unidrnd(N);
+    
+    % Repeat selection if position is already taken:
+    while(map(i,j).type ~= 0)
+        i = unidrnd(N);
+        j = unidrnd(N);
+    end
+    
+    % Define Characteristics:
+    map(i,j).type = 3;
+    map(i,j).v = v_soldier;
+    
+end
 
 % Initialization of the Civilians 1:
 for k=1:n_1
@@ -45,7 +63,7 @@ for k=1:n_1
     % Define Characteristics:
     map(i,j).type = 1;
     map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = [L L L]; % legitimacy
+    map(i,j).L = [L L]; % legitimacy
     map(i,j).v = v_civ; % vision
     map(i,j).T = T; % violence threshold
     map(i,j).R = unifrnd(0,1); % risk aversion
@@ -69,55 +87,11 @@ for k=1:n_2
     % Define Characteristics:
     map(i,j).type = 2;
     map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = [L L L]; % legitimacy
+    map(i,j).L = [L L]; % legitimacy
     map(i,j).v = v_civ; % vision
     map(i,j).T = T; % violence threshold
     map(i,j).R = unifrnd(0,1); % risk aversion
     map(i,j).life_exp = 150 + (unidrnd(51) - 1); % life expectancy
-    
-end
-
-% Initialization of the Civilians 3:
-for k=1:n_3
-    
-    % Choose random position on the map:
-    i = unidrnd(N);
-    j = unidrnd(N);
-    
-    % Repeat selection if position is already taken:
-    while(map(i,j).type ~= 0)
-        i = unidrnd(N);
-        j = unidrnd(N);
-    end
-    
-    % Define Characteristics:
-    map(i,j).type = 3;
-    map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = [L L L]; % legitimacy
-    map(i,j).v = v_civ; % vision
-    map(i,j).T = T; % violence threshold
-    map(i,j).R = unifrnd(0,1); % risk aversion
-    map(i,j).life_exp = 150 + (unidrnd(51) - 1); % life expectancy
-    
-end
-
-
-% Initialization of the Cops:
-for k=1:n_soldier
-    
-    % Choose random position on the map:
-    i = unidrnd(N);
-    j = unidrnd(N);
-    
-    % Repeat selection if position is already taken:
-    while(map(i,j).type ~= 0)
-        i = unidrnd(N);
-        j = unidrnd(N);
-    end
-    
-    % Define Characteristics:
-    map(i,j).type = 4;
-    map(i,j).v = v_soldier;
     
 end
 

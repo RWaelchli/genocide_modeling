@@ -1,4 +1,4 @@
-function [map,jail,arrest] = fun_action_soldier(i,j,map,jail,J_min,J_max,default_struct)
+function [map,jail,arrest] = fun_action_soldier(i,j,map,jail,J_max,default_struct)
 
 arrest = 0;
 
@@ -11,7 +11,7 @@ if isempty(active) ~= 1
 
     coord = active(k,:); % Coordinates Of The Active Civilian To Be Arrested
 
-    map(coord(1),coord(2)).sentenced = J_min + (unidrnd(J_max+1) - 1); % Assign Random Jail Term
+    map(coord(1),coord(2)).sentenced = unidrnd(J_max); % Assign Random Jail Term
     
     % Move Arrested Civilian To The Jail:
     for k=1:length(jail)

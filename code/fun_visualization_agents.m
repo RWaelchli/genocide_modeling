@@ -1,4 +1,4 @@
-function [C1_active,C1_quiet,C2_active,C2_quiet,C3_active,C3_quiet,Cops] = fun_visualization_agents(map)
+function [C1_active,C1_quiet,C2_active,C2_quiet,Cops] = fun_visualization_agents(map)
 
 %% Determination Of The Map Size
 
@@ -13,8 +13,6 @@ C1_active = zeros(N^2,3);
 C1_quiet = zeros(N^2,3);
 C2_active = zeros(N^2,3);
 C2_quiet = zeros(N^2,3);
-C3_active = zeros(N^2,3);
-C3_quiet = zeros(N^2,3);
 Cops = zeros(N^2,3);
 
 %% Copying The Information About The Types
@@ -30,19 +28,15 @@ for i=1:N
     for j=1:N
         
         if A(i,j) == 1 && B(i,j) == 0
-            C1_quiet(((i-1)*10+j),:) = [j N-(i-1) 1];
+            C1_quiet(((i-1)*N+j),:) = [j N-(i-1) 1];
         elseif A(i,j) == 1 && B(i,j) == 1
-            C1_active(((i-1)*10+j),:) = [j N-(i-1) 1];
+            C1_active(((i-1)*N+j),:) = [j N-(i-1) 1];
         elseif A(i,j) == 2 && B(i,j) == 0
-            C2_quiet(((i-1)*10+j),:) = [j N-(i-1) 1];
+            C2_quiet(((i-1)*N+j),:) = [j N-(i-1) 1];
         elseif A(i,j) == 2 && B(i,j) == 1
-            C2_active(((i-1)*10+j),:) = [j N-(i-1) 1];
-        elseif A(i,j) == 3 && B(i,j) == 0
-            C3_quiet(((i-1)*10+j),:) = [j N-(i-1) 1];
-        elseif A(i,j) == 3 && B(i,j) == 1
-            C3_active(((i-1)*10+j),:) = [j N-(i-1) 1];
-        elseif A(i,j) == 4
-            Cops(((i-1)*10+j),:) = [j N-(i-1) 1];
+            C2_active(((i-1)*N+j),:) = [j N-(i-1) 1];
+        elseif A(i,j) == 3
+            Cops(((i-1)*N+j),:) = [j N-(i-1) 1];
         end
         
     end
@@ -61,12 +55,6 @@ C2_quiet = C2_quiet(rows,:);
 
 rows = find(C2_active(:,1));
 C2_active = C2_active(rows,:);
-
-rows = find(C3_quiet(:,1));
-C3_quiet = C3_quiet(rows,:);
-
-rows = find(C3_active(:,1));
-C3_active = C3_active(rows,:);
 
 rows = find(Cops(:,1));
 Cops = Cops(rows,:);

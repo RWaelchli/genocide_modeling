@@ -17,7 +17,7 @@ surr_actives = 1;
 range = map(i,j).v;
 N = size(map,1);
 civilians = struct('coordinates',[]);
-civilians = repmat(civilians,3,1);
+civilians = repmat(civilians,2,1);
 
 % Type of the Examined Agent:
 type = map(i,j).type;
@@ -44,13 +44,11 @@ for k=-range:range
                 civilians(1).coordinates = [civilians(1).coordinates; i_temp j_temp];
             elseif map(i_temp,j_temp).type == 2
                 civilians(2).coordinates = [civilians(2).coordinates; i_temp j_temp];
-            elseif map(i_temp,j_temp).type == 3
-                civilians(3).coordinates = [civilians(3).coordinates; i_temp j_temp];
             end
             
             if map(i_temp,j_temp).type == type && map(i_temp,j_temp).state == 1
                 surr_actives = surr_actives + 1;
-            elseif map(i_temp,j_temp).type == 4
+            elseif map(i_temp,j_temp).type == 3
                 surr_soldiers = surr_soldiers + 1;
             end
             
@@ -60,50 +58,33 @@ end
 
 %% Choice of the Action
 
+if type == 1
+    index = 2;
+elseif type == 2
+    index = 1;
+end
+
 ratio = surr_soldiers/surr_actives;
 
 P = 1 - exp(-k*ratio); % estimated arrest probability
-G = map(i,j).H.*(1-map(i,j).L); % grievance of the selected civilian
+G = map(i,j).H.*(1-map(i,j).L(index)); % grievance of the selected civilian
 N = P*map(i,j).R; % net risk of the selected civilian
 
 kill = 0;
-diff = (G - N) - map(i,j).T;
 
-% Search Index of Largest Difference:
-[~,index] = max(diff);
-
-if diff(index) > 0 && index ~= type
-    if isempty(civilians(index).coordinates) ~= 1
-        kill_coord = civilians(index).coordinates(unidrnd(size(civilians(index).coordinates,1)),:);
-        map(kill_coord(1),kill_coord(2)) = default_struct;
-        kill = 1;
-    end
+if (G-N) > map(i,j).T && isempty(civilians(index).coordinates) ~= 1
+    n_opp = size(civilians(index).coordinates,1);
+    ind_opp = unidrnd(n_opp);
+    i_opp = civilians(index).coordinates(ind_opp,1);
+    j_opp = civilians(index).coordinates(ind_opp,2);
+    map(i_opp,j_opp) = default_struct;
+    kill = 1;
 end
 
-% Search Index of the Second Largest Difference:
-
-diff_sort = sort(diff);
-index = find(diff == diff_sort(2));
-
-% Check If All Differences Are Equal:
-if length(index) > 1
-    index = unidrnd(3);
-    while index == type
-        index = unidrnd(3);
-    end
-end
-
-if diff(index) > 0 && index ~= type && kill ~= 1
-    if isempty(civilians(index).coordinates) ~= 1
-        kill_coord = civilians(index).coordinates(unidrnd(size(civilians(index).coordinates,1)),:);
-        map(kill_coord(1),kill_coord(2)) = default_struct;
-        kill = 1;
-    end
-end
 
 %% Update of State
 
-if diff <= 0
+if (G-N) <= map(i,j).T
     map(i,j).state = 0;
 elseif kill == 1
     map(i,j).state = 1;

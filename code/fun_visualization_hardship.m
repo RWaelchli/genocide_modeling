@@ -22,7 +22,7 @@ end
 for i=1:N
     for j=1:N
         
-        if T(i,j) ~= 0 && T(i,j) ~= 4
+        if T(i,j) ~= 0 && T(i,j) ~= 3
             H(((i-1)*10+j),:) = [j N-(i-1) A(i,j)];
         end
         
