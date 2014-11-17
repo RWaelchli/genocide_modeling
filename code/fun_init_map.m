@@ -25,7 +25,7 @@ n_2 = n_civ*pop_frac(2); % number of civilians 2
 n_soldier = n_fields*rho_tot*soldier_to_civ; % number of soliders
 
 
-L = 0.3;
+L = 0.8;
 T = 0.1;
 
 % Initialization of the Cops:
@@ -66,8 +66,9 @@ for k=1:n_1
     map(i,j).L = [L L]; % legitimacy
     map(i,j).v = v_civ; % vision
     map(i,j).T = T; % violence threshold
+%     map(i,j).T = unifrnd(0,1);
     map(i,j).R = unifrnd(0,1); % risk aversion
-    map(i,j).life_exp = 150 + (unidrnd(51) - 1); % life expectancy
+    map(i,j).life_exp = unidrnd(200); % life expectancy
     
 end
 
@@ -89,9 +90,10 @@ for k=1:n_2
     map(i,j).H = unifrnd(0,1); % hardship
     map(i,j).L = [L L]; % legitimacy
     map(i,j).v = v_civ; % vision
-    map(i,j).T = T; % violence threshold
+%     map(i,j).T = unifrnd(0,1); % violence threshold
+    map(i,j).T = T;
     map(i,j).R = unifrnd(0,1); % risk aversion
-    map(i,j).life_exp = 150 + (unidrnd(51) - 1); % life expectancy
+    map(i,j).life_exp = unidrnd(200); % life expectancy
     
 end
 

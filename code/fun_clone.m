@@ -37,6 +37,7 @@ for i=1:N
             p = normrnd(0,1);
             if p <= boundary
                 map(i_clone,j_clone) = map(i,j);
+                map(i_clone,j_clone).age = 0;
             end
 
         end
