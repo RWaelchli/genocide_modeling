@@ -85,7 +85,7 @@
 \section{Individual contributions}
 
 \section{Introduction and Motivations}
-Ethnical conflicts were omnipresent throughout human history and still are a major source for civil violence in these days. The wars leading to the decay of former Yugoslavia are an example in recent history. When studying the project suggestions, this topic immediately drew our interest. Our project is a so-called "model-driven" project. The base model was described by Epstein in 2002. It contains some very strong simplifications as further described in section \ref{subsec:base_model}. Our approach was to modify the model in a way that describes reality better in our opinion and to compare the results of the model runs to those presented in literature. To further assess the model in a quantitative manner, a global sensitivity analysis was performed for various model parameters based on a method described in literature.
+Ethnical conflicts were omnipresent throughout human history and still are a major source for civil violence in these days. For instance, the wars leading to the decay of former Yugoslavia are an example in recent history. When studying the project suggestions, this topic immediately drew our interest. Our project is a so-called "model-driven" project. The base model was described by Epstein in 2002. It contains some very strong simplifications as further described in section \ref{subsec:base_model}. Our approach was to modify the model in a way that describes reality better in our opinion and to compare the results of the model runs to those presented in literature. To further assess the model in a quantitative manner, a global sensitivity analysis was performed for various model parameters based on a method described in literature.
 
 \section{Description of the Model}
 \label{sec:description_model}
@@ -114,10 +114,34 @@ The difference $G - N$ is the civilian's net utility of becoming active. This is
 \subsubsection{Specification of the LEOs}
 The LEOs have only one characteristic, their vision $v^\star$. They inspect the map within their vision and randomly arrest an active civilian.
 
-\subsection{Evolution of the Simulation}
-After choosing values for the global parameters, the three different types of agents are placed on the map randomly and their individual attributes are initialized. The number of civilians and LEOs that are placed on the map are determined by their corresponding densities. In each iteration begins by the random selection of one agent (civilian or LEO). This agent moves to a random empty position within his vision. There he inspects his environment. If the agent is a civilian he takes the decision to be active or quiet. When he decides to become active, he tries to kill a random civilian of the other ethnic group within his vision. If the selected agent is a LEO, he arrests a random active civilian within his vision. The arrested civilian is assigned a jail term and moved to the jail. The jail term is drawn from $U(0,J_{\text{max}}$. The ages both of the civilians on the map as well as of those in jail are updated and the civilians that have reached their maximum age are removed. The number of turns of the inmates spent in jail are updated and those who have served their time are released onto random positions on the map.
+\subsubsection{Evolution of the Simulation}
+After choosing values for the global parameters, the three different types of agents are placed on the map randomly and their individual attributes are initialized. The number of civilians and LEOs that are placed on the map are determined by their corresponding selected densities. In each iteration begins by the random selection of one agent (civilian or LEO). This agent moves to a random empty position within his vision. There he inspects his environment. If the agent is a civilian he takes the decision to be active or quiet. When he decides to become active, he tries to kill a random civilian of the other ethnic group within his vision. If the selected agent is a LEO, he arrests a random active civilian within his vision. The arrested civilian is assigned a jail term and moved to the jail. The jail term is drawn from $U(0,J_{\text{max}})$. The ages both of the civilians on the map as well as of those in jail are updated and the civilians that have reached their maximum age are removed. The number of turns of the inmates spent in jail are updated and those who have served their time are released onto random positions on the map.
+
+\subsection{Modification of the Model}
+
+\subsubsection{Individual Perceived Legitimacy and Threshold}
+In our opinion, the assumption that the perceived legitimacy of the other ethnic group and the threshold value are identical for all individuals of the population is too harsh. Therefore, we wanted to make them individual quantities. In the modified model the perceived legitimacy of the other ethnic groups is also initialized for all civilians by drawing it from $U(0,1)$.\\
+\\
+The threshold $T$ can be seen as the level of "extremism" an individual has. Epstein describes it as the utility of not publicly expressing one's private grievance. A very extreme individual will see no utility in holding his private grievance back, whether a very conservative individual will almost never publicly express his private grievance. The difference $(G-N)$ can take values in the interval $[-1,1]$. Therefore it is sensible to draw the individual threshold values from the uniform distribution defined in that range. A civilian with $T = -1$ will always be active, whereas a civilian with $T = 1$ will never be active.
+
+\subsubsection{Updating the Perceived Legitimacy}
+It seems quite obvious that the perceived legitimacy of the other ethnic group should not be a constant over the course of the simulation. Violence committed by one ethnic group will probably decrease its perceived legitimacy in the eyes of the other ethnic group. The opposite effect will possibly have the arrest of a active (violent) civilian on the perceived legitimacy of its ethnic group. In our expansion of the model, these effects are limited to the range of sight of the involved active civilian. The update in the case of violence is the following:
+\begin{align}
+L_{\text{new}} = L_{\text{old}} \left( 1 - k_L \right)
+\end{align}
+When an active civilian is arrested, the updates is given by:
+\begin{align}
+L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right)
+\end{align}
+The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
 
 \section{Implementation}
+
+\subsection{Base Model}
+The whole implementation is based on arrays of structs of which the one describing the map is in the center of the program. This way of implementation may not be the fastest possible, but in our opinion the most intuitive one.
+
+\subsubsection{Structure Describing the Agents}
+
 
 \section{Simulation Results and Discussion}
 

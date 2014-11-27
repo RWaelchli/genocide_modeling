@@ -11,9 +11,9 @@ default_struct = struct('type',0,'H',0,'L',[0 0],'v',0,'T',0,'R',0,'state',0,'ag
 
 % Properties of the Map:
 N = 20; % size
-rho_tot = 0.8; % desity of the population
+rho_tot = 0.7; % desity of the population
 pop_frac = [1/2 1/2]; % population fractions of the three ethnic groups
-soldier_to_civ = 0; % soldiers to civilians ratio
+LEO_to_civ = 0.01; % soldiers to civilians ratio
 P = 0.01; % probability of the civilians to clone themselves in one iteration
 
 % Properties of the Civilians:
@@ -23,7 +23,7 @@ k = 2.3; % parameter to estimate arrest probability P
 % Properties of the Soldiers:
 v_soldier = 3; % vision
 
-map = fun_init_map(default_struct,N,rho_tot,soldier_to_civ,v_civ,v_soldier,pop_frac);
+map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_soldier,pop_frac);
 
 %% Initialization Of The Jail
 
@@ -33,15 +33,18 @@ jail = fun_init_jail(default_struct,J_max);
 
 %% Preallocation Storage Variables
 
-nIter = 1.5e3;
+nIter = 3e2;
 
 n_1 = zeros(1,nIter+1);
 n_2 = zeros(1,nIter+1);
+n1_active = zeros(1,nIter);
+n2_active = zeros(1,nIter);
+n_jail = zeros(1,nIter);
 
 sum_kills = zeros(nIter,1);
 sum_arrests = zeros(nIter,1);
 
-n_civ = N^2*rho_tot*(1-soldier_to_civ); % total number of civilians
+n_civ = N^2*rho_tot*(1-LEO_to_civ); % total number of civilians
 n_1(1) = n_civ*pop_frac(1); % number of civilians 1
 n_2(1) = n_civ*pop_frac(2); % number of civilians 2
 
@@ -146,7 +149,15 @@ for n=1:nIter
     n_1(n+1) = length(C1_quiet(:,1))+length(C1_active(:,1));
     n_2(n+1) = length(C2_quiet(:,1))+length(C2_active(:,1));
     
-    n
+    n1_active(n) = length(C1_active(:,1));
+    n2_active(n) = length(C2_active(:,1));
+    
+    for l = 1:size(jail,2)
+        if jail(l).type ~= 0
+            n_jail(n) = n_jail(n)+1;
+        end
+    end
+    
 
 end
 
@@ -169,6 +180,12 @@ xlabel('Turn','FontSize',14)
 ylabel('Population','FontSize',14)
 legend({'Ethnicity 1','Ethnicity 2'},'FontSize',14,'location','SouthEast')
 hold off
+
+f4 = figure(4);
+plot(1:nIter,n1_active,1:nIter,n2_active,1:nIter,n_jail)
+xlabel('Turn','FontSize',14)
+ylabel('Number [-]','FontSize',14)
+legend({'Actives Ethnicity 1','Actives Ethnicity 2','Civilians in Jail'},'FontSize',14,'location','best')
 
 % movie(gcf,M,2,1);
 
