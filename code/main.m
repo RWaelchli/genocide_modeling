@@ -181,11 +181,32 @@ ylabel('Population','FontSize',14)
 legend({'Ethnicity 1','Ethnicity 2'},'FontSize',14,'location','SouthEast')
 hold off
 
+saveas(f3,'ex_kill_arrest.png')
+
 f4 = figure(4);
 plot(1:nIter,n1_active,1:nIter,n2_active,1:nIter,n_jail)
 xlabel('Turn','FontSize',14)
 ylabel('Number [-]','FontSize',14)
 legend({'Actives Ethnicity 1','Actives Ethnicity 2','Civilians in Jail'},'FontSize',14,'location','best')
+
+saveas(f4,'ex_active_jail.png')
+
+f5 = figure(5);
+hold on
+scatter(C1_quiet(:,1), C1_quiet(:,2),100,'filled','s','MarkerFaceColor','y');
+scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r');
+scatter(C2_quiet(:,1), C2_quiet(:,2),100,'filled','s','MarkerFaceColor','g');
+scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r');
+scatter(Cops(:,1), Cops(:,2),100,'filled','s','MarkerFaceColor','k');
+xlim([1 N])
+ylim([1 N])
+grid on
+
+set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
+
+hold off
+
+saveas(f5,'ex_map.png')
 
 % movie(gcf,M,2,1);
 

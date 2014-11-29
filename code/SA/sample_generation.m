@@ -77,3 +77,17 @@ for i=1:size(M1,1)
         M2(i,j) = M1(resamp_index(i,j),j);
     end
 end
+
+%% Writing Data Into Files
+
+fileID = fopen('M1.txt','w');
+for i=1:size(M1,1)
+    fprintf(fileID,'%d %d %d %d %d %d %d %d %d %d\n',M1(i,:));
+end
+fclose(fileID);
+
+fileID = fopen('M2.txt','w');
+for i=1:size(M2,1)
+    fprintf(fileID,'%d %d %d %d %d %d %d %d %d %d\n',M2(i,:));
+end
+fclose(fileID);
