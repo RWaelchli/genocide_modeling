@@ -109,7 +109,7 @@ for i = 1:n
 end
 
 E = sqrt(1/n*sum(a_12345678910.*a_0));
-V = 1/(n-1)*sum((a_0-E).^2);
+V = 1/n*sum((a_0-E).^2);
 
 U_1 = 1/(n-1)*sum(a_12345678910.*a_1);
 U_2 = 1/(n-1)*sum(a_12345678910.*a_2);
@@ -144,15 +144,15 @@ U_min8 = 1/(n-1)*sum(a_0.*a_8);
 U_min9 = 1/(n-1)*sum(a_0.*a_9);
 U_min10 = 1/(n-1)*sum(a_0.*a_10);
 
-S_1T = (U_min1-E^2)/V;
-S_2T = (U_min2-E^2)/V;
-S_3T = (U_min3-E^2)/V;
-S_4T = (U_min4-E^2)/V;
-S_5T = (U_min5-E^2)/V;
-S_6T = (U_min6-E^2)/V;
-S_7T = (U_min7-E^2)/V;
-S_8T = (U_min8-E^2)/V;
-S_9T = (U_min9-E^2)/V;
-S_10T = (U_min10-E^2)/V;
+S_1T = 1-(U_min1-E^2)/V;
+S_2T = 1-(U_min2-E^2)/V;
+S_3T = 1-(U_min3-E^2)/V;
+S_4T = 1-(U_min4-E^2)/V;
+S_5T = 1-(U_min5-E^2)/V;
+S_6T = 1-(U_min6-E^2)/V;
+S_7T = 1-(U_min7-E^2)/V;
+S_8T = 1-(U_min8-E^2)/V;
+S_9T = 1-(U_min9-E^2)/V;
+S_10T = 1-(U_min10-E^2)/V;
 
 toc
