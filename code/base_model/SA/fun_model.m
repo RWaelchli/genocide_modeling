@@ -14,8 +14,6 @@ jail = fun_init_jail(default_struct,J_max);
 %% Preallocation Storage Variables
 
 sum_kills = zeros(nIter,1);
-% sum_arrests = zeros(nIter,1);
-
 n_civ = N^2*rho_tot*(1-LEO_to_civ); % total number of civilians at the beginning
 
 for n=1:nIter
