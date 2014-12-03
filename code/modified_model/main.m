@@ -15,7 +15,8 @@ rho_tot = 0.7; % desity of the population
 pop_frac = 0.5; % population fractions of the three ethnic groups
 LEO_to_civ = 0.05; % soldiers to civilians ratio
 P = 0.01; % probability of the civilians to clone themselves in one iteration
-k_L = 1;
+k_L = 0.5;
+L_mean = 0.8;
 
 % Properties of the Civilians:
 v_civ = 2; % vision
@@ -24,7 +25,7 @@ k = 2.3; % parameter to estimate arrest probability P
 % Properties of the Soldiers:
 v_soldier = 3; % vision
 
-map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_soldier,pop_frac);
+map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_soldier,pop_frac,L_mean);
 
 %% Initialization Of The Jail
 

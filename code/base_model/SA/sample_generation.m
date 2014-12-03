@@ -36,7 +36,7 @@ L_b = 0.9;
 
 %% Generation of the Sampling Matrix
 
-n = 1e3; % number of samples to be generated
+n = 1e2; % number of samples to be generated
 
 p = sobolset(10,'Skip',1e3,'Leap',1e2); % point set of random numbers generated using Sobol's method
 p = scramble(p,'MatousekAffineOwen');
@@ -80,14 +80,5 @@ end
 
 %% Writing Data Into Files
 
-fileID = fopen('M1.txt','w');
-for i=1:size(M1,1)
-    fprintf(fileID,'%d %d %d %d %d %d %d %d %d %d\n',M1(i,:));
-end
-fclose(fileID);
-
-fileID = fopen('M2.txt','w');
-for i=1:size(M2,1)
-    fprintf(fileID,'%d %d %d %d %d %d %d %d %d %d\n',M2(i,:));
-end
-fclose(fileID);
+dlmwrite('M1.txt',M1,'delimiter','\t','precision','%.6d')
+dlmwrite('M2.txt',M2,'delimiter','\t','precision','%.6d')

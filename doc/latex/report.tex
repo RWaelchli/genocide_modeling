@@ -141,7 +141,29 @@ The reasoning behind both formulas is that if the perceived legitimacy is either
 The whole implementation is based on arrays of structs of which the one describing the map is in the center of the program. This way of implementation may not be the fastest possible, but in our opinion the most intuitive one.
 
 \subsubsection{Structure Describing the Agents}
-
+The fields of the struct used to describe the agents are shown in table \ref{tab:fields_struct}. The central part of the program is the map, an array of size $(N \times N)$ containing this struct as entries, where $N$ is the map size. The individual values of the fields are initialized at the beginning using the function $fun\_init\_map()$, which returns the initialized map array with all the civilians and LEOs. Type equal to 1, 2 or 3 indicates that the agent is a civilian of the ethnic group 1, group 2 or a LEO. For a LEO only the field v is also different from the default value.
+\begin{table}[!htbp]
+	\centering
+	\caption{The fields of the struct used to describe the single agents and their meaning and default value.}
+	\vspace{0.5 cm}
+		\begin{tabular}{l | l | l} 
+			Field Name & Quantity & Default Value\\
+			\hline
+			type & Type of the Agent & 0\\
+			H & Agent's Hardship & 0\\
+			L & Agent's Perceived Legitimacy & 0\\
+			v & Agent's Vision & 0\\
+			T & Agent's Violence Threshold & 0\\
+			R & Agent's Risk Aversion & 0\\
+			state & Agent's State & 0\\
+			age & Agent's Age & 0\\
+			life\_exp & Agent's Life Expectancy & 0\\
+			sentenced & Agent's Jail Term & 0\\
+			served & Agent's Served Time in Jail & 0
+	\end{tabular}
+	\label{tab:fields_struct}
+\end{table}
+The jail is an array of size $(J_{max} \times 1)$ with the struct as entries. The reasoning behind the size of the jail array is that it has to be large enough that theoretically in every iteration a civilian could be send to jail. The function $fun\_movement()$ moves the randomly selected agent, updates the map accordingly and returns the new position of the agent. If the agent is a LEO, the function $fun\_action\_LEO()$ inspects the fields within vision of the new position and if one present, randomly moves an active civilian to the jail. To do so, it first assigns the civilian a random jail term (field "sentenced"). Then copies the civilians struct entries to an empty position in the jail and erases the civilian from the map by setting the struct fields at its position to the default values.
 
 \section{Simulation Results and Discussion}
 

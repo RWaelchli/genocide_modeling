@@ -34,7 +34,6 @@ for n=1:nIter
 
     %% Action
     
-%     arrest = 0;
     kill = 0;
 
     if map(i,j).type == 3

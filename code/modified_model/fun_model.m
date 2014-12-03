@@ -1,4 +1,4 @@
-function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k,J_max,k_L,max_age,nIter)
+function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k,J_max,L_mean,k_L,max_age,nIter)
 
 %% Initializing the Map (Array of Structures)
 

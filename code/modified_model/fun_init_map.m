@@ -13,7 +13,7 @@
 
 % cop_to_civ is the initial ratio of cops to civilians.
 
-function map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac)
+function map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac,L_mean)
 
 % Preallocation of the Array of Structures:
 map = repmat(default_struct,N,N); % array of structures representing the map
@@ -44,6 +44,11 @@ for k=1:n_LEO
     
 end
 
+pd_L = makedist('Normal','mu',L_mean,'sigma',0.1);
+t_L = truncate(pd_L,0,1);
+pd_T = makedist('Normal','mu',0,'sigma',0.1);
+t_T = truncate(pd_T,-1,1);
+
 % Initialization of the Civilians 1:
 for k=1:n_1
     
@@ -60,9 +65,9 @@ for k=1:n_1
     % Define Characteristics:
     map(i,j).type = 1;
     map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = unifrnd(0,1); % legitimacy
+    map(i,j).L = random(t_L); % legitimacy
     map(i,j).v = v_civ; % vision
-    map(i,j).T = unifrnd(-1,1); % violence threshold
+    map(i,j).T = random(t_T); % violence threshold
     map(i,j).R = unifrnd(0,1); % risk aversion
     map(i,j).life_exp = unidrnd(200); % life expectancy
     
@@ -84,9 +89,9 @@ for k=1:n_2
     % Define Characteristics:
     map(i,j).type = 2;
     map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = unifrnd(0,1); % legitimacy
+    map(i,j).L = random(t_L); % legitimacy
     map(i,j).v = v_civ; % vision
-    map(i,j).T = unifrnd(-1,1); % violence threshold
+    map(i,j).T = random(t_T); % violence threshold
     map(i,j).R = unifrnd(0,1); % risk aversion
     map(i,j).life_exp = unidrnd(200); % life expectancy
     

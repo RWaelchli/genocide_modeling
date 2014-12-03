@@ -35,7 +35,7 @@ for i=1:N
             % Performing the Cloning With Probability P:
             boundary = norminv(P,0,1);
             p = normrnd(0,1);
-            if p <= boundary
+            if p <= boundary && map(i,j).type ~= 3
                 map(i_clone,j_clone) = map(i,j);
                 map(i_clone,j_clone).age = 0;
             end
