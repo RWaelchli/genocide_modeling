@@ -1,4 +1,4 @@
-function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k,J_max,T,L,max_age,nIter)
+function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,T,L,max_age,nIter)
 
 %% Initializing the Map (Array of Structures)
 
@@ -39,7 +39,7 @@ for n=1:nIter
     if map(i,j).type == 3
         [map,jail,~] = fun_action_LEO(i,j,map,jail,J_max,default_struct);
     else
-        [map,kill] = fun_action_civ(map,i,j,default_struct,k);
+        [map,kill] = fun_action_civ(map,i,j,default_struct,k_P);
     end
     
     %% Recording The Results Of The Action

@@ -7,7 +7,7 @@
 % entry of this vector is larger than zero, the selected agent will kill a
 % civilian from an other ethinc group within reach.
 
-function [map,kill] = fun_action_civ(map,i,j,default_struct,k)
+function [map,kill] = fun_action_civ(map,i,j,default_struct,k_P)
 
 %% Analyze Fields Within Vision
 
@@ -66,7 +66,7 @@ end
 
 ratio = surr_LEOs/surr_actives;
 
-P = 1 - exp(-k*ratio); % estimated arrest probability
+P = 1 - exp(-k_P*ratio); % estimated arrest probability
 G = map(i,j).H.*(1-map(i,j).L); % grievance of the selected civilian
 N = P*map(i,j).R; % net risk of the selected civilian
 

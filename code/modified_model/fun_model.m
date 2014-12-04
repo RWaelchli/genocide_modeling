@@ -1,11 +1,11 @@
-function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k,J_max,L_mean,k_L,max_age,nIter)
+function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,L_mean,k_L,max_age,nIter)
 
 %% Initializing the Map (Array of Structures)
 
 % Definition of the Default Structure:
 default_struct = struct('type',0,'H',0,'L',0,'v',0,'T',0,'R',0,'state',0,'age',0,'life_exp',0,'sentenced',0,'served',0);
 
-map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac);
+map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac,L_mean,L_std,T_mean,T_std,max_age);
 
 %% Initialization Of The Jail
 
@@ -39,7 +39,7 @@ for n=1:nIter
     if map(i,j).type == 3
         [map,jail,~] = fun_action_LEO(i,j,map,jail,J_max,default_struct,k_L);
     else
-        [map,kill] = fun_action_civ(map,i,j,default_struct,k_L);
+        [map,kill] = fun_action_civ(map,i,j,default_struct,k_P,k_L);
     end
     
     %% Recording The Results Of The Action

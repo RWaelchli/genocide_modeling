@@ -79,7 +79,7 @@ for n=1:nIter
     if map(i,j).type == 3
         [map,jail,arrest] = fun_action_LEO(i,j,map,jail,J_max,default_struct,k_L);
     else
-        [map,kill] = fun_action_civ(map,i,j,default_struct,k_L);
+        [map,kill] = fun_action_civ(map,i,j,default_struct,k_P,k_L);
     end
     
     %% Recording The Results Of The Action

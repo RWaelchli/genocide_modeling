@@ -18,7 +18,7 @@ P = 0.01; % probability of the civilians to clone themselves in one iteration
 
 % Properties of the Civilians:
 v_civ = 2; % vision
-k = 2.3; % parameter to estimate arrest probability P
+k_P = 2.3; % parameter to estimate arrest probability P
 
 % Properties of the Soldiers:
 v_soldier = 3; % vision
@@ -72,7 +72,7 @@ for n=1:nIter
     if map(i,j).type == 3
         [map,jail,arrest] = fun_action_soldier(i,j,map,jail,J_max,default_struct);
     else
-        [map,kill] = fun_action_civ(map,i,j,default_struct);
+        [map,kill] = fun_action_civ(map,i,j,default_struct,k_P);
     end
     
     %% Recording The Results Of The Action
