@@ -16,9 +16,9 @@ n = size(M1,1);
 
 %% Preallocation of Vectors
 
-% a_0 = zeros(n,1);
-% a_1 = zeros(n,1);
-% a_2 = zeros(n,1);
+a_0 = zeros(n,1);
+a_1 = zeros(n,1);
+a_2 = zeros(n,1);
 a_3 = zeros(n,1);
 a_4 = zeros(n,1);
 a_5 = zeros(n,1);
@@ -32,9 +32,9 @@ a_12345678910 = zeros(n,1);
 %% Model Output Generation
 
 for i = 1:n
-%     a_0(i) = fun_model(N,M2(i,1),M2(i,2),M2(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
-%     a_1(i) = fun_model(N,M1(i,1),M2(i,2),M2(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
-%     a_2(i) = fun_model(N,M2(i,1),M1(i,2),M2(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
+    a_0(i) = fun_model(N,M2(i,1),M2(i,2),M2(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
+    a_1(i) = fun_model(N,M1(i,1),M2(i,2),M2(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
+    a_2(i) = fun_model(N,M2(i,1),M1(i,2),M2(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
     a_3(i) = fun_model(N,M2(i,1),M2(i,2),M1(i,3),M2(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
     a_4(i) = fun_model(N,M2(i,1),M2(i,2),M2(i,3),M1(i,4),M2(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
     a_5(i) = fun_model(N,M2(i,1),M2(i,2),M2(i,3),M2(i,4),M1(i,5),M2(i,6),M2(i,7),M2(i,8),M2(i,9),M2(i,10),max_age,nIter);
@@ -49,9 +49,9 @@ end
 
 %% Saving the Output
 
-% dlmwrite('a_0.txt',a_0,'delimiter','\t','precision','%.6d')
-% dlmwrite('a_1.txt',a_1,'delimiter','\t','precision','%.6d')
-% dlmwrite('a_2.txt',a_2,'delimiter','\t','precision','%.6d')
+dlmwrite('a_0.txt',a_0,'delimiter','\t','precision','%.6d')
+dlmwrite('a_1.txt',a_1,'delimiter','\t','precision','%.6d')
+dlmwrite('a_2.txt',a_2,'delimiter','\t','precision','%.6d')
 dlmwrite('a_3.txt',a_3,'delimiter','\t','precision','%.6d')
 dlmwrite('a_4.txt',a_4,'delimiter','\t','precision','%.6d')
 dlmwrite('a_5.txt',a_5,'delimiter','\t','precision','%.6d')
