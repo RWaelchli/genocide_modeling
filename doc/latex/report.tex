@@ -103,7 +103,7 @@ The grievance of the individual civilian is according to this formula given by t
 \\
 $R$ is the risk aversion of the civilian. It is heterogeneous across the population and also drawn upon initialization from $U(0,1)$. A civilian inspects its environment before deciding whether to go active or stay quiet (and vice versa). The civilians have the vision $v$, which is homogeneous across the population and is defined at the beginning of the simulation.
 \begin{align}
-P = 1 - \exp \left( - k \left( \frac{LEO}{A} \right)_v \right)
+P = 1 - \exp \left( - k_P \left( \frac{LEO}{A} \right)_v \right)
 \end{align}
 $P$ is the arrest probability estimated by the civilian. $\left(LEO/A\right)_v$ is the LEO-to-active ratio within the civilians vision. $A$ is always at least $1$, because the civilian counts himself as active when calculating the arrest probability. The reasoning behind this calculation is, that it is less likely for the civilian to be arrested, when already a lot of other civilians are acting violently and very few LEOs are present around him. The opposite can be said, if there are a lot of LEOs and only few or no active civilians. $k$ is a constant parameter, that is calculated by setting $P = 0.9$ when $\left(LEO/A\right)_v = 1$. With the risk aversion and the estimated arrest probability the so-called net risk of the civilian of going active can be calculated:
 \begin{align}
@@ -120,12 +120,14 @@ After choosing values for the global parameters, the three different types of ag
 \subsection{Modification of the Model}
 
 \subsubsection{Individual Perceived Legitimacy and Threshold}
-In our opinion, the assumption that the perceived legitimacy of the other ethnic group and the threshold value are identical for all individuals of the population is too harsh. Therefore, we wanted to make them individual quantities. In the modified model the perceived legitimacy of the other ethnic groups is also initialized for all civilians by drawing it from $U(0,1)$.\\
+In our opinion, the assumption that the perceived legitimacy of the other ethnic group and the threshold value are identical for all individuals of the population is too harsh. Therefore, we wanted to make them individual quantities. To us it also seemed not realistic to have the perceived legitimacy uniformly distributed throughout the population. Therefore, we decided to use the Gaussian distribution truncated to the interval $[0,1]$. In the modified model the perceived legitimacy of the other ethnic group is initialized for all civilians by drawing it from this distribution. This adds two parameters to the model: the mean $\mu_L$ and the standard deviation $\sigma_L$ of the legitimacy.\\
 \\
-The threshold $T$ can be seen as the level of "extremism" an individual has. Epstein describes it as the utility of not publicly expressing one's private grievance. A very extreme individual will see no utility in holding his private grievance back, whether a very conservative individual will almost never publicly express his private grievance. The difference $(G-N)$ can take values in the interval $[-1,1]$. Therefore it is sensible to draw the individual threshold values from the uniform distribution defined in that range. A civilian with $T = -1$ will always be active, whereas a civilian with $T = 1$ will never be active.
+The threshold $T$ can be seen as the level of "extremism" an individual has. Epstein describes it as the utility of not publicly expressing one's private grievance. A very extreme individual will see absolutely no utility in holding his private grievance back, whether a very conservative individual will almost never publicly express his private grievance. The difference $(G-N)$ on the other hand is the perceived utility to describe one's private grievance and it can take values in the interval $[-1,1]$. A civilian with $T = -1$ will always be active, whereas a civilian with $T = 1$ will never be active. As said before, it is probably unrealistic to have the threshold value uniformly distributed over the population. Therefore, it is also drawn upon initialization of the civilians from the truncated Gaussian distribution on the interval $[-1,1]$ adding another two parameters to the model ($\mu_T$ and $\sigma_T$).\\
+\\
+For the sake of simplicity and to make the sensitivity analysis described later not computationally too expensive it is renounced to also change the distributions of the other individual characteristics of the civilians ($H$ and $R$) to the described truncated Gaussian distribution.
 
 \subsubsection{Updating the Perceived Legitimacy}
-It seems quite obvious that the perceived legitimacy of the other ethnic group should not be a constant over the course of the simulation. Violence committed by one ethnic group will probably decrease its perceived legitimacy in the eyes of the other ethnic group. The opposite effect will possibly have the arrest of a active (violent) civilian on the perceived legitimacy of its ethnic group. In our expansion of the model, these effects are limited to the range of sight of the involved active civilian. The update in the case of violence is the following:
+It seems quite obvious that the perceived legitimacy of the other ethnic group should not be a constant over the course of the simulation. Violence committed by one ethnic group will probably decrease its perceived legitimacy in the eyes of the other ethnic group. The opposite effect will possibly have the arrest of a active (violent) civilian on the perceived legitimacy of its ethnic group. In our expansion of the model, these effects are limited to the range of sight of the involved killed or active civilian. The update in the case of violence is the following:
 \begin{align}
 L_{\text{new}} = L_{\text{old}} \left( 1 - k_L \right)
 \end{align}
@@ -133,7 +135,7 @@ When an active civilian is arrested, the updates is given by:
 \begin{align}
 L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right)
 \end{align}
-The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
+The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little in the legitimacy (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
 
 \section{Implementation}
 
@@ -163,7 +165,10 @@ The fields of the struct used to describe the agents are shown in table \ref{tab
 	\end{tabular}
 	\label{tab:fields_struct}
 \end{table}
-The jail is an array of size $(J_{max} \times 1)$ with the struct as entries. The reasoning behind the size of the jail array is that it has to be large enough that theoretically in every iteration a civilian could be send to jail. The function $fun\_movement()$ moves the randomly selected agent, updates the map accordingly and returns the new position of the agent. If the agent is a LEO, the function $fun\_action\_LEO()$ inspects the fields within vision of the new position and if one present, randomly moves an active civilian to the jail. To do so, it first assigns the civilian a random jail term (field "sentenced"). Then copies the civilians struct entries to an empty position in the jail and erases the civilian from the map by setting the struct fields at its position to the default values.
+The jail is an array of size $(J_{max} \times 1)$ with the struct from table \ref{tab:fields_struct} as entries. The reasoning behind the size of the jail array is that it has to be large enough that theoretically in every iteration a civilian could be send to jail. The function $fun\_movement()$ moves the randomly selected agent, updates the map accordingly and returns the new position of the agent. If the agent is a LEO, the function $fun\_action\_LEO()$ inspects the fields within vision of the new position and if one is present, randomly moves an active civilian to the jail. To do so, it first assigns the civilian a random jail term (field "sentenced"). Then copies the civilians struct entries to an empty position in the jail and erases the civilian from the map by setting the struct fields at its position to the default values.\\
+\\
+If the selected and moved agent is a civilian, the function $fun\_action\_civ()$ is called. It first inspects the surrounding of the new position and determines the current value of $P$ and with this the net risk $N$. The grievance $G$ is also computed and it is checked if $(G-N)$ is larger or smaller than $T$. If it is larger, civilians of the other ethnic group within vision are searched. When there is one present, he is killed by setting all the values of the struct at his position to the default values. If there is no such civilian present, the agent remains quiet although he wants to become active. If $(G-N)$ is smaller than $T$, the selected civilian remains quiet in any case. The function returns the changed map and if there has been a kill.\\
+\\
 
 \section{Simulation Results and Discussion}
 

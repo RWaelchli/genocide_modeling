@@ -55,9 +55,9 @@ end
 
 %% Saving the Output
 
-% dlmwrite('a_0.txt',a_0,'delimiter','\t','precision','%.6d')
-% dlmwrite('a_1.txt',a_1,'delimiter','\t','precision','%.6d')
-% dlmwrite('a_2.txt',a_2,'delimiter','\t','precision','%.6d')
+dlmwrite('a_0.txt',a_0,'delimiter','\t','precision','%.6d')
+dlmwrite('a_1.txt',a_1,'delimiter','\t','precision','%.6d')
+dlmwrite('a_2.txt',a_2,'delimiter','\t','precision','%.6d')
 dlmwrite('a_3.txt',a_3,'delimiter','\t','precision','%.6d')
 dlmwrite('a_4.txt',a_4,'delimiter','\t','precision','%.6d')
 dlmwrite('a_5.txt',a_5,'delimiter','\t','precision','%.6d')
@@ -66,4 +66,7 @@ dlmwrite('a_7.txt',a_7,'delimiter','\t','precision','%.6d')
 dlmwrite('a_8.txt',a_8,'delimiter','\t','precision','%.6d')
 dlmwrite('a_9.txt',a_9,'delimiter','\t','precision','%.6d')
 dlmwrite('a_10.txt',a_10,'delimiter','\t','precision','%.6d')
+dlmwrite('a_11.txt',a_11,'delimiter','\t','precision','%.6d')
+dlmwrite('a_12.txt',a_12,'delimiter','\t','precision','%.6d')
+dlmwrite('a_13.txt',a_13,'delimiter','\t','precision','%.6d')
 dlmwrite('a_12345678910111213.txt',a_12345678910111213,'delimiter','\t','precision','%.6d')

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.9)  1 DEC 2014 21:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.9)  7 DEC 2014 11:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -313,15 +313,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 101--105
  []
 
 [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 123--126
+Underfull \hbox (badness 10000) in paragraph at lines 123--128
 
  []
 
-[6] [7] [8] (./report.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--128
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 146--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--172
+
+ []
+
+[7] [8] [9] (./report.aux) ) 
 Here is how much of TeX's memory you used:
  3220 strings out of 493117
  43027 string characters out of 6135433
- 114577 words of memory out of 5000000
+ 118577 words of memory out of 5000000
  6634 multiletter control sequences out of 15000+600000
  13666 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -337,10 +357,10 @@ onts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb>
-Output written on report.pdf (8 pages, 159129 bytes).
+Output written on report.pdf (9 pages, 162535 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 54 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
