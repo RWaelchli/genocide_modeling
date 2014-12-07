@@ -138,11 +138,9 @@ L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right)
 The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little in the legitimacy (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
 
 \section{Implementation}
-
-\subsection{Base Model}
 The whole implementation is based on arrays of structs of which the one describing the map is in the center of the program. This way of implementation may not be the fastest possible, but in our opinion the most intuitive one.
 
-\subsubsection{Structure Describing the Agents}
+\subsection{Base Model}
 The fields of the struct used to describe the agents are shown in table \ref{tab:fields_struct}. The central part of the program is the map, an array of size $(N \times N)$ containing this struct as entries, where $N$ is the map size. The individual values of the fields are initialized at the beginning using the function $fun\_init\_map()$, which returns the initialized map array with all the civilians and LEOs. Type equal to 1, 2 or 3 indicates that the agent is a civilian of the ethnic group 1, group 2 or a LEO. For a LEO only the field v is also different from the default value.
 \begin{table}[!htbp]
 	\centering
@@ -169,6 +167,11 @@ The jail is an array of size $(J_{max} \times 1)$ with the struct from table \re
 \\
 If the selected and moved agent is a civilian, the function $fun\_action\_civ()$ is called. It first inspects the surrounding of the new position and determines the current value of $P$ and with this the net risk $N$. The grievance $G$ is also computed and it is checked if $(G-N)$ is larger or smaller than $T$. If it is larger, civilians of the other ethnic group within vision are searched. When there is one present, he is killed by setting all the values of the struct at his position to the default values. If there is no such civilian present, the agent remains quiet although he wants to become active. If $(G-N)$ is smaller than $T$, the selected civilian remains quiet in any case. The function returns the changed map and if there has been a kill.\\
 \\
+After moving the agent and performing its action, the function $fun\_clone()$ is called. It goes through all civilians on the map in a random order. For each civilian it checks, if there are empty position right next to him. When there is an empty position, the civilian is cloned with probability $P_c$ onto this position by copying the struct of the selected civilian. The age of the newly created civilian is reset to 0.\\
+\\
+The $fun\_update\_map()$ function updates the ages of the civilians on the map and removes those who have reached their life expectancy by reseting the struct on those positions to the default one.\\
+\\
+The jail is updated using the function $fun\_update\_jail()$. First it updates the ages and the served time of the civilians in jail, then it removes civilians that have reached their life expectancy and releases the civilians that have served their sentence onto random empty positions on the map. The structs of those civilians in the jail array are reset to the default values. The civilians are released in the quiet state, all other characteristics remain unchanged.
 
 \section{Simulation Results and Discussion}
 
