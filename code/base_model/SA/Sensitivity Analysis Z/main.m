@@ -4,7 +4,8 @@ clc
 
 tic
 
-%% Bounds of the Investigated Parameters
+%% Import Data
+
 a_0 = importdata('a_0.txt');
 a_1 = importdata('a_1.txt');
 a_2 = importdata('a_2.txt');
@@ -20,8 +21,11 @@ a_12345678910 = importdata('a_12345678910.txt');
 
 n = size(a_0,1);
 
+%% Expectation Value and Variance
+
 E2 = 1/n*sum(a_12345678910.*a_0);
-V = 1/n*sum((a_0-sqrt(E2)).^2);
+E = 1./n.*sum(a_12345678910);
+V = 1./(n-1).*sum((a_12345678910-E).^2);
 
 U_1 = 1/(n-1)*sum(a_12345678910.*a_1);
 U_2 = 1/(n-1)*sum(a_12345678910.*a_2);
@@ -66,5 +70,3 @@ S_7T = 1-(U_min7-E2)/V;
 S_8T = 1-(U_min8-E2)/V;
 S_9T = 1-(U_min9-E2)/V;
 S_10T = 1-(U_min10-E2)/V;
-
-toc

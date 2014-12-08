@@ -88,11 +88,11 @@ for n=1:nIter
     %% Cloning
     
     map = fun_clone(map,P);
-
+    
     %% Update Of The Jail
 
     [jail,map] = fun_update_jail(jail,map,default_struct);
-
+    
     %% Update Of The Map
 
     map = fun_update_map(map,default_struct);
