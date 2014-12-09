@@ -2,8 +2,6 @@ close all
 clear all
 clc
 
-tic
-
 %% Import Data
 
 y_A = dlmread('y_A.txt');
