@@ -138,10 +138,10 @@ L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right)
 The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little in the legitimacy (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
 
 \section{Implementation}
-The whole implementation is based on arrays of structs of which the one describing the map is in the center of the program. This way of implementation may not be the fastest possible, but in our opinion the most intuitive one.
+The whole implementation is based on arrays of structs. This way of implementation may not be the fastest possible, but it is in our opinion the most intuitive one.
 
 \subsection{Base Model}
-The fields of the struct used to describe the agents are shown in table \ref{tab:fields_struct}. The central part of the program is the map, an array of size $(N \times N)$ containing this struct as entries, where $N$ is the map size. The individual values of the fields are initialized at the beginning using the function $fun\_init\_map()$, which returns the initialized map array with all the civilians and LEOs. Type equal to 1, 2 or 3 indicates that the agent is a civilian of the ethnic group 1, group 2 or a LEO. For a LEO only the field v is also different from the default value.
+The fields of the struct used to describe the agents are shown in table \ref{tab:fields_struct}. The central part of the program is the map, an array of size $(N_{\text{map}} \times N_{\text{map}})$ containing this struct as entries, where $N$ is the map size. The individual values of the fields are initialized at the beginning using the function $fun\_init\_map()$, which returns the initialized map array with all the civilians and LEOs. Type equal to 1, 2 or 3 indicates that the agent is a civilian of the ethnic group 1, group 2 or a LEO. For a LEO only the field v is also different from the default value.
 \begin{table}[!htbp]
 	\centering
 	\caption{The fields of the struct used to describe the single agents and their meaning and default value.}
@@ -163,17 +163,127 @@ The fields of the struct used to describe the agents are shown in table \ref{tab
 	\end{tabular}
 	\label{tab:fields_struct}
 \end{table}
-The jail is an array of size $(J_{max} \times 1)$ with the struct from table \ref{tab:fields_struct} as entries. The reasoning behind the size of the jail array is that it has to be large enough that theoretically in every iteration a civilian could be send to jail. The function $fun\_movement()$ moves the randomly selected agent, updates the map accordingly and returns the new position of the agent. If the agent is a LEO, the function $fun\_action\_LEO()$ inspects the fields within vision of the new position and if one is present, randomly moves an active civilian to the jail. To do so, it first assigns the civilian a random jail term (field "sentenced"). Then copies the civilians struct entries to an empty position in the jail and erases the civilian from the map by setting the struct fields at its position to the default values.\\
+The jail is an array of size $(J_{max} \times 1)$ with the struct from table \ref{tab:fields_struct} as entries. The reasoning behind the size of the jail array is that it has to be large enough that theoretically in every iteration a civilian could be send to jail. The function $fun\_movement()$ moves the randomly selected agent, updates the map accordingly and returns the new position of the agent. If the agent is a LEO, the function $fun\_action\_LEO()$ inspects the fields within vision of the new position and if active civilians are present there, randomly moves one of them to the jail. To do so, it first assigns the civilian a random jail term (field "sentenced"). Then copies the civilians struct entries to an empty position in the jail and erases the civilian from the map by setting the struct fields at its position to the default values.\\
 \\
-If the selected and moved agent is a civilian, the function $fun\_action\_civ()$ is called. It first inspects the surrounding of the new position and determines the current value of $P$ and with this the net risk $N$. The grievance $G$ is also computed and it is checked if $(G-N)$ is larger or smaller than $T$. If it is larger, civilians of the other ethnic group within vision are searched. When there is one present, he is killed by setting all the values of the struct at his position to the default values. If there is no such civilian present, the agent remains quiet although he wants to become active. If $(G-N)$ is smaller than $T$, the selected civilian remains quiet in any case. The function returns the changed map and if there has been a kill.\\
+If the selected and moved agent is a civilian, the function $fun\_action\_civ()$ is called. It first inspects the surrounding of the new position and determines the current value of $P$ and with this the net risk $N$. The grievance $G$ is also computed and it is checked if $(G-N)$ is larger or smaller than $T$. If it is larger, civilians of the other ethnic group within vision are searched. When there is one present, he is killed by setting all the values of the struct at his position to the default values. If there is no such civilian present, the agent remains quiet although he wants to become active. If $(G-N)$ is smaller than $T$, the selected civilian remains or becomes quiet in any case. When the civilian was initially active, wants to stay active but does not find a opponent to kill, he however stays active. The function returns the changed map and if there has been a kill.\\
 \\
 After moving the agent and performing its action, the function $fun\_clone()$ is called. It goes through all civilians on the map in a random order. For each civilian it checks, if there are empty position right next to him. When there is an empty position, the civilian is cloned with probability $P_c$ onto this position by copying the struct of the selected civilian. The age of the newly created civilian is reset to 0.\\
 \\
 The $fun\_update\_map()$ function updates the ages of the civilians on the map and removes those who have reached their life expectancy by reseting the struct on those positions to the default one.\\
 \\
-The jail is updated using the function $fun\_update\_jail()$. First it updates the ages and the served time of the civilians in jail, then it removes civilians that have reached their life expectancy and releases the civilians that have served their sentence onto random empty positions on the map. The structs of those civilians in the jail array are reset to the default values. The civilians are released in the quiet state, all other characteristics remain unchanged.
+The jail is updated using the function $fun\_update\_jail()$. First it updates the ages and the served times of the civilians in jail, then it removes civilians that have reached their life expectancy and releases the civilians that have served their sentence onto random empty positions on the map. The structs of those civilians in the jail array are reset to the default values. The civilians are released in the quiet state, all other characteristics remain unchanged.
+
+\subsection{Sensitivity Analysis}
+For both models, the output variable describing the extent of violence that occurred during the simulation was defined as the cumulative number of kills divided by the initial population size. The normalization to the population size was done in order to investigate also the initial population density as input parameter of the models.
+
+\subsubsection{Sample Generation}
+The size $N$ of the base sample generated was 100. The necessary $(N \times 2k)$ base sample matrix of random numbers, where $k$ is the number of parameters investigated, was generated as suggested in the literature using the sobolset class, which is an implementation of Sobol's random number generator in MATLAB. The procedure to obtain the matrix from a created point set object of this class was directly taken from the documentation of the software. This matrix was divided as described in literature into the two matrices $\boldsymbol{A}$ and $\boldsymbol{B}$, which in turn were used to construct the $k$ matrices $\boldsymbol{C_i}$. The matrix $\boldsymbol{C_i}$ corresponds to the generic parameter $i$ and contains all columns of $\boldsymbol{B}$ except the $i^{\text{th}}$, which is taken from the $i^{\text{th}}$ column of $\boldsymbol{A}$. The sample generation was done inside the program $sample\_generation$ and the created sample matrices were exported into .txt files.
+
+\subsubsection{Model Output Generation}
+The implemented models were integrated each into a function called $fun\_model()$ which takes the defined input parameters as arguments and returns the normalized cumulative number of kills. This function was used to generate the output values corresponding to the sets of input parameters contained in the rows of the matrices $\boldsymbol{A}$, $\boldsymbol{B}$ and $\boldsymbol{C_i}$. Sobol's quasi-random number generator produces numbers between 0 and 1. Therefore, the input parameters had to be converted inside the functions $fun\_model()$ in order have their values in the desired ranges. This was done using interval mapping, which here should be illustrated shortly:
+\begin{align*}
+& x \in [0,1] \longmapsto x^\prime \in [a,b]\\
+&x^\prime = (b-a) \cdot x + a
+\end{align*}
+For input parameters that should take integer values, the MATLAB function $round()$ was used. The interval $[a,b]$ was extended by 0.5 on both ends for those parameters in order not to decrease the probability of having the parameter values $a$ and $b$. The output values were stored in the $(N \times 1)$ vectors $\boldsymbol{y_A}$, $\boldsymbol{y_B}$ and $\boldsymbol{y_{C_i}}$. All of this was done inside the program $output\_generation$.
+
+\subsubsection{Sensitivity Indice Computation}
+
+\subsection{Qualitative Assessment of the Input Parameters}
+After the global sensitivity analysis failed by yielding no sensible results, a more qualitative approach was taken to nevertheless be able to discuss the effect of certain input parameters on the simulation outcome, both of the base and the modified model. For the base model it was mainly tried to reproduce the observation made in literature regarding the dependence on the density of LEOs on the map. The values of the other model parameters that were fixed for this and the following examinations are shown in table \ref{tab:values_parameters}.
+\begin{table}[!htbp]
+	\centering
+	\caption{}
+	\vspace{0.5 cm}
+		\begin{tabular}{l | l}
+		Parameter & Value\\
+		\hline
+		Size of the Map & $(40 \times 40)$\\
+		Max. Age & 200\\
+		Initial Pop. Density & 0.7\\
+		Initial Fraction of Ethinc Group 1 & 0.5\\
+		Cloning Probability & 0.025\\
+		Vision of the Civilians & 2\\
+		Vision of the LEOs & 3\\
+		$k_P$ & 2.3\\
+		Max. Jail Term & 30\\
+		Legitimacy & 0.8\\
+		Violence Threshold & 0.1\\
+		Number of Iterations & 200\\
+	\end{tabular}
+	\label{tab:values_parameters}
+\end{table}
+In this frame it was renounced to normalize the cumulative number of kills to the initial population size, because this parameter was never varied. The initial LEO/civilian ratio was varied from 0 to 0.1 in steps of 0.004. The model was run 10 times at each input parameter value. The mean and the standard deviation of the output variables were taken. This is not an exact reproduction of the analysis done in the reference. There the number of iterations was set to 15000 and for each value of the initial LEO density the simulation was run 50 times. As measure for the extent of violence the time until one ethnic group is completely exterminated was taken (it was set to 15000, if there was no extinction of one group). In our opinion, this is not a very good way to assess the violence during the simulation. Very violent conflicts can never lead to the extinction of one ethnic group, but to very high number of casualties. Also this method was no feasible for us, given our computational resources. Therefore, we decided to let the simulation run for one generation of civilians.\\
+\\
+An other minor difference to the reference is the selection of the LEO density. In the reference model, the LEO density on the map can be set independently from the population density of the civilians. In our implementation of the model, only the initial LEO/civilian ratio can be selected. This was mainly done in order to prevent situations where there are too many agents to be placed on the map upon initialization. However, this leads only to minor differences, the general trends should not be affected by this.\\
+\\
+For comparison, the same analysis was done using the modified model. In this case $\mu_L$ was set to 0.8, $\mu_T$ to 0.1 and both $\sigma_L$ and $\sigma_T$ to 0.1. The parameter $k_L$ was set to 0.1. The value for the standard deviations of those parameters was selected by evaluating the broadness of the distributions by eye and selecting a sensible value. The effect of $k_L$ will be discussed later and for the time being its value was just a guess.
 
 \section{Simulation Results and Discussion}
+
+\subsection{Global Sensitivity Analysis}
+The computed sensitivity indices of the input parameters of the base and the modified model are presented in tables~\ref{tab:si_base} and \ref{tab:si_modified}, respectively. It is right away obvious that those values cannot be correct. For instance, the $S_i$ have to take by definition values in the interval $[0,1]$ and the sum of the $S_i$ has to be equal to 1. Also, $S_i^T$ has to be larger or equal to $S_i$. To our knowledge, we have made no mistake in the implementation of the global sensitivity analysis in MATLAB. One possible explanation for the failure could be an insufficiently large base sample, leading to inaccurate estimates of the sensitivity indices. But it goes past our computational resources to increase the sample size significantly in order to check, if that is actually the case.
+\begin{table}[!htbp]
+	\centering
+	\caption{Sensitivity indices computed for the base model input parameters.}
+	\vspace{0.5 cm}
+		\begin{tabular}{c | c | c}
+		Parameter & $S_i$ & $S_i^T$\\
+		\hline
+		1 & 0.4748 & 0.2421\\
+		2 & -0.0147 & -0.7522\\
+		3 & 0.0464 & -1.0529\\
+		4 & 0.0360 & -1.1220\\
+		5 & 0.0810 & -1.1282\\
+		6 & 0.0640 & -1.1080\\
+		7 & 0.0559 & -1.1037\\
+		8 & 0.0765 & -1.0351\\
+		9 & 0.3150 & -0.0658\\
+		10 & 0.1213 & -0.9992\\
+	\end{tabular}
+	\label{tab:si_base}
+\end{table}
+\begin{table}[!htbp]
+	\centering
+	\caption{Sensitivity indices computed for the modified model input parameters.}
+	\vspace{0.5 cm}
+		\begin{tabular}{c | c | c}
+		Parameter & $S_i$ & $S_i^T$\\
+		\hline
+		1 & 0.3993 & 1.0651\\
+		2 & -0.1700 & 0.7317\\
+		3 & -0.2336 & 0.8763\\
+		4 & -0.1632 & 0.7517\\
+		5 & -0.1535 & 0.7772\\
+		6 & -0.1971 & 0.7879\\
+		7 & -0.1700 & 0.7482\\
+		8 & -0.2087 & 0.8419\\
+		9 & -0.2013 & 0.7784\\
+		10 & -0.2031 & 0.8355\\
+		11 & -0.0380 & 0.9466\\
+		12 & -0.1666 & 0.8387\\
+		13 & -0.1948 & 0.7765
+	\end{tabular}
+	\label{tab:si_modified}
+\end{table}
+
+\subsection{Qualitative Assessment of the Input Parameters}
+
+\subsubsection{Reproduction Literature Results}
+The result of the analysis regarding the initial LEO/civilian ratio is shown in figure \label{fig:LEO_civ_base}. The anticipated dependence of the mean cumulative number of kills on the LEO/civilian ratio was observed. However, the standard deviation did not increase as one might expect from the results presented in literature. This might be due to the different violence measure used or the effect of the initial LEO/civilian ratio on the standard deviation might only manifest itself at larger numbers of iterations. Also the smaller number of runs per parameter value might affect the result.
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/base_model/cum_kills_vs_LEO_civ.png}
+	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the base model. As expected, the mean formed out of 10 runs decreases with increasing LEO/civ ratio. The standard deviation on the other hand remains constant. It is shown via the error bars.}
+	\label{fig:LEO_civ_base}
+\end{figure}
+The result of the similar analysis done for the modified model is shown in figure \ref{fig:LEO_civ_modified}. It does not differ from that using the base model. This implies that the heterogeneity of the perceived legitimacy and the violence threshold as well as the updating of the legitimacy has no effect on the dependency of the cumulative number of kills on the initial LEO/civilian ratio, at least not at those values of all the other parameters. 
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/modified_model/cum_kills_vs_LEO_civ.png}
+	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the modified model. Basically the same result as with the base model is obtained. Again, the mean formed out of 10 runs decreases with increasing LEO/civ ratio. The standard deviation shown through remains fairly constant.}
+	\label{fig:LEO_civ_modified}
+\end{figure}
 
 \section{Summary and Outlook}
 

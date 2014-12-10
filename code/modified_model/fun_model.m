@@ -1,4 +1,4 @@
-function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,L_mean,k_L,max_age,nIter)
+function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,L_mean,L_std,T_mean,T_std,k_L,max_age,nIter)
 
 %% Initializing the Map (Array of Structures)
 
@@ -14,7 +14,6 @@ jail = fun_init_jail(default_struct,J_max);
 %% Preallocation Storage Variables
 
 sum_kills = zeros(nIter,1);
-n_civ = N^2*rho_tot*(1-LEO_to_civ); % total number of civilians at the beginning
 
 for n=1:nIter
     %% Movement
@@ -65,6 +64,6 @@ for n=1:nIter
 
 end
 
-y = sum_kills(end)/n_civ;
+y = sum_kills(end);
 
 end

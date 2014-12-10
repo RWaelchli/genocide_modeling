@@ -13,23 +13,20 @@
 
 % cop_to_civ is the initial ratio of cops to civilians.
 
-function map = fun_init_map(default_struct,N,rho_tot,soldier_to_civ,v_civ,v_soldier,pop_frac)
+function map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac,L,T,max_age)
 
 % Preallocation of the Array of Structures:
 map = repmat(default_struct,N,N); % array of structures representing the map
 
 n_fields = N^2; % number of fields on the map
-n_civ = n_fields*rho_tot*(1-soldier_to_civ); % total number of civilians
-n_1 = n_civ*pop_frac(1); % number of civilians 1
-n_2 = n_civ*pop_frac(2); % number of civilians 2
-n_soldier = n_fields*rho_tot*soldier_to_civ; % number of soliders
+n_civ = n_fields*rho_tot*(1-LEO_to_civ); % total number of civilians
+n_1 = n_civ*pop_frac; % number of civilians 1
+n_2 = n_civ*(1-pop_frac); % number of civilians 2
+n_LEO = n_fields*rho_tot*LEO_to_civ; % number of soliders
 
-
-L = 0.8;
-T = 0.1;
 
 % Initialization of the Cops:
-for k=1:n_soldier
+for k=1:n_LEO
     
     % Choose random position on the map:
     i = unidrnd(N);
@@ -43,7 +40,7 @@ for k=1:n_soldier
     
     % Define Characteristics:
     map(i,j).type = 3;
-    map(i,j).v = v_soldier;
+    map(i,j).v = v_LEO;
     
 end
 
@@ -63,12 +60,11 @@ for k=1:n_1
     % Define Characteristics:
     map(i,j).type = 1;
     map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = [L L]; % legitimacy
+    map(i,j).L = L; % legitimacy
     map(i,j).v = v_civ; % vision
     map(i,j).T = T; % violence threshold
-%     map(i,j).T = unifrnd(0,1);
     map(i,j).R = unifrnd(0,1); % risk aversion
-    map(i,j).life_exp = unidrnd(200); % life expectancy
+    map(i,j).life_exp = unidrnd(max_age); % life expectancy
     
 end
 
@@ -88,12 +84,11 @@ for k=1:n_2
     % Define Characteristics:
     map(i,j).type = 2;
     map(i,j).H = unifrnd(0,1); % hardship
-    map(i,j).L = [L L]; % legitimacy
+    map(i,j).L = L; % legitimacy
     map(i,j).v = v_civ; % vision
-%     map(i,j).T = unifrnd(0,1); % violence threshold
     map(i,j).T = T;
     map(i,j).R = unifrnd(0,1); % risk aversion
-    map(i,j).life_exp = unidrnd(200); % life expectancy
+    map(i,j).life_exp = unidrnd(max_age); % life expectancy
     
 end
 

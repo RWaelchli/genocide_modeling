@@ -52,8 +52,8 @@ if arrest == 1
                     continue
                 end
 
-                % Coordinates of Fellow Civilians Within the Vision of the
-                % Killed Civilian:
+                % Coordinates of Civilians of the Other Ethnic Group Within
+                % the Vision of the Arrested Active Civilian:
                 if map(i_temp,j_temp).type == type_update
                     opp_civ = [i_temp j_temp;
                         opp_civ];

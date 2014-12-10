@@ -106,8 +106,6 @@ if kill == 1
                 if i_temp > N || i_temp < 1 || j_temp > N || j_temp < 1
                     continue
                 end
-                
-                map(i_temp,j_temp).type
 
                 % Coordinates of Fellow Civilians Within the Vision of the
                 % Killed Civilian:

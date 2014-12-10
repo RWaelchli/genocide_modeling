@@ -10,22 +10,26 @@ tic;
 default_struct = struct('type',0,'H',0,'L',0,'v',0,'T',0,'R',0,'state',0,'age',0,'life_exp',0,'sentenced',0,'served',0);
 
 % Properties of the Map:
-N = 20; % size
+N = 40; % size
 rho_tot = 0.7; % desity of the population
 pop_frac = 0.5; % population fractions of the three ethnic groups
 LEO_to_civ = 0.05; % soldiers to civilians ratio
-P = 0.01; % probability of the civilians to clone themselves in one iteration
-k_L = 0.5;
-L_mean = 0.8;
 
 % Properties of the Civilians:
+max_age = 200;
 v_civ = 2; % vision
-k = 2.3; % parameter to estimate arrest probability P
+k_P = 2.3; % parameter to estimate arrest probability P
+P = 0.01; % probability of the civilians to clone themselves in one iteration
+k_L = 0.1;
+L_mean = 0.8;
+L_std = 0.1;
+T_mean = 0.1;
+T_std = 0.1;
 
-% Properties of the Soldiers:
-v_soldier = 3; % vision
+% Properties of the LEOs:
+v_LEO = 3; % vision
 
-map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_soldier,pop_frac,L_mean);
+map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac,L_mean,L_std,T_mean,T_std,max_age);
 
 %% Initialization Of The Jail
 
@@ -35,9 +39,9 @@ jail = fun_init_jail(default_struct,J_max);
 
 %% Preallocation Storage Variables
 
-nIter = 100;
+nIter = max_age;
 
-movie_test(nIter) = struct('cdata',[],'colormap',[]);
+% movie_test(nIter) = struct('cdata',[],'colormap',[]);
 
 n_1 = zeros(1,nIter+1);
 n_2 = zeros(1,nIter+1);
@@ -106,7 +110,7 @@ for n=1:nIter
     
     %% Graphical Representation
 
-    % Extract the Hardship Values From the Map:
+    % Extract the Grievance Values From the Map:
     G = fun_visualization_grievance(map);
 
     % Draw The Scatter Plot:
@@ -127,7 +131,7 @@ for n=1:nIter
     set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
     grid on
     
-    M_1(n) =getframe(gcf);
+%     M_1(n) =getframe(gcf);
     
 %     % Extract The Information About The Individuals From The Map:
     [C1_active,C1_quiet,C2_active,C2_quiet,Cops] = fun_visualization_agents(map);
@@ -135,9 +139,9 @@ for n=1:nIter
     f2 = figure(2);
     hold all
     scatter(C1_quiet(:,1), C1_quiet(:,2),100,'filled','s','MarkerFaceColor','y');
-    scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r');
+    scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r','LineWidth',2);
     scatter(C2_quiet(:,1), C2_quiet(:,2),100,'filled','s','MarkerFaceColor','g');
-    scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r');
+    scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r','LineWidth',2);
     scatter(Cops(:,1), Cops(:,2),100,'filled','s','MarkerFaceColor','k');
     title(str,'FontSize',14);
     xlim([1 N])
@@ -147,7 +151,7 @@ for n=1:nIter
     
     hold off
     
-    movie_test(n) = getframe(gcf);
+%     movie_test(n) = getframe(gcf);
     if n < nIter
         delete(f2) % deleting figure to have correct results
     end
@@ -228,6 +232,6 @@ ylim([0 1])
 xlabel('Turn [-]','FontSize',14)
 ylabel('Perceived Legitimacy','FontSize',14)
 
-movie2avi(movie_test,'movie_test','fps',1)
+% movie2avi(movie_test,'movie_test','fps',1)
 
 toc;

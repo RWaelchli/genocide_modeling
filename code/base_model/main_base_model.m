@@ -2,28 +2,29 @@ close all;
 clear all;
 clc;
 
-tic;
-
 %% Initializing the Map (Array of Structures)
 
 % Definition of the Default Structure:
 default_struct = struct('type',0,'H',0,'L',[0 0],'v',0,'T',0,'R',0,'state',0,'age',0,'life_exp',0,'sentenced',0,'served',0);
 
 % Properties of the Map:
-N = 20; % size
-rho_tot = 0.7; % desity of the population
-pop_frac = [1/2 1/2]; % population fractions of the three ethnic groups
-LEO_to_civ = 0.01; % soldiers to civilians ratio
+N = 40; % size
+rho_tot = 0.7; % initial desity of the population
+pop_frac = 0.5; % initial fraction of ethnicity 1 of the total population
+LEO_to_civ = 0.05; % soldiers to civilians ratio
 P = 0.01; % probability of the civilians to clone themselves in one iteration
 
 % Properties of the Civilians:
+L = 0.8;
+T = 0.1;
 v_civ = 2; % vision
+max_age = 200;
 k_P = 2.3; % parameter to estimate arrest probability P
 
-% Properties of the Soldiers:
-v_soldier = 3; % vision
+% Properties of the LEOs:
+v_LEO = 3; % vision
 
-map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_soldier,pop_frac);
+map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac,L,T,max_age);
 
 %% Initialization Of The Jail
 
@@ -33,7 +34,7 @@ jail = fun_init_jail(default_struct,J_max);
 
 %% Preallocation Storage Variables
 
-nIter = 3e2;
+nIter = max_age;
 
 n_1 = zeros(1,nIter+1);
 n_2 = zeros(1,nIter+1);
@@ -45,8 +46,8 @@ sum_kills = zeros(nIter,1);
 sum_arrests = zeros(nIter,1);
 
 n_civ = N^2*rho_tot*(1-LEO_to_civ); % total number of civilians
-n_1(1) = n_civ*pop_frac(1); % number of civilians 1
-n_2(1) = n_civ*pop_frac(2); % number of civilians 2
+n_1(1) = n_civ*pop_frac; % number of civilians 1
+n_2(1) = n_civ*(1-pop_frac); % number of civilians 2
 
 for n=1:nIter
     %% Movement
@@ -70,7 +71,7 @@ for n=1:nIter
     kill = 0;
 
     if map(i,j).type == 3
-        [map,jail,arrest] = fun_action_soldier(i,j,map,jail,J_max,default_struct);
+        [map,jail,arrest] = fun_action_LEO(i,j,map,jail,J_max,default_struct);
     else
         [map,kill] = fun_action_civ(map,i,j,default_struct,k_P);
     end
@@ -89,17 +90,17 @@ for n=1:nIter
     
     map = fun_clone(map,P);
     
-    %% Update Of The Jail
-
-    [jail,map] = fun_update_jail(jail,map,default_struct);
-    
     %% Update Of The Map
 
     map = fun_update_map(map,default_struct);
     
+    %% Update Of The Jail
+
+    [jail,map] = fun_update_jail(jail,map,default_struct);
+    
     %% Graphical Representation
 
-    % Extract the Hardship Values From the Map:
+    % Extract the Grievance Values From the Map:
 %     G = fun_visualization_grievance(map);
 
     % Draw The Scatter Plot:
@@ -194,9 +195,9 @@ saveas(f4,'ex_active_jail.png')
 f5 = figure(5);
 hold on
 scatter(C1_quiet(:,1), C1_quiet(:,2),100,'filled','s','MarkerFaceColor','y');
-scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r');
+scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r','LineWidth',2);
 scatter(C2_quiet(:,1), C2_quiet(:,2),100,'filled','s','MarkerFaceColor','g');
-scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r');
+scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r','LineWidth',2);
 scatter(Cops(:,1), Cops(:,2),100,'filled','s','MarkerFaceColor','k');
 xlim([1 N])
 ylim([1 N])
@@ -209,5 +210,3 @@ hold off
 saveas(f5,'ex_map.png')
 
 % movie(gcf,M,2,1);
-
-toc;

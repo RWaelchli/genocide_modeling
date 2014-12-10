@@ -67,7 +67,7 @@ end
 ratio = surr_soldiers/surr_actives;
 
 P = 1 - exp(-k_P*ratio); % estimated arrest probability
-G = map(i,j).H.*(1-map(i,j).L(index)); % grievance of the selected civilian
+G = map(i,j).H.*(1-map(i,j).L); % grievance of the selected civilian
 N = P*map(i,j).R; % net risk of the selected civilian
 
 kill = 0;

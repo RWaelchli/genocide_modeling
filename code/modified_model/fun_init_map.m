@@ -24,7 +24,6 @@ n_1 = n_civ*pop_frac; % number of civilians 1
 n_2 = n_civ*(1-pop_frac); % number of civilians 2
 n_LEO = n_fields*rho_tot*LEO_to_civ; % number of soliders
 
-
 % Initialization of the LEOs:
 for k=1:n_LEO
     
