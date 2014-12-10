@@ -22,9 +22,9 @@ end
 for i=1:N
     for j=1:N
         if T(i,j) == 1
-            L(i,j) = cell2mat({map(i,j).L(2)});
+            L(i,j) = cell2mat({map(i,j).L});
         elseif T(i,j) == 2
-            L(i,j) = cell2mat({map(i,j).L(1)});
+            L(i,j) = cell2mat({map(i,j).L});
         end
     end
 end

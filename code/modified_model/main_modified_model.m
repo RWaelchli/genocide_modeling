@@ -10,7 +10,7 @@ default_struct = struct('type',0,'H',0,'L',0,'v',0,'T',0,'R',0,'state',0,'age',0
 % Properties of the Map:
 N = 40; % size
 rho_tot = 0.7; % desity of the population
-pop_frac = 0.5; % population fractions of the three ethnic groups
+pop_frac = 0.5; % population fraction of ethnic group 1
 LEO_to_civ = 0.05; % soldiers to civilians ratio
 
 % Properties of the Civilians:
@@ -19,7 +19,7 @@ v_civ = 2; % vision
 k_P = 2.3; % parameter to estimate arrest probability P
 P = 0.025; % probability of the civilians to clone themselves in one iteration
 k_L = 0.1;
-L_mean = 0.9;
+L_mean = 0.4;
 L_std = 0.1;
 T_mean = 0.1;
 T_std = 0.1;
@@ -37,7 +37,7 @@ jail = fun_init_jail(default_struct,J_max);
 
 %% Preallocation Storage Variables
 
-nIter = max_age;
+nIter = 15*max_age;
 
 % movie_test(nIter) = struct('cdata',[],'colormap',[]);
 
@@ -195,7 +195,7 @@ ylabel('Population','FontSize',14)
 legend({'Ethnicity 1','Ethnicity 2'},'FontSize',14,'location','SouthEast')
 hold off
 
-saveas(f3,'kills_arrests_L_09.png')
+saveas(f3,'kills_arrests_L_04.png')
 
 f4 = figure(4);
 plot(1:nIter,n1_active,1:nIter,n2_active,1:nIter,n_jail)
@@ -205,7 +205,7 @@ xlabel('Turn','FontSize',14)
 ylabel('Number [-]','FontSize',14)
 legend({'Actives Ethnicity 1','Actives Ethnicity 2','Civilians in Jail'},'FontSize',14,'location','best')
 
-saveas(f4,'active_jail_L_09.png')
+saveas(f4,'active_jail_L_04.png')
 
 f5 = figure(5);
 hold on
@@ -222,7 +222,7 @@ set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
 
 hold off
 
-saveas(f5,'map_end_L_09.png')
+saveas(f5,'map_end_L_04.png')
 
 % movie(gcf,M,2,1);
 
@@ -231,9 +231,9 @@ plot(1:nIter,L1,1:nIter,L2)
 xlim([0 nIter])
 ylim([0 1])
 xlabel('Turn [-]','FontSize',14)
-ylabel('Perceived Legitimacy','FontSize',14)
+ylabel('Mean Perceived Legitimacy','FontSize',14)
 
-saveas(f6,'legitimacy_L_09.png')
+saveas(f6,'legitimacy_L_04.png')
 
 f7 = figure(7);
 scatter(G(:,1), G(:,2),100,G(:,3),'filled','s');
@@ -248,6 +248,6 @@ set(get(ch, 'ylabel'), 'string', 'Grievance','FontSize',14);
 set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
 grid on
 
-saveas(f7,'grevance_end_L_09.png')
+saveas(f7,'grevance_end_L_04.png')
 
 % movie2avi(movie_test,'movie_test','fps',1)

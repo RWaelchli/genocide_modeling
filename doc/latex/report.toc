@@ -3,22 +3,25 @@
 \contentsline {section}{\numberline {3}Introduction and Motivations}{4}
 \contentsline {section}{\numberline {4}Description of the Model}{4}
 \contentsline {subsection}{\numberline {4.1}Base Model}{4}
-\contentsline {subsubsection}{\numberline {4.1.1}Specification of the Civilians}{4}
-\contentsline {subsubsection}{\numberline {4.1.2}Specification of the LEOs}{5}
-\contentsline {subsubsection}{\numberline {4.1.3}Evolution of the Simulation}{5}
+\contentsline {subsubsection}{\numberline {4.1.1}Specification of the Civilians}{5}
+\contentsline {subsubsection}{\numberline {4.1.2}Specification of the LEOs}{6}
+\contentsline {subsubsection}{\numberline {4.1.3}Evolution of the Simulation}{6}
 \contentsline {subsection}{\numberline {4.2}Modification of the Model}{6}
 \contentsline {subsubsection}{\numberline {4.2.1}Individual Perceived Legitimacy and Threshold}{6}
 \contentsline {subsubsection}{\numberline {4.2.2}Updating the Perceived Legitimacy}{7}
 \contentsline {section}{\numberline {5}Implementation}{7}
-\contentsline {subsection}{\numberline {5.1}Base Model}{7}
-\contentsline {subsection}{\numberline {5.2}Sensitivity Analysis}{9}
-\contentsline {subsubsection}{\numberline {5.2.1}Sample Generation}{9}
-\contentsline {subsubsection}{\numberline {5.2.2}Model Output Generation}{9}
-\contentsline {subsubsection}{\numberline {5.2.3}Sensitivity Indice Computation}{10}
-\contentsline {subsection}{\numberline {5.3}Qualitative Assessment of the Input Parameters}{10}
-\contentsline {section}{\numberline {6}Simulation Results and Discussion}{11}
-\contentsline {subsection}{\numberline {6.1}Global Sensitivity Analysis}{11}
-\contentsline {subsection}{\numberline {6.2}Qualitative Assessment of the Input Parameters}{13}
-\contentsline {subsubsection}{\numberline {6.2.1}Reproduction Literature Results}{13}
-\contentsline {section}{\numberline {7}Summary and Outlook}{15}
-\contentsline {section}{\numberline {8}References}{15}
+\contentsline {subsection}{\numberline {5.1}Base Model}{8}
+\contentsline {subsection}{\numberline {5.2}Modified Model}{9}
+\contentsline {subsubsection}{\numberline {5.2.1}Heterogeneity of the Parameters $L$ and $T$}{9}
+\contentsline {subsection}{\numberline {5.3}Sensitivity Analysis}{10}
+\contentsline {subsubsection}{\numberline {5.3.1}Sample Generation}{10}
+\contentsline {subsubsection}{\numberline {5.3.2}Model Output Generation}{10}
+\contentsline {subsubsection}{\numberline {5.3.3}Sensitivity Indice Computation}{11}
+\contentsline {subsection}{\numberline {5.4}Qualitative Assessment of the Input Parameters}{11}
+\contentsline {section}{\numberline {6}Simulation Results and Discussion}{12}
+\contentsline {subsection}{\numberline {6.1}Global Sensitivity Analysis}{12}
+\contentsline {subsection}{\numberline {6.2}Qualitative Assessment of the Input Parameters}{12}
+\contentsline {subsubsection}{\numberline {6.2.1}Reproduction Literature Results}{12}
+\contentsline {subsubsection}{\numberline {6.2.2}Dependence on the Legitimacy and the Violence Threshold}{14}
+\contentsline {section}{\numberline {7}Summary and Outlook}{14}
+\contentsline {section}{\numberline {8}References}{14}
