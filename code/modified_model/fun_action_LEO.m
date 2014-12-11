@@ -32,6 +32,7 @@ end
 %% Updating The Legitimacy of the Group of the Arrested Civilian
 
 N = size(map,1);
+
 if arrest == 1
     if type_arrested == 1
         type_update = 2;
@@ -40,10 +41,12 @@ if arrest == 1
     end
 
     opp_civ = [];
+    
+    info_range = 5*range_arrested;
 
-    for k=-range_arrested:range_arrested
-        range_j = range_arrested - abs(k);
-            for m=-range_j:range_j
+    for k=-info_range:info_range
+        info_range_j = info_range - abs(k);
+            for m=-info_range_j:info_range_j
                 i_temp = i_arrest + k;
                 j_temp = j_arrest + m;
 

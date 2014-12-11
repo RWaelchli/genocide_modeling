@@ -61,7 +61,7 @@ end
 ratio = surr_LEOs/surr_actives;
 
 P = 1 - exp(-k_P*ratio); % estimated arrest probability
-G = map(i,j).H.*(1-map(i,j).L); % grievance of the selected civilian
+G = map(i,j).H*(1-map(i,j).L); % grievance of the selected civilian
 N = P*map(i,j).R; % net risk of the selected civilian
 
 kill = 0;
@@ -95,10 +95,12 @@ end
 opp_civ = [];
 N = size(map,1);
 
+info_range = 5*range;
+
 if kill == 1
-    for k=-range:range
-        range_j = range - abs(k);
-            for m=-range_j:range_j
+    for k=-info_range:info_range
+        info_range_j = info_range - abs(k);
+            for m=-info_range_j:info_range_j
                 i_temp = i_opp + k;
                 j_temp = j_opp + m;
 
