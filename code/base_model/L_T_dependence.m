@@ -42,12 +42,12 @@ end
 %% Graphical Representation
 
 f1 = figure(1);
-surf(L_mean,T_mean,y_mean)
+surf(L,T,y_mean)
 xlim([0 1])
 ylim([-1 1])
 zlim([0 200])
-xlabel('\mu_L','FontSize',14)
-ylabel('\mu_T','FontSize',14)
+xlabel('L','FontSize',14)
+ylabel('T','FontSize',14)
 zlabel('Mean Cumulative Kills','FontSize',14)
 [az,el] = view;
 az = az + 180;
@@ -56,12 +56,12 @@ view(az, el);
 saveas(f1,'L_T_dep_mean.png')
 
 f2 = figure(2);
-surf(L_mean,T_mean,y_std)
+surf(L,T,y_std)
 xlim([0 1])
 ylim([-1 1])
 zlim([0 20])
-xlabel('\mu_L','FontSize',14)
-ylabel('\mu_T','FontSize',14)
+xlabel('L','FontSize',14)
+ylabel('T','FontSize',14)
 zlabel('Standard Deviation Cumulative Kills','FontSize',14)
 view(az, el);
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.9)  10 DEC 2014 15:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.9)  10 DEC 2014 20:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -206,11 +206,7 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(./report.aux
-
-LaTeX Warning: Label `fig:LEO_civ_base' multiply defined.
-
-)
+(./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
@@ -312,6 +308,11 @@ Overfull \hbox (5.3226pt too wide) in paragraph at lines 42--60
 \openout3 = `report.toc'.
 
  [3]
+
+LaTeX Warning: Reference `subsec:base_model' on page 4 undefined on input line 
+90.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 88--93
 
  []
@@ -337,94 +338,161 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--132
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 148--179
+Underfull \hbox (badness 10000) in paragraph at lines 146--149
+
+ []
+
+[7]
+Overfull \hbox (4.2331pt too wide) in paragraph at lines 152--158
+\OT1/cmr/m/n/12 tioned on $\OML/cmm/m/it/12 X[]$ \OT1/cmr/m/n/12 and $\OML/cmm/
+m/it/12 V\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 E\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Y
+\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 X[]\OT1/cmr/m/n/12 )]$ the vari-ance of the 
+con-di-tional ex-pec-ta-tion (fixed/known
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--179
+Underfull \hbox (badness 10000) in paragraph at lines 152--158
+
+ []
+
+[8]
+
+LaTeX Warning: Reference `tab:fields_struct' on page 9 undefined on input line 
+166.
+
+
+LaTeX Warning: Reference `tab:fields_struct' on page 9 undefined on input line 
+188.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--179
+Underfull \hbox (badness 10000) in paragraph at lines 166--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--179
-
- []
-
-[7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 202--230
+Underfull \hbox (badness 10000) in paragraph at lines 166--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--230
+Underfull \hbox (badness 10000) in paragraph at lines 166--197
 
  []
 
-[10] [11]
-<../../code/base_model/cum_kills_vs_LEO_civ.png, id=55, 578.16pt x 433.62pt>
+[9] [10]
+
+LaTeX Warning: Reference `eqn:update_violence' on page 11 undefined on input li
+ne 204.
+
+[11]
+
+LaTeX Warning: Reference `tab:values_parameters' on page 12 undefined on input 
+line 234.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 234--262
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 234--262
+
+ []
+
+[12]
+
+LaTeX Warning: Reference `tab:si_base' on page 13 undefined on input line 266.
+
+
+LaTeX Warning: Reference `tab:si_modified' on page 13 undefined on input line 2
+66.
+
+[13]
+<../../code/base_model/cum_kills_vs_LEO_civ.png, id=63, 578.16pt x 433.62pt>
 File: ../../code/base_model/cum_kills_vs_LEO_civ.png Graphic file (type png)
 
 <use ../../code/base_model/cum_kills_vs_LEO_civ.png>
 Package pdftex.def Info: ../../code/base_model/cum_kills_vs_LEO_civ.png used on
- input line 285.
+ input line 317.
 (pdftex.def)             Requested size: 344.005pt x 258.0038pt.
 
-<../../code/modified_model/cum_kills_vs_LEO_civ.png, id=56, 578.16pt x 433.62pt
+
+LaTeX Warning: Reference `fig:LEO_civ_modified' on page 14 undefined on input l
+ine 321.
+
+
+<../../code/modified_model/cum_kills_vs_LEO_civ.png, id=64, 578.16pt x 433.62pt
 >
 File: ../../code/modified_model/cum_kills_vs_LEO_civ.png Graphic file (type png
 )
  <use ../../code/modified_model/cum_kills_vs_LEO_civ.png>
 Package pdftex.def Info: ../../code/modified_model/cum_kills_vs_LEO_civ.png use
-d on input line 292.
+d on input line 324.
 (pdftex.def)             Requested size: 344.005pt x 258.0038pt.
- [12] [13]
-<../../code/modified_model/L_T_mean_dep_mean.png, id=64, 578.16pt x 433.62pt>
+ [14] [15 <../../code/base_model/cum_kills_vs_LEO_civ.png (PNG copy)>]
+<../../code/base_model/L_T_dep_mean.png, id=71, 578.16pt x 433.62pt>
+File: ../../code/base_model/L_T_dep_mean.png Graphic file (type png)
+
+<use ../../code/base_model/L_T_dep_mean.png>
+Package pdftex.def Info: ../../code/base_model/L_T_dep_mean.png used on input l
+ine 332.
+(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
+
+<../../code/modified_model/L_T_mean_dep_mean.png, id=72, 578.16pt x 433.62pt>
 File: ../../code/modified_model/L_T_mean_dep_mean.png Graphic file (type png)
 
 <use ../../code/modified_model/L_T_mean_dep_mean.png>
 Package pdftex.def Info: ../../code/modified_model/L_T_mean_dep_mean.png used o
-n input line 300.
+n input line 338.
 (pdftex.def)             Requested size: 344.005pt x 258.0038pt.
- [14 <../../code/base_model/cum_kills_vs_LEO_civ.png (PNG copy)>] [15 <../../co
-de/modified_model/cum_kills_vs_LEO_civ.png (PNG copy)>] [16 <../../code/modifie
-d_model/L_T_mean_dep_mean.png (PNG copy)>] (./report.aux)
+ [16 <../../code/modified_model/cum_kills_vs_LEO_civ.png (PNG copy)>] [17 <../.
+./code/base_model/L_T_dep_mean.png (PNG copy)>] [18 <../../code/modified_model/
+L_T_mean_dep_mean.png (PNG copy)>] (./report.aux)
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 3260 strings out of 493117
- 44035 string characters out of 6135433
- 121670 words of memory out of 5000000
- 6661 multiletter control sequences out of 15000+600000
+ 3267 strings out of 493117
+ 44261 string characters out of 6135433
+ 118551 words of memory out of 5000000
+ 6667 multiletter control sequences out of 15000+600000
  16128 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,26p,1176b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,13n,26p,1176b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
 usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.p
-fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/l
-ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on report.pdf (16 pages, 381467 bytes).
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on report.pdf (18 pages, 481634 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 133 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

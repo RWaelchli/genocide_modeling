@@ -134,12 +134,30 @@ For the sake of simplicity and to make the sensitivity analysis described later 
 It seems quite obvious that the perceived legitimacy of the other ethnic group should not be a constant over the course of the simulation. Violence committed by one ethnic group will probably decrease its perceived legitimacy in the eyes of the other ethnic group. The opposite effect will possibly have the arrest of a active (violent) civilian on the perceived legitimacy of its ethnic group. In our expansion of the model, these effects are limited to the range of sight of the involved killed or arrested active civilian. The update in the case of violence is the following:
 \begin{align}
 L_{\text{new}} = L_{\text{old}} \left( 1 - k_L \right)
+\label{eqn:update_violence}
 \end{align}
 When an active civilian is arrested, the update is given by:
 \begin{align}
 L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right)
 \end{align}
 The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little in the legitimacy (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
+
+\subsection{Global Sensitivity Analysis of Model Parameters}
+In order to test the sensitivity of the output of a generic model with respect to its inputs, a variance-based global sensitivity analysis can be performed as proposed in literature. For the sake of simplicity, we restrict ourselves to scalar model outputs. Most generally speaking, the model is a arbitrary relation $Y = f(X_1,X_2,...,X_k)$ between the output variable $Y$ and the $k$ input variables (parameters) $X_i$. Variance-based sensitivity analysis methods provide a quantitative measure how the variance of the output depends on the different uncertain/random inputs. The main advantages of variance-based global sensitivity analysis techniques are their abilities to describe the influence of each input parameter over its full range of values and to detect interactions between the input parameters. Their main disadvantage is their computational cost.\\
+\\
+For each input parameter $X_i$, a first-order sensitivity index $S_i$ and total-effect index $S_{T_i}$ can be defined:
+\begin{align}
+S_i &= \frac{V[E(Y|X_i)]}{V(Y)}\\
+S_{T_i} &= \frac{E[V(Y|\textbf{X}_{\sim i})]}{V(Y)} = 1 - \frac{V[E(Y|\textbf{X}_{\sim i})]}{V(Y)}
+\end{align}
+$V(Y)$ is the unconditional variance of $Y$, $E(Y|X_i)$ the expectation value of $Y$ conditioned on $X_i$ and $V[E(Y|X_i)]$ the variance of the conditional expectation (fixed/known value of $X_i$). This is measure for sensitivity to changes in the parameter $X_i$. After normalization to the unconditional variance $V(Y)$ one obtains the first-order sensitivity index, which is also called the main effect of $X_i$.\\
+\\
+$V[E(Y|\textbf{Y}_{\sim i})]$ on the other hand is the output variance $V(Y)$ conditioned on all input variables except $X_i$, i.e. $\textbf{X}_{\sim i}$. This is the remaining variance of the expectation value, if the true values of all input parameters except $X_i$ would be known.\\
+\\
+The values both of $S_i$ and of $S_{T_i}$ have to be by definition between 0 and 1 as well as  $S_{T_i}$ has to be larger or equal to $S_i$. The bigger $S_i$ and $S_{T_i}$ are, the higher is the effect of the input variable $X_i$ onto the output variable $Y$. The difference $(S_{T_i} - S_i)$ provides information on how much $X_i$ interferes with the other input parameters. If it is zero, there are no interactions. For a purely additive model is $\sum_{i=1}^k S_i = 1$. The difference $1 - \sum_{i=1}^k S_i$ gives a general measure of the amount of interactions in the model. Further information about this method of global sensitivity analysis can be found in the literature.
+
+\subsection{Qualitative Assessment of the Input Parameters}
+Unfortunately, the global sensitivity analysis yielded no useful results. Therefore, an alternative had to be found in order to assess the influence of certain input parameters on the simulation outcomes and in the end discuss the differences between the two models. The focus was put on the changed procedures and the newly introduced interaction as well as the comparison of the two models with each other.
 
 \section{Implementation}
 The whole implementation is based on arrays of structs. This way of implementation may not be the fastest possible, but it is in our opinion the most intuitive one.
@@ -182,8 +200,22 @@ The jail is updated using the function $fun\_update\_jail()$. First it updates t
 \subsubsection{Heterogeneity of the Parameters $L$ and $T$}
 The function $truncate()$ is used in order to obtain two truncated probability density object. The normal probability density objects are first created with the desired mean and standard deviation using the function $makedist()$. So in the case of the modified model, the function $fun\_init\_map()$ takes instead of the two parameters $L$ and $T$ the four parameters $\mu_L$, $\sigma_L$, $\mu_T$ and $\sigma_T$. The function $rand()$ is then used to initialize the individual values of $L$ and $T$ of the civilians from the truncated normal probability density objects.
 
+\subsubsection{Update of the Perceived Legitimacy}
+The function $fun\_action\_civ()$ of the modified model records the position and the ethnic group of the possible killed civilian. Then it inspects the neighborhood within vision of the killed civilian and records the civilians of the same ethnic group. Their perceived legitimacy is then updated according to equation \eqref{eqn:update_violence}.
+
 \subsection{Sensitivity Analysis}
-For both models, the output variable describing the extent of violence that occurred during the simulation was defined as the cumulative number of kills divided by the initial population size. The normalization to the population size was done in order to investigate also the initial population density as input parameter of the models.
+For both models, the output variable describing the extent of violence that occurred during the simulation was defined as the cumulative number of kills divided by the initial population size. The normalization to the population size was done in order to investigate also the initial population density as input parameter of the models. The parameters investigated and their intervals are shown in tables and .
+\begin{table}[!htbp]
+	\centering
+	\caption{}
+	\vspace{0.5 cm}
+		\begin{tabular}{c | c | c | c}
+		Number & Parameter & $a$ & $b$\\
+		\hline
+		1 & $\rho_{\text{tot}}$ & 0.1 & 0.9\\
+	\end{tabular}
+	\label{tab:values_parameters}
+\end{table}
 
 \subsubsection{Sample Generation}
 The size $N$ of the base sample generated was 100. The necessary $(N \times 2k)$ base sample matrix of random numbers, where $k$ is the number of parameters investigated, was generated as suggested in the literature using the sobolset class, which is an implementation of Sobol's random number generator in MATLAB. The procedure to obtain the matrix from a created point set object of this class was directly taken from the documentation of the software. This matrix was divided as described in literature into the two matrices $\boldsymbol{A}$ and $\boldsymbol{B}$, which in turn were used to construct the $k$ matrices $\boldsymbol{C_i}$. The matrix $\boldsymbol{C_i}$ corresponds to the generic parameter $i$ and contains all columns of $\boldsymbol{B}$ except the $i^{\text{th}}$, which is taken from the $i^{\text{th}}$ column of $\boldsymbol{A}$. The sample generation was done inside the program $sample\_generation$ and the created sample matrices were exported into .txt files.
@@ -297,8 +329,14 @@ The result of the similar analysis done for the modified model is shown in figur
 \subsubsection{Dependence on the Legitimacy and the Violence Threshold}
 \begin{figure}[!htbp]
 	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/base_model/L_T_dep_mean.png}
+	\caption{Dependence of the mean cumulative number of kills on the two parameters $L$ and $T$ of the base model. The parameter $L$ seems to be more influential than $T$ for the selected values of the other model parameters.}
+	\label{fig:L_T_dep_base}
+\end{figure}
+\begin{figure}[!htbp]
+	\centering
 		\includegraphics[width=0.80\textwidth]{../../code/modified_model/L_T_mean_dep_mean.png}
-	\caption{Dependence of the mean cumulative number of kills on the two parameters $\mu_L$ and $\mu_T$ of the modified model. Clearly the parameter $\mu_L$ is more influential than $\mu_T$ for the selected values of the other model parameters.}
+	\caption{Dependence of the mean cumulative number of kills on the two parameters $\mu_L$ and $\mu_T$ of the modified model. As in the base model, the output shows more sensitivity towards the parameter $L$ than the parameter $T$ for the selected values of the other model parameters.}
 	\label{fig:L_T_dep_mod}
 \end{figure}
 
