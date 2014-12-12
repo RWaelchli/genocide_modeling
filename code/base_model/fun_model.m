@@ -1,3 +1,9 @@
+%% Model Output Function
+
+% This function produces the output of the base model providing a set of
+% input parameters. The output is the cumulative number of kills that
+% occured over the course of the simulation of duration nIter.
+
 function y = fun_model(N,nIter,max_age,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,L,T)
 
 %% Initializing the Map (Array of Structures)
@@ -66,6 +72,8 @@ for n=1:nIter
     [jail,map] = fun_update_jail(jail,map,default_struct);
     
 end
+
+%% Returning the Output Argument
 
 y = sum_kills(end);
 

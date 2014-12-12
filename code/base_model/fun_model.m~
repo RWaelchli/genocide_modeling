@@ -1,67 +1,8 @@
 %% Model Output Function
 
-% This function produces the output of the base model that can be used for
-% the variance-based global sensitivity analysis. The input parameters have
-% to be uniform random numbers from the interval [0,1]. They will be
-% tansformed inside the function into their real values. The output is the
-% cumulative number of kills divided by the initial population size.
+% This function produces the model 
 
-function y = fun_model(N,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,T,L,max_age,nIter)
-
-%% Interval Transformation of the Input Parameters
-
-rho_tot_a = 0.1;
-rho_tot_b = 0.9;
-
-rho_tot = rho_tot*(rho_tot_b-rho_tot_a)+rho_tot_a;
-
-pop_frac_a = 0.1;
-pop_frac_b = 0.9;
-
-pop_frac = pop_frac*(pop_frac_b-pop_frac_a)+pop_frac_a;
-
-LEO_to_civ_a = 0;
-LEO_to_civ_b = 0.1;
-
-LEO_to_civ = LEO_to_civ*(LEO_to_civ_b-LEO_to_civ_a)+LEO_to_civ_a;
-
-P_a = 0.001;
-P_b = 0.05;
-
-P = P*(P_b-P_a)+P_a;
-
-v_civ_a = 0.5;
-v_civ_b = 5.4999999;
-
-v_civ = v_civ*(v_civ_b-v_civ_a)+v_civ_a;
-v_civ = round(v_civ);
-
-v_LEO_a = 0.5;
-v_LEO_b = 5.4999999;
-
-v_LEO = v_LEO*(v_LEO_b-v_LEO_a)+v_LEO_a;
-v_LEO = round(v_LEO);
-
-k_a = 1;
-k_b = 3;
-
-k_P = k_P*(k_b-k_a)+k_a;
-
-J_max_a = 9.5;
-J_max_b = 200.4999999;
-
-J_max = J_max*(J_max_b-J_max_a)+J_max_a;
-J_max = round(J_max);
-
-T_a = -0.9;
-T_b = 0.9;
-
-T = T*(T_b-T_a)+T_a;
-
-L_a = 0.1;
-L_b = 0.9;
-
-L = L*(L_b-L_a)+L_a;
+function y = fun_model(N,nIter,max_age,rho_tot,pop_frac,LEO_to_civ,P,v_civ,v_LEO,k_P,J_max,L,T)
 
 %% Initializing the Map (Array of Structures)
 
@@ -77,7 +18,7 @@ jail = fun_init_jail(default_struct,J_max);
 %% Preallocation Storage Variables
 
 sum_kills = zeros(nIter,1);
-n_civ = N^2*rho_tot*(1-LEO_to_civ); % initial population size
+% sum_arrests = zeros(nIter,1);
 
 for n=1:nIter
     %% Movement
@@ -97,6 +38,7 @@ for n=1:nIter
 
     %% Action
     
+%     arrest = 0;
     kill = 0;
 
     if map(i,j).type == 3
@@ -127,9 +69,8 @@ for n=1:nIter
 
     [jail,map] = fun_update_jail(jail,map,default_struct);
     
-
 end
 
-y = sum_kills(end)/n_civ;
+y = sum_kills(end);
 
 end

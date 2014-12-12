@@ -313,7 +313,75 @@ To finish the qualitative analysis, it was also tried to assess the dependence o
 \section{Simulation Results and Discussion}
 
 \subsection{Global Sensitivity Analysis}
-The computed sensitivity indices of the input parameters of the base and the modified model are presented in table~\ref{tab:val_sen_ind}, respectively. It is right away obvious that those values cannot be correct. For instance, the $S_i$ have to take by definition values in the interval $[0,1]$ and the sum of the $S_i$ has to be equal to 1. Also, $S_i^T$ has to be larger or equal to $S_i$. To our knowledge, we have made no mistake in the implementation of the global sensitivity analysis in MATLAB. One possible explanation for the failure could be an insufficiently large base sample, leading to inaccurate estimates of the sensitivity indices. But it goes past our computational resources to increase the sample size significantly in order to check, if that is actually the case.
+The computed sensitivity indices of the input parameters of the base and the modified model are presented in table~\ref{tab:val_sen_ind}. It is obvious for multiple reasons that those values cannot be correct. For instance, both the $S_i$ and the $S_{T_i}$ have to take by definition values in the interval $[0,1]$. Also, $S_{T_i}$ has to be larger or equal to $S_i$. To our knowledge, we have made no mistake in the implementation of the global sensitivity analysis in MATLAB. One possible explanation for the failure could be an insufficiently large base sample, leading to inaccurate estimates of the sensitivity indices. But it goes past our computational resources to increase the sample size significantly in order to check, if that is actually the case.
+
+\subsection{Qualitative Assessment of the Input Parameters}
+
+\subsubsection{Reproduction of Literature Results}
+The result of the analysis regarding the initial LEO/civilian ratio is shown in figure~\ref{fig:LEO_civ_base}. The anticipated dependence of the mean cumulative number of kills on the LEO/civilian ratio was observed. However, the standard deviation did not increase as one might expect from the results presented in literature. This is probably be due to the different violence measure used or the effect of the initial LEO/civilian ratio on the standard deviation might only manifest itself at larger numbers of iterations. Also the smaller number of runs per parameter value might affect the result.
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/base_model/cum_kills_vs_LEO_civ.png}
+	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the base model. As expected, the mean formed out of 10 runs decreases with increasing LEO/civilian ratio. The standard deviation on the other hand remains constant. It is shown via the error bars.}
+	\label{fig:LEO_civ_base}
+\end{figure}
+The result of the similar analysis done for the modified model is shown in figure~\ref{fig:LEO_civ_modified}. It does not differ from that using the base model. This suggests that the heterogeneity of the perceived legitimacy and the violence threshold as well as the updating of the legitimacy has no effect on the dependency of the cumulative number of kills on the initial LEO/civilian ratio, at least not at those values of all the other parameters. 
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/modified_model/cum_kills_vs_LEO_civ.png}
+	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the modified model. Basically the same result as with the base model is obtained. Again, the mean formed out of 10 runs decreases with increasing LEO/civilian ratio. The standard deviation shown through remains fairly constant.}
+	\label{fig:LEO_civ_modified}
+\end{figure}
+
+\subsubsection{Dependence on the Legitimacy and the Violence Threshold}
+The results are shown in figures~\ref{fig:L_T_dep_base} and \ref{fig:L_T_dep_mod}. The (mean) violence threshold seems to have a larger impact on the extent of violence encountered during the simulation than the (mean) perceived legitimacy. Especially at low violence threshold values extreme extents of violence are encountered. The effect of the (mean) perceived legitimacy on the model output also decreases with decreasing value of the (mean) violence threshold. This can be rationalized by recalling the criterion $(G-N)>T$ for a civilian to become active and looking at a high (mean) perceived legitimacy. $G$ is approximately zero in that case. $N$ is approximately equal to $R$ for the selected value of $k_P$. The difference $(G-N)$ becomes approximatively equal to $-R$. When $T$/$\mu_T$ are close to -1, the civilians will almost always become active when selected (remembering that $R$ is drawn from $U(0,1)$ upon initialization). For smaller values of $L$/$\mu_L$ the grievance $G$ becomes larger than zero, even increasing the chances that the selected civilian becomes active.\\
+\\
+In the case of the modified model, the results are qualitatively identical to those of the base model. The variation in the individual values of $L$ and $T$ introduces especially some deviations for moderate values of $\mu_T$ and high values of $\mu_L$. Because there is a certain fraction of the population that has lower values of $L$ and $T$ than the mean, there will be more violence compared to the base models, where all civilians are identical regarding these characteristics.
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/base_model/L_T_dep_mean.png}
+	\caption{Dependence of the mean cumulative number of kills on the two parameters $L$ and $T$ of the base model. The parameter $T$ seems to be more influential on the model output than the parameter $L$ for the selected values of the other model parameters.}
+	\label{fig:L_T_dep_base}
+\end{figure}
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/modified_model/L_T_mean_dep_mean.png}
+	\caption{Dependence of the mean cumulative number of kills on the two parameters $\mu_L$ and $\mu_T$ of the modified model. As in the base model, the output shows more sensitivity towards the parameter $T$ than the parameter $L$ for the selected values of the other model parameters.}
+	\label{fig:L_T_dep_mod}
+\end{figure}
+
+\subsubsection{Dependence on the Parameters $\sigma_L$ and $\sigma_T$}
+The results of this analysis are shown in figure~\ref{fig:L_T_std_dep}. The mean number of cumulative kills increases with increasing value of the standard deviations $\sigma_L$ and $\sigma_T$. This is most probable due to the increase in the number of extreme individuals on the map, which have low values of $L$ and/or $T$, although the means of those characteristics over the entire population remain unchanged. Those extreme individuals will very often engage in violence when they are selected. Therefore it would be important to not only have high mean perceived legitimacy and violence threshold, but also to have a homogeneous society regarding those characteristics in order to prevent extensive violence.
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/modified_model/L_T_std_dep.png}
+	\caption{Dependence of the mean cumulative number of kills on the value of the standard deviations $\sigma_L$ and $\sigma_T$ of the truncated normal distributions from which the two individual characteristics $L$ and $T$ of the civilians are drawn in the case of the modified model.}
+	\label{fig:L_T_std_dep}
+\end{figure}
+
+\subsubsection{Dependence on the Parameter $k_L$}
+The results are shown in figure~\ref{fig:k_L_dep}. As it can be seen, the parameter value seems to have almost no effect on the extent of violence encountered in the simulation. Based on the form of the equations~\eqref{eqn:update_violence} and \eqref{eqn:update_arrest}, one would expect an increase of the violence with increasing value of the parameter $k_L$. Kills have a stronger influence on the perceived legitimacy than arrests. Also are kills more likely to occur in the simulation because of the fewer selections of a LEO. That this was not observed might be mainly due to the fact, that the legitimacy is only updated in a rather short range around the killed/arrested civilian. Extending the range might increase the effect on the cumulative number of kills. It might make the model even more realistic, if two different constants are used in the update equations instead of just $k_L$ in both (increasing the relative effect of an arrest).
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/modified_model/k_L_dep.png}
+	\caption{Dependence of the mean cumulative number of kills on the value of the parameter $k_L$.}
+	\label{fig:k_L_dep}
+\end{figure}
+
+\section{Summary and Outlook}
+The base model presented in literature was extended by making the characteristics $L$ and $T$ individual quantities of the civilians. This was achieved by drawing them from a truncated normal distribution upon initialization of the civilians on the map. The normal distribution was selected instead of a uniform distribution because it seemed not to be realistic, that those quantities are uniformly distributed. This introduced four new parameters to the model: $\mu_L$, $\sigma_L$, $\mu_T$ and $\sigma_T$, removing the parameters $L$ and $T$. Further, a new interaction was introduced: the updating of the perceived legitimacy upon murders or arrests. This yielded another parameter $k_L$ used to describe this update. The next step could be also to change the distributions from which the other individual quantities (the hardship $H$ and the risk aversion $R$)) are drawn (e.g. truncated normal distributions as well). Them being uniformly distributed over the population also seems to be not very realistic. Maybe the assumption that violence has always the same effect on the perceived legitimacy is too strong. It could be tried to use a formula similar to equation~\eqref{eqn:update_arrest} to describe the update of the legitimacy, but to use two different constants in the updating formulas.\\
+\\
+It was tried to assess the sensitivity of the model output to the various input parameters using a variance-based global sensitivity analysis method. As model output, the cumulative number of kills encountered over the course of the simulation normalized to the initial population size was defined. The application of this method failed due to unidentified reasons. One possible explanation would be an insufficient size of sample points. Increasing the sample size was not an option due to the lack of computational resources. This could for instance be overcome by using a computer cluster, since the computation of model outputs is tailor-made for parallelization. Also the number of iterations to generate the single model outputs could be increase, to better assess the evolution of the simulation and to consider long term effects inside the model.\\
+\\
+Lacking the results from the global sensitivity analysis, a more basic approach was made to evaluate the dependence of the extent of violence in the artificial society on some of the model parameters. First, it was tried to reproduce the findings from the literature regarding perceived legitimacy and LEO density. As in the reference, no violence was observed in the base model when the perceived legitimacy was as high as 0.9. In the modified model, there was always some violence due to the heterogeneity of the parameters $L$ and $T$. This seems to be a reasonable result. Even in the most peaceful, multi-cultural societies, racist violence occurs from time to time. The effect of the LEO density on the mean extent of violence was corresponding to that reported in literature. However, no increase in the standard deviation could be observed, but this is most probably attributed to the different method to measure the extent of violence compared to the reference.\\
+\\
+Both for the base and the modified model, the (mean) violence threshold was found to be more influential on the model output than the (mean) perceived legitimacy. This can be explained by the criterion for the selected civilian to become active or to stay quiet. The modified model showed generally more violence over the whole range of combinations of the mean perceived legitimacy and the mean violence threshold. This can be rationalized by the small probability to also have extreme individuals in the population.\\
+\\
+The parameter $k_L$ seems to have not a significant effect on the extent of violence encountered in the simulation. This might be due to limited range in which the update of the perceived legitimacy takes place. As next step, this range could be extended and the dependence of the model output on the value of the parameter $k_L$ could be reevaluated.
+
+\section{References}
+
+\section{Appendix}
 \begin{table}[!htbp]
 	\centering
 	\caption{Sensitivity indices computed for the input parameters of both models. The meaning of the parameter numbering is explained in table~\ref{tab:parameter_intervals}.}
@@ -338,70 +406,6 @@ The computed sensitivity indices of the input parameters of the base and the mod
 	\end{tabular}
 	\label{tab:val_sen_ind}
 \end{table}
-
-\subsection{Qualitative Assessment of the Input Parameters}
-
-\subsubsection{Reproduction of Literature Results}
-The result of the analysis regarding the initial LEO/civilian ratio is shown in figure \label{fig:LEO_civ_base}. The anticipated dependence of the mean cumulative number of kills on the LEO/civilian ratio was observed. However, the standard deviation did not increase as one might expect from the results presented in literature. This might be due to the different violence measure used or the effect of the initial LEO/civilian ratio on the standard deviation might only manifest itself at larger numbers of iterations. Also the smaller number of runs per parameter value might affect the result.
-\begin{figure}[!htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{../../code/base_model/cum_kills_vs_LEO_civ.png}
-	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the base model. As expected, the mean formed out of 10 runs decreases with increasing LEO/civilian ratio. The standard deviation on the other hand remains constant. It is shown via the error bars.}
-	\label{fig:LEO_civ_base}
-\end{figure}
-The result of the similar analysis done for the modified model is shown in figure \ref{fig:LEO_civ_modified}. It does not differ from that using the base model. This implies that the heterogeneity of the perceived legitimacy and the violence threshold as well as the updating of the legitimacy has no effect on the dependency of the cumulative number of kills on the initial LEO/civilian ratio, at least not at those values of all the other parameters. 
-\begin{figure}[!htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{../../code/modified_model/cum_kills_vs_LEO_civ.png}
-	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the modified model. Basically the same result as with the base model is obtained. Again, the mean formed out of 10 runs decreases with increasing LEO/civilian ratio. The standard deviation shown through remains fairly constant.}
-	\label{fig:LEO_civ_modified}
-\end{figure}
-
-\subsubsection{Dependence on the Legitimacy and the Violence Threshold}
-The results are shown in figures~\ref{fig:L_T_dep_base} and \ref{fig:L_T_dep_mod}. The (mean) violence threshold seems to have a larger impact on the extent of violence encountered during the simulation than the (mean) perceived legitimacy. Especially at low violence threshold values extreme extents of violence are encountered. This can be rationalized by recalling the criterion for a civilian to become active $(G-N)>T$. $G$ is approximately equal to $H$ when the perceived legitimacy is very high. $N$ is approximately equal to $R$ for the selected value of $k_P$. The mean difference $(H-R)$ is equal to zero, so for negative values of $T$/$\mu_T$., the civilians almost always become active, no matter what their surrounding looks like. The effect of the (mean) perceived legitimacy on the model output decreases with decreasing value of the (mean) violence threshold. This can be explained using the same arguments presented before. In the case of the modified model, the results are qualitatively identical to those of the base model. The variation in the individual values of $L$ and $T$ introduces especially some deviations for moderate values of $\mu_T$ and high values of $\mu_L$. Because there is a certain fraction of the population that has lower values of $L$ and $T$ than the mean, there will be more violence compared to the base models, where all civilians are identical regarding these characteristics.
-\begin{figure}[!htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{../../code/base_model/L_T_dep_mean.png}
-	\caption{Dependence of the mean cumulative number of kills on the two parameters $L$ and $T$ of the base model. The parameter $L$ seems to be more influential than $T$ for the selected values of the other model parameters.}
-	\label{fig:L_T_dep_base}
-\end{figure}
-\begin{figure}[!htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{../../code/modified_model/L_T_mean_dep_mean.png}
-	\caption{Dependence of the mean cumulative number of kills on the two parameters $\mu_L$ and $\mu_T$ of the modified model. As in the base model, the output shows more sensitivity towards the parameter $L$ than the parameter $T$ for the selected values of the other model parameters.}
-	\label{fig:L_T_dep_mod}
-\end{figure}
-
-\subsubsection{Dependence on the Parameters $\sigma_L$ and $\sigma_T$}
-The results of this analysis are shown in figure~\ref{fig:L_T_std_dep}. The mean number of cumulative kills increases with increasing value of the standard deviations $\sigma_L$ and $\sigma_T$. This is most probable due to the increase in the number of extreme individuals on the map, which have low values of $L$ and/or $T$, although the means of those characteristics over the entire population remain unchanged. Those extreme individuals will very often engage in violence when they are selected. Therefore it would be important to not only have high mean perceived legitimacy and violence threshold, but also to have a homogeneous society regarding those characteristics in order to prevent extensive violence.
-\begin{figure}[!htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{../../code/modified_model/L_T_std_dep.png}
-	\caption{Dependence of the mean cumulative number of kills on the value of the standard deviations $\sigma_L$ and $\sigma_T$ of the truncated normal distributions from which the two individual characteristics $L$ and $T$ of the civilians are drawn in the case of the modified model.}
-	\label{fig:L_T_std_dep}
-\end{figure}
-
-\subsubsection{Dependence on the Parameter $k_L$}
-The results are shown in figure~\ref{fig:k_L_dep}. As it can be seen, the parameter value seems to have almost no effect on the extent of violence encountered in the simulation. Based on the form of the equations~\eqref{eqn:update_violence} and \eqref{eqn:update_arrest}, one would expect an increase of the violence with increasing value of the parameter $k_L$. Kills have a stronger influence on the perceived legitimacy than arrests. Also are kills more likely to occur in the simulation because of the fewer selections of a LEO. That this was not observed might be mainly due to the fact, that the legitimacy is only updated in a rather short range around the killed/arrested civilian. Extending the range might increase the effect on the cumulative number of kills. It might make the model even more realistic, if the values of the constants $k_L$ in the two update equations can be different (increasing the relative effect of an arrest).
-\begin{figure}[!htbp]
-	\centering
-		\includegraphics[width=0.80\textwidth]{../../code/modified_model/k_L_dep.png}
-	\caption{Dependence of the mean cumulative number of kills on the value of the parameter $k_L$.}
-	\label{fig:k_L_dep}
-\end{figure}
-
-\section{Summary and Outlook}
-The base model presented in literature was extended by making the characteristics $L$ and $T$ of the civilians individual quantities. This was achieved by drawing them from a truncated normal distribution upon initialization of the civilians on the map. The normal distribution was selected instead of a uniform distribution because it seemed not to be realistic, that those quantities are uniformly distributed. This introduced four new parameters to the model: $\mu_L$, $\sigma_L$, $\mu_T$ and $\sigma_T$, removing the parameters $L$ and $T$. Further, a new interaction was introduced: the updating of the perceived legitimacy upon murders or arrests. This yielded another parameter $k_L$ used to describe this update. The next step could be to also change the distributions from which the other individual quantities (the hardship $H$ and the risk aversion $R$)) are drawn to a truncated normal distribution. Them being uniformly distributed over the population also seems to be not very realistic. Maybe the assumption that violence has always the same effect on the perceived legitimacy is too strong. It could be tried to use a formula similar to equation~\eqref{eqn:update_arrest} to describe the update of the legitimacy, but to use two different constants in the updating formulas.\\
-\\
-It was tried to assess the sensitivity of the model output to the various input parameters using a variance-based global sensitivity analysis method. As model output, the cumulative number of kills encountered over the course of the simulation normalized to the initial population size was defined. The application of this method failed due to unidentified reasons. One possible explanation would be an insufficient size of sample points. Increasing the sample size was not an option due to the lack of computational resources. This could for instance be overcome by using a computer cluster, since the computation of model outputs is tailor-made for parallelization. Also the number of iterations to generate the single model outputs could be increase, to better assess the evolution of the simulation and to consider long term effects inside the model.\\
-\\
-Lacking the results from the global sensitivity analysis, a more basic approach was made to evaluate the dependence of the extent of violence in the artificial society on some of the model parameters. First, it was tried to reproduce the findings from the literature regarding perceived legitimacy and LEO density. As in the reference, no violence was observed in the base model when the perceived legitimacy was as high as 0.9. In the modified model, there was always some violence due to the heterogeneity of the parameters $L$ and $T$. This seems to be a reasonable result. Even in the most peaceful, multi-cultural societies, racist violence occurs from time to time. The effect of the LEO density on the mean extent of violence was corresponding to that reported in literature. However, no increase in the standard deviation could be observed, but this is most probably attributed to the different method to measure the extent of violence compared to the reference.\\
-\\
-Both for the base and the modified model, the (mean) violence threshold was found to be more influential on the model output than the (mean) perceived legitimacy. This can be explained by the criterion for the selected civilian to become active or to stay quiet. The modified model showed generally more violence over the whole range of combinations of the mean perceived legitimacy and the mean violence threshold. This can be rationalized by the small probability to also have extreme individuals in the population.\\
-\\
-The parameter $k_L$ seems to have not a significant effect on the extent of violence encountered in the simulation. This might be due to limited range in which the update of the perceived legitimacy takes place. As next step, this range could be extended and the dependence of the model output on the value of the parameter $k_L$ could be reevaluated.
-
-\section{References}
 
 
 

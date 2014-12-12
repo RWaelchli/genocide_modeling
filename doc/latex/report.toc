@@ -30,7 +30,8 @@
 \contentsline {subsection}{\numberline {6.2}Qualitative Assessment of the Input Parameters}{18}
 \contentsline {subsubsection}{\numberline {6.2.1}Reproduction of Literature Results}{18}
 \contentsline {subsubsection}{\numberline {6.2.2}Dependence on the Legitimacy and the Violence Threshold}{20}
-\contentsline {subsubsection}{\numberline {6.2.3}Dependence on the Parameters $\sigma _L$ and $\sigma _T$}{22}
-\contentsline {subsubsection}{\numberline {6.2.4}Dependence on the Parameter $k_L$}{24}
-\contentsline {section}{\numberline {7}Summary and Outlook}{26}
-\contentsline {section}{\numberline {8}References}{27}
+\contentsline {subsubsection}{\numberline {6.2.3}Dependence on the Parameters $\sigma _L$ and $\sigma _T$}{23}
+\contentsline {subsubsection}{\numberline {6.2.4}Dependence on the Parameter $k_L$}{23}
+\contentsline {section}{\numberline {7}Summary and Outlook}{24}
+\contentsline {section}{\numberline {8}References}{26}
+\contentsline {section}{\numberline {9}Appendix}{26}

@@ -11,18 +11,20 @@ default_struct = struct('type',0,'H',0,'L',[0 0],'v',0,'T',0,'R',0,'state',0,'ag
 N = 40; % size
 rho_tot = 0.7; % initial desity of the population
 pop_frac = 0.5; % initial fraction of ethnicity 1 of the total population
-LEO_to_civ = 0.05; % soldiers to civilians ratio
+LEO_to_civ = 0.05; % LEO/civilian ratio
 
 % Properties of the Civilians:
-L = 0;
-T = 1;
+L = 0; % perceived legitimacy
+T = 1; % violence threshold
 v_civ = 2; % vision
-max_age = 200;
+max_age = 200; % maximum age of the civilians
 k_P = 2.3; % parameter to estimate arrest probability P
 P = 0.025; % probability of the civilians to clone themselves in one iteration
 
 % Properties of the LEOs:
 v_LEO = 3; % vision
+
+%% Initialization of the Map
 
 map = fun_init_map(default_struct,N,rho_tot,LEO_to_civ,v_civ,v_LEO,pop_frac,L,T,max_age);
 
@@ -34,20 +36,22 @@ jail = fun_init_jail(default_struct,J_max);
 
 %% Preallocation Storage Variables
 
-nIter = 200;
+nIter = 200; % number of iterations
 
-n_1 = zeros(1,nIter+1);
-n_2 = zeros(1,nIter+1);
-n1_active = zeros(1,nIter);
-n2_active = zeros(1,nIter);
-n_jail = zeros(1,nIter);
+n_1 = zeros(1,nIter+1); % number of civilians of ethnic group 1
+n_2 = zeros(1,nIter+1); % number of civilians of ethnic group 2
+n1_active = zeros(1,nIter); % number of active civilians of ethnic group 1
+n2_active = zeros(1,nIter); % number of active civilians of ethnic group 2
+n_jail = zeros(1,nIter); % number of civilians in jail
 
-sum_kills = zeros(nIter,1);
-sum_arrests = zeros(nIter,1);
+sum_kills = zeros(nIter,1); % cumulative number of kills
+sum_arrests = zeros(nIter,1); % cumulative number of arrests
 
 n_civ = N^2*rho_tot*(1-LEO_to_civ); % total number of civilians
-n_1(1) = n_civ*pop_frac; % number of civilians 1
-n_2(1) = n_civ*(1-pop_frac); % number of civilians 2
+n_1(1) = n_civ*pop_frac;
+n_2(1) = n_civ*(1-pop_frac);
+
+%% Iteration of the Model
 
 for n=1:nIter
     %% Movement
@@ -62,6 +66,7 @@ for n=1:nIter
         j = unidrnd(N);
     end
 
+    % Movement of the Selected Agent:
     [map,i,j] = fun_movement(map,i,j,default_struct,N);
 
 
@@ -145,7 +150,7 @@ for n=1:nIter
 %         delete(f2) % deleting figure to have correct results
 %     end
     
-    %% Updating The Count Of The Civilians
+    %% Updating The Counts Of The Civilians
     
     n_1(n+1) = length(C1_quiet(:,1))+length(C1_active(:,1));
     n_2(n+1) = length(C2_quiet(:,1))+length(C2_active(:,1));
