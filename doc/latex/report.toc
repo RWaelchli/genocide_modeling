@@ -1,36 +1,36 @@
 \contentsline {section}{\numberline {1}Abstract}{5}
 \contentsline {section}{\numberline {2}Individual contributions}{5}
 \contentsline {section}{\numberline {3}Introduction and Motivations}{5}
-\contentsline {section}{\numberline {4}Description of the Model}{5}
-\contentsline {subsection}{\numberline {4.1}Base Model}{5}
+\contentsline {section}{\numberline {4}Description of the Model}{6}
+\contentsline {subsection}{\numberline {4.1}Base Model}{6}
 \contentsline {subsubsection}{\numberline {4.1.1}Specification of the Civilians}{6}
 \contentsline {subsubsection}{\numberline {4.1.2}Specification of the LEOs}{7}
 \contentsline {subsubsection}{\numberline {4.1.3}Evolution of the Simulation}{7}
-\contentsline {subsection}{\numberline {4.2}Modification of the Model}{7}
-\contentsline {subsubsection}{\numberline {4.2.1}Individual Perceived Legitimacy and Threshold}{7}
-\contentsline {subsubsection}{\numberline {4.2.2}Updating the Perceived Legitimacy}{8}
-\contentsline {subsection}{\numberline {4.3}Global Sensitivity Analysis of Model Parameters}{8}
+\contentsline {subsection}{\numberline {4.2}Modification of the Model}{8}
+\contentsline {subsubsection}{\numberline {4.2.1}Individual Perceived Legitimacy and Threshold}{8}
+\contentsline {subsubsection}{\numberline {4.2.2}Updating the Perceived Legitimacy}{9}
+\contentsline {subsection}{\numberline {4.3}Global Sensitivity Analysis of Model Parameters}{9}
 \contentsline {subsection}{\numberline {4.4}Qualitative Assessment of the Input Parameters}{10}
-\contentsline {section}{\numberline {5}Implementation}{10}
-\contentsline {subsection}{\numberline {5.1}Base Model}{10}
+\contentsline {section}{\numberline {5}Implementation}{11}
+\contentsline {subsection}{\numberline {5.1}Base Model}{11}
 \contentsline {subsection}{\numberline {5.2}Modified Model}{12}
 \contentsline {subsubsection}{\numberline {5.2.1}Heterogeneity of the Parameters $L$ and $T$}{12}
-\contentsline {subsubsection}{\numberline {5.2.2}Update of the Perceived Legitimacy}{12}
-\contentsline {subsection}{\numberline {5.3}Global Sensitivity Analysis}{12}
+\contentsline {subsubsection}{\numberline {5.2.2}Update of the Perceived Legitimacy}{13}
+\contentsline {subsection}{\numberline {5.3}Global Sensitivity Analysis}{13}
 \contentsline {subsubsection}{\numberline {5.3.1}Sample Generation}{14}
-\contentsline {subsubsection}{\numberline {5.3.2}Model Output Generation}{14}
+\contentsline {subsubsection}{\numberline {5.3.2}Model Output Generation}{15}
 \contentsline {subsubsection}{\numberline {5.3.3}Sensitivity Indices Computation}{15}
-\contentsline {subsection}{\numberline {5.4}Qualitative Assessment of the Input Parameters}{15}
-\contentsline {subsubsection}{\numberline {5.4.1}Reproduction of Literature Results}{15}
+\contentsline {subsection}{\numberline {5.4}Qualitative Assessment of the Input Parameters}{16}
+\contentsline {subsubsection}{\numberline {5.4.1}Reproduction of Literature Results}{16}
 \contentsline {subsubsection}{\numberline {5.4.2}Dependence on the Legitimacy and the Violence Threshold}{17}
-\contentsline {subsubsection}{\numberline {5.4.3}Dependence on the Parameters $\sigma _L$ and $\sigma _T$}{17}
-\contentsline {subsubsection}{\numberline {5.4.4}Dependence on the Parameter $k_L$}{17}
-\contentsline {section}{\numberline {6}Simulation Results and Discussion}{17}
-\contentsline {subsection}{\numberline {6.1}Global Sensitivity Analysis}{17}
+\contentsline {subsubsection}{\numberline {5.4.3}Dependence on the Parameters $\sigma _L$ and $\sigma _T$}{18}
+\contentsline {subsubsection}{\numberline {5.4.4}Dependence on the Parameter $k_L$}{18}
+\contentsline {section}{\numberline {6}Simulation Results and Discussion}{18}
+\contentsline {subsection}{\numberline {6.1}Global Sensitivity Analysis}{18}
 \contentsline {subsection}{\numberline {6.2}Qualitative Assessment of the Input Parameters}{18}
 \contentsline {subsubsection}{\numberline {6.2.1}Reproduction of Literature Results}{18}
-\contentsline {subsubsection}{\numberline {6.2.2}Dependence on the Legitimacy and the Violence Threshold}{21}
-\contentsline {subsubsection}{\numberline {6.2.3}Dependence on the Parameters $\sigma _L$ and $\sigma _T$}{21}
-\contentsline {subsubsection}{\numberline {6.2.4}Dependence on the Parameters $k_L$}{24}
-\contentsline {section}{\numberline {7}Summary and Outlook}{25}
-\contentsline {section}{\numberline {8}References}{25}
+\contentsline {subsubsection}{\numberline {6.2.2}Dependence on the Legitimacy and the Violence Threshold}{20}
+\contentsline {subsubsection}{\numberline {6.2.3}Dependence on the Parameters $\sigma _L$ and $\sigma _T$}{22}
+\contentsline {subsubsection}{\numberline {6.2.4}Dependence on the Parameter $k_L$}{24}
+\contentsline {section}{\numberline {7}Summary and Outlook}{26}
+\contentsline {section}{\numberline {8}References}{27}
