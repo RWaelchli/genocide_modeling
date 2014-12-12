@@ -66,7 +66,7 @@ if arrest == 1
     % Updating the Perceived Legitimacy Values:
     if isempty(opp_civ) ~= 1
         for l=1:size(opp_civ,1)
-            map(opp_civ(l,1),opp_civ(l,2)).L = map(opp_civ(l,1),opp_civ(l,2)).L+k_L.*(1-map(opp_civ(l,1),opp_civ(l,2)).L);
+            map(opp_civ(l,1),opp_civ(l,2)).L = map(opp_civ(l,1),opp_civ(l,2)).L+k_L.*(1-map(opp_civ(l,1),opp_civ(l,2)).L).*map(opp_civ(l,1),opp_civ(l,2)).L;
         end
     end
 end

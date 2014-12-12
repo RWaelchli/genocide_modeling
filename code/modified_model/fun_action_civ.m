@@ -95,7 +95,7 @@ end
 opp_civ = [];
 N = size(map,1);
 
-info_range = 5*range;
+info_range = 1*range;
 
 if kill == 1
     for k=-info_range:info_range

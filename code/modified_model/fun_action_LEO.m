@@ -42,7 +42,7 @@ if arrest == 1
 
     opp_civ = [];
     
-    info_range = 5*range_arrested;
+    info_range = 1*range_arrested;
 
     for k=-info_range:info_range
         info_range_j = info_range - abs(k);
@@ -69,7 +69,7 @@ if arrest == 1
     % Updating the Perceived Legitimacy Values:
     if isempty(opp_civ) ~= 1
         for l=1:size(opp_civ,1)
-            map(opp_civ(l,1),opp_civ(l,2)).L = map(opp_civ(l,1),opp_civ(l,2)).L+k_L.*(1-map(opp_civ(l,1),opp_civ(l,2)).L);
+            map(opp_civ(l,1),opp_civ(l,2)).L = map(opp_civ(l,1),opp_civ(l,2)).L+k_L.*(1-map(opp_civ(l,1),opp_civ(l,2)).L).*map(opp_civ(l,1),opp_civ(l,2)).L;
         end
     end
 end

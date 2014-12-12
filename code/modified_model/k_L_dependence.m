@@ -44,14 +44,14 @@ violence_std = std(y,0,2);
 f1 = figure(1);
 errorbar(k_L,violence_mean,violence_std,'ok')
 xlim([0 1])
-ylim([0 200])
+ylim([0 120])
 xlabel('k_L','FontSize',14)
 ylabel('Cumulative Kills','FontSize',14)
 
-saveas(f1,'k_L_dep_ext_range.png')
+saveas(f1,'k_L_dep.png')
 
 %% Export of the Data
 
 output = [k_L' violence_mean violence_std];
 
-dlmwrite('k_L_dep_ext_range.txt',output,'delimiter','\t','precision','%.6d')
+dlmwrite('k_L_dep.txt',output,'delimiter','\t','precision','%.6d')

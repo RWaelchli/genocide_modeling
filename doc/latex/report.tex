@@ -109,7 +109,7 @@ $R$ is the risk aversion of the civilian. It is heterogeneous across the populat
 \begin{align}
 P = 1 - \exp \left( - k_P \left( \frac{LEO}{A} \right)_v \right)
 \end{align}
-$\left(LEO/A\right)_v$ is the LEO-to-active ratio within the civilians vision. $A$ is always at least $1$, because the civilian counts himself as active when calculating the arrest probability. The reasoning behind this calculation is, that it is less likely for the civilian to be arrested, when already a lot of other civilians are acting violently and very few LEOs are present around him. The opposite can be said, if there are a lot of LEOs and only few or no active civilians. $k_P$ is a constant parameter, its value (2.3) was calculated in the literature by setting $P = 0.9$ when $\left(LEO/A\right)_v = 1$. With the risk aversion and the estimated arrest probability the so-called net risk of the civilian of going active can be calculated:
+$\left(LEO/A\right)_v$ is the LEO-to-active ratio within the civilians vision. $A$ is always at least $1$, because the civilian counts himself as active when calculating the arrest probability. The reasoning behind this calculation is, that it is less likely for the civilian to be arrested, when already a lot of other civilians are acting violently and very few LEOs are present around him. The opposite can be said, if there are a lot of LEOs and only few or no active civilians. $k_P$ is a constant parameter, its value was calculated in literature by setting $P = 0.9$ when $\left(LEO/A\right)_v = 1$. With the risk aversion and the estimated arrest probability the so-called net risk of the civilian of going active can be calculated:
 \begin{align}
 N = RP
 \end{align}
@@ -119,42 +119,45 @@ The difference $G - N$ is the civilian's net utility of becoming active. This is
 The LEOs have only one characteristic, their vision $v^\star$. They inspect the map within their vision and randomly arrest an active civilian.
 
 \subsubsection{Evolution of the Simulation}
-After choosing values for the global parameters, the three different types of agents are placed on the map randomly and their individual attributes are initialized. The number of civilians and LEOs that are placed on the map are determined by their corresponding selected densities. In each iteration begins by the random selection of one agent (civilian or LEO). This agent moves to a random empty position within his vision. There he inspects his environment. If the agent is a civilian he takes the decision to be active or quiet. When he decides to become active, he tries to kill a random civilian of the other ethnic group within his vision. If the selected agent is a LEO, he arrests a random active civilian within his vision. The arrested civilian is assigned a jail term and moved to the jail. The jail term is drawn from $U(0,J_{\text{max}})$. The ages both of the civilians on the map as well as of those in jail are updated and the civilians that have reached their maximum age are removed. The number of turns of the inmates spent in jail are updated and those who have served their time are released onto random positions on the map.
+After choosing values for the global parameters, the three different types of agents are placed on the map randomly and their individual attributes are initialized. The number of civilians and LEOs that are placed on the map are determined by their corresponding selected densities. Each iteration begins by the random selection of one agent (civilian or LEO). This agent moves to a random empty position within his vision. There he inspects his environment. If the agent is a civilian he takes the decision to be active or quiet. When he decides to become active, he tries to kill a random civilian of the other ethnic group within his vision. If the selected agent is a LEO, he arrests a random active civilian within his vision. The arrested civilian is assigned a jail term and moved to the jail. The jail term is drawn from $U(0,J_{\text{max}})$. The ages both of the civilians on the map as well as of those in jail are updated and the civilians that have reached their maximum age are removed. The number of turns of the inmates spent in jail are updated and those who have served their time are released onto random positions on the map.
 
 \subsection{Modification of the Model}
 
 \subsubsection{Individual Perceived Legitimacy and Threshold}
 In our opinion, the assumption that the perceived legitimacy of the other ethnic group and the threshold value are identical for all individuals of the population is too harsh. Therefore, we wanted to make them individual quantities. To us it also seemed not realistic to have the perceived legitimacy uniformly distributed throughout the population. Therefore, we decided to use the Gaussian distribution truncated to the interval $[0,1]$. In the modified model the perceived legitimacy of the other ethnic group is initialized for all civilians by drawing it from this distribution. This adds two parameters to the model: the mean $\mu_L$ and the standard deviation $\sigma_L$ of the legitimacy.\\
 \\
-The threshold $T$ can be seen as the level of "extremism" an individual has. Epstein describes it as the utility of not publicly expressing one's private grievance. A very extreme individual will see absolutely no utility in holding his private grievance back, whether a very conservative individual will almost never publicly express his private grievance. The difference $(G-N)$ on the other hand is the perceived utility to express one's private grievance publicly and it can take values in the interval $[-1,1]$. A civilian with $T = -1$ will always be active, whereas a civilian with $T = 1$ will never be active. As said before, it is probably unrealistic to have the threshold value uniformly distributed over the population. Therefore, it is also drawn upon initialization of the civilians from the truncated Gaussian distribution on the interval $[-1,1]$ adding another two parameters to the model ($\mu_T$ and $\sigma_T$).\\
+The threshold $T$ can be seen as the level of "extremism" an individual has. Epstein describes it as the utility of not publicly expressing one's private grievance. A very extreme individual will see absolutely no utility in holding his private grievance back, whether a very conservative individual will almost never publicly express his private grievance. The difference $(G-N)$ on the other hand is the perceived utility to express one's private grievance publicly and it can take values in the interval $[-1,1]$. A civilian with $T = -1$ will always be active, whereas a civilian with $T = 1$ will never be active. As said before, it is probably unrealistic to have the threshold value uniformly distributed over the population. Therefore, it is also drawn upon initialization of the civilians from the truncated Gaussian distribution on the interval $[-1,1]$ adding another two parameters to the model, $\mu_T$ and $\sigma_T$.\\
 \\
-For the sake of simplicity and to make the sensitivity analysis described later not computationally too expensive, it is renounced to also change the uniform distributions of the other individual characteristics of the civilians ($H$ and $R$) to truncated Gaussian distributions.
+For the sake of simplicity and to make the sensitivity analysis described later computationally not too expensive, it is renounced to also change the uniform distributions of the other individual characteristics of the civilians ($H$ and $R$) to truncated Gaussian distributions.
 
 \subsubsection{Updating the Perceived Legitimacy}
-It seems quite obvious that the perceived legitimacy of the other ethnic group should not be a constant over the course of the simulation. Violence committed by one ethnic group will probably decrease its perceived legitimacy in the eyes of the other ethnic group. The opposite effect will possibly have the arrest of a active (violent) civilian on the perceived legitimacy of its ethnic group. In our expansion of the model, these effects are limited to the range of sight of the involved killed or arrested active civilian. The update in the case of violence is the following:
+It seems quite obvious that the perceived legitimacy of the other ethnic group should not be a constant over the course of the simulation. Violence committed by one ethnic group will probably decrease its perceived legitimacy in the eyes of the other ethnic group. The opposite effect will possibly have the arrest of an active (violent) civilian on the perceived legitimacy of its ethnic group. In our expansion of the model, these effects are limited to the range of sight of the involved killed or arrested active civilian. The update in the case of violence is the following:
 \begin{align}
 L_{\text{new}} = L_{\text{old}} \left( 1 - k_L \right)
 \label{eqn:update_violence}
 \end{align}
 When an active civilian is arrested, the update is given by:
 \begin{align}
-L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right)
+L_{\text{new}} = L_{\text{old}} + k_L \left( 1 - L_{\text{old}} \right) L_{\text{old}}
+\label{eqn:update_arrest}
 \end{align}
 The reasoning behind both formulas is that if the perceived legitimacy is either very high or very low, violence and arrests only change little in the legitimacy (saturation effect). On the other hand, when a civilian is unsure, if the other ethnic group has the right to exist (medium value of $L$) such events can have a strong influence.
 
 \subsection{Global Sensitivity Analysis of Model Parameters}
-In order to test the sensitivity of the output of a generic model with respect to its inputs, a variance-based global sensitivity analysis can be performed as proposed in literature. For the sake of simplicity, we restrict ourselves to scalar model outputs. Most generally speaking, the model is a arbitrary relation $Y = f(X_1,X_2,...,X_k)$ between the output variable $Y$ and the $k$ input variables (parameters) $X_i$. Variance-based sensitivity analysis methods provide a quantitative measure how the variance of the output depends on the different uncertain/random inputs. The main advantages of variance-based global sensitivity analysis techniques are their abilities to describe the influence of each input parameter over its full range of values and to detect interactions between the input parameters. Their main disadvantage is their computational cost.\\
+In order to test the sensitivity of the output of a generic model with respect to its inputs, a variance-based global sensitivity analysis can be performed as proposed in literature. For the sake of simplicity, we restrict ourselves to scalar model outputs. Most generally speaking, the model is a arbitrary relation $Y = f(X_1,X_2,...,X_k)$ between the output variable $Y$ and the $k$ input variables (parameters) $X_i$. Variance-based sensitivity analysis methods provide quantitative measures how the variance of the output depends on different uncertain/random inputs. Those measures can be interpreted as quantities describing the influence of those inputs on the model output in general. The main advantages of variance-based global sensitivity analysis techniques are their abilities to describe the influence of each input parameter over its full range of values and to detect interactions between the input parameters. Their main disadvantage is their computational cost.\\
 \\
 For each input parameter $X_i$, a first-order sensitivity index $S_i$ and total-effect index $S_{T_i}$ can be defined:
 \begin{align}
-S_i &= \frac{V[E(Y|X_i)]}{V(Y)}\\
-S_{T_i} &= \frac{E[V(Y|\textbf{X}_{\sim i})]}{V(Y)} = 1 - \frac{V[E(Y|\textbf{X}_{\sim i})]}{V(Y)}
+S_i &= \frac{V[E(Y|X_i)]}{V(Y)} \label{eqn:first_order}\\
+S_{T_i} &= \frac{E[V(Y|\textbf{X}_{\sim i})]}{V(Y)} = 1 - \frac{V[E(Y|\textbf{X}_{\sim i})]}{V(Y)} \label{eqn:total_effect}
 \end{align}
 $V(Y)$ is the unconditional variance of $Y$, $E(Y|X_i)$ the expectation value of $Y$ conditioned on $X_i$ and $V[E(Y|X_i)]$ the variance of the conditional expectation (fixed/known value of $X_i$). This is measure for sensitivity to changes in the parameter $X_i$. After normalization to the unconditional variance $V(Y)$ one obtains the first-order sensitivity index, which is also called the main effect of $X_i$.\\
 \\
 $V[E(Y|\textbf{Y}_{\sim i})]$ on the other hand is the output variance $V(Y)$ conditioned on all input variables except $X_i$, i.e. $\textbf{X}_{\sim i}$. This is the remaining variance of the expectation value, if the true values of all input parameters except $X_i$ would be known.\\
 \\
-The values both of $S_i$ and of $S_{T_i}$ have to be by definition between 0 and 1 as well as  $S_{T_i}$ has to be larger or equal to $S_i$. The bigger $S_i$ and $S_{T_i}$ are, the higher is the effect of the input variable $X_i$ onto the output variable $Y$. The difference $(S_{T_i} - S_i)$ provides information on how much $X_i$ interferes with the other input parameters. If it is zero, there are no interactions. For a purely additive model is $\sum_{i=1}^k S_i = 1$. The difference $1 - \sum_{i=1}^k S_i$ gives a general measure of the amount of interactions in the model. Further information about this method of global sensitivity analysis can be found in the literature.
+The values both of $S_i$ and of $S_{T_i}$ have to be by definition between 0 and 1 as well as  $S_{T_i}$ has to be larger or equal to $S_i$. The bigger $S_i$ and $S_{T_i}$ are, the higher is the effect of the input variable $X_i$ onto the output variable $Y$. The difference $(S_{T_i} - S_i)$ provides information on how much $X_i$ interferes with the other input parameters. If it is zero, there are no interactions. For a purely additive model is $\sum_{i=1}^k S_i = 1$. The difference $1 - \sum_{i=1}^k S_i$ gives a general measure of the amount of interactions in the model.\\
+\\
+The conditional variances (e.g. $V[E(Y|X_i)]$) can be calculated with a Monte Carlo method using randomly generated sets of input parameters and the corresponding outputs of the model. The implementation is described in section \ref{sec:imp_SA}. Further information about this method of global sensitivity analysis can be found in the literature.
 
 \subsection{Qualitative Assessment of the Input Parameters}
 Unfortunately, the global sensitivity analysis yielded no useful results. Therefore, an alternative had to be found in order to assess the influence of certain input parameters on the simulation outcomes and in the end discuss the differences between the two models. The focus was put on the changed procedures and the newly introduced interaction as well as the comparison of the two models with each other.
@@ -187,24 +190,27 @@ The fields of the struct used to describe the agents are shown in table \ref{tab
 \end{table}
 The jail is an array of size $(J_{max} \times 1)$ with the struct from table \ref{tab:fields_struct} as entries. The reasoning behind the size of the jail array is that it has to be large enough that theoretically in every iteration a civilian could be send to jail. The function $fun\_movement()$ moves the randomly selected agent, updates the map accordingly and returns the new position of the agent. The agents cannot penetrate the borders of the map. If the selected agent is a LEO, the function $fun\_action\_LEO()$ inspects the fields within vision of the new position and if active civilians are present there, randomly moves one of them to the jail. To do so, it first assigns the civilian a random jail term (field "sentenced"). Then copies the civilians struct entries to an empty position in the jail and erases the civilian from the map by setting the struct fields at its position to the default values.\\
 \\
-If the selected and moved agent is a civilian, the function $fun\_action\_civ()$ is called. It first inspects the surrounding of the new position and determines the current value of $P$ and with this the net risk $N$. The grievance $G$ is also computed and it is checked if $(G-N)$ is larger or smaller than $T$. If it is larger, civilians of the other ethnic group within vision are searched. When there is one present, he is killed by setting all the values of the struct at his position to the default values. If there is no such civilian present, the agent remains quiet although he wants to become active. If $(G-N)$ is smaller than $T$, the selected civilian remains or becomes quiet in any case. When the civilian was initially active, wants to stay active but does not find a opponent to kill, he however stays active. The function returns the changed map and if there has been a kill.\\
+If the selected and moved agent is a civilian, the function $fun\_action\_civ()$ is called. It first inspects the surrounding of the new position and determines the current value of $P$ and with this the net risk $N$. The grievance $G$ is also computed and it is checked if $(G-N)$ is larger or smaller than $T$. If it is larger, civilians of the other ethnic group within vision are searched. When there is one present, he is killed by setting all the values of the struct at his position to the default values. If there is no such civilian present, the agent remains quiet although he wants to become active. If $(G-N)$ is smaller than $T$, the selected civilian remains or becomes quiet in any case. The state of the selected civilian remains unchanged, when $(G-N) > T$, but no adversarial civilian is within his vision.The function returns the changed map and if there has been a kill.\\
 \\
-After moving the agent and performing its action, the function $fun\_clone()$ is called. It goes through all civilians on the map in a random order. For each civilian it checks, if there are empty position right next to him. When there is an empty position, the civilian is cloned with probability $P_c$ onto this position by copying the struct of the selected civilian. The age of the newly created civilian is reset to 0.\\
+After moving the agent and performing his action, the function $fun\_clone()$ is called. It goes through all civilians on the map in a random order. For each civilian it checks, if there are empty position right next to him. When there is an empty position, the civilian is cloned with probability $P_c$ onto this position by copying the struct of the selected civilian. The age of the newly created civilian is reset to 0.\\
 \\
-The $fun\_update\_map()$ function updates the ages of the civilians on the map and removes those who have reached their life expectancy by reseting the struct on those positions to the default one.\\
+The $fun\_update\_map()$ function updates the ages of the civilians on the map and removes those who have reached their life expectancy by resetting the struct on those positions to the default one.\\
 \\
 The jail is updated using the function $fun\_update\_jail()$. First it updates the ages and the served times of the civilians in jail, then it removes civilians that have reached their life expectancy and releases the civilians that have served their sentence onto random empty positions on the map. The structs of those civilians in the jail array are reset to the default values. The civilians are released in the quiet state, all other characteristics remain unchanged.
 
 \subsection{Modified Model}
 
 \subsubsection{Heterogeneity of the Parameters $L$ and $T$}
-The function $truncate()$ is used in order to obtain two truncated probability density object. The normal probability density objects are first created with the desired mean and standard deviation using the function $makedist()$. So in the case of the modified model, the function $fun\_init\_map()$ takes instead of the two parameters $L$ and $T$ the four parameters $\mu_L$, $\sigma_L$, $\mu_T$ and $\sigma_T$. The function $rand()$ is then used to initialize the individual values of $L$ and $T$ of the civilians from the truncated normal probability density objects.
+The function $truncate()$ is used in order to obtain two truncated probability density objects. The normal probability density objects are first created with the desired mean and standard deviation using the function $makedist()$. So in the case of the modified model, the function $fun\_init\_map()$ takes instead of the two parameters $L$ and $T$ the four parameters $\mu_L$, $\sigma_L$, $\mu_T$ and $\sigma_T$. The function $random()$ is then used to initialize the individual values of $L$ and $T$ of the civilians from the truncated normal probability density objects.
 
 \subsubsection{Update of the Perceived Legitimacy}
-The function $fun\_action\_civ()$ of the modified model records the position and the ethnic group of the possible killed civilian. Then it inspects the neighborhood within vision of the killed civilian and records the civilians of the same ethnic group. Their perceived legitimacy is then updated according to equation \eqref{eqn:update_violence}.
+The function $fun\_action\_civ()$ of the modified model records the position and the ethnic group of the possible killed civilian. Then it inspects the neighborhood within vision of the killed civilian and records the civilians of the same ethnic group. Their perceived legitimacy is then updated according to equation \eqref{eqn:update_violence}. The update described in equation~\eqref{eqn:update_arrest} is incorporated similarly in the function $fun\_action\_LEO()$ of the modified model.
 
-\subsection{Sensitivity Analysis}
-For both models, the output variable describing the extent of violence that occurred during the simulation was defined as the cumulative number of kills divided by the initial population size. The normalization to the population size was done in order to investigate also the initial population density as input parameter of the models. The parameters investigated and their corresponding intervals $[a_i,b_i]$ are shown in table \ref{tab:parameter_intervals}. The remaining model parameters, whose impact on the model output were not investigated are the maximum age of the civilians and the size of the map $N_{\text{map}}$. They were set to 200 and 40, respectively. They both should not qualitatively change the results of the global sensitivity analysis. The number of model iterations used to generate the output was also set to 200. A higher number would have prohibitively increased the computational cost of the analysis. Therefore, we decided to investigate the artificial society for the duration of one generation of civilians. This should however enable us to make a statement about the sensitivity of the occurring violence towards the different parameters.
+\subsection{Global Sensitivity Analysis}
+\label{sec:imp_SA}
+For both models, the output variable describing the extent of violence that occurred during the simulation was defined as the cumulative number of kills divided by the initial population size. The normalization to the population size was done in order to investigate the initial population density as input parameter of the models as well. The parameters investigated and their corresponding intervals $[a_i,b_i]$ are shown in table \ref{tab:parameter_intervals}. The remaining model parameters, whose impact on the model output were not investigated are the maximum age of the civilians and the size of the map $N_{\text{map}}$. They were set to 200 and 40, respectively. They both should not qualitatively change the results of the global sensitivity analysis. The number of model iterations used to generate the output was also set to 200. A higher number would have prohibitively increased the computational cost of the analysis. Therefore, we decided to investigate the artificial society for the duration of one generation of civilians. This should however enable us to make a statement about the sensitivity of the occurring violence towards the different parameters.\\
+\\
+The initial population density $\rho_\textrm{tot}$ was varied between the extremes of a unpopulated and a densely populated map. The fraction $\chi_1$ of the first ethnic group of the population of civilians was varied between the extremes of being a strong minority and being the vast majority. The LEO/civilian ratio gives the ratio between law enforcement officers and civilians. This parameters was varied between having no and having strong law enforcement. A value larger than 0.1 seems to be unrealistic even in authoritarian states. The probability $P_c$ of the civilians to clone themselves in one iteration was not set to 0 because this would lead to a dying out of the entire population in any case. Setting it higher than 0.05 would lead to a unrealistically fast population of the entire map. The range of the visions both of the civilians and the LEOs were obtained in a reasonable relation to the map size. The parameter $k_P$ was varied around the value reported in literature. For $k_P = 1$, the estimated probability of a civilian to be arrested when there are no other active civilians present within vision is $\approx$60\% and for $k_P = 3$ it is $\approx$95\%. The maximum jail term was varied between a very mild and a lifelong sentence. The (mean) perceived legitimacy and violence threshold were varied almost over their entire possible range. Even more extreme values seemed not very sensible, since the outcome of the simulation would be obvious. The standard deviations $\sigma_L$ and $\sigma_T$ of the truncated normal distributions from which the individual values of $L$ and $T$ are initialized in the case of the modified model were varied from the case of a very sharp to a almost uniform distribution over the respective range of possible values. The values of the parameter $k_L$ of the modified model were varied over the entire possible range of values.
 \begin{table}[!htbp]
 \centering
 \caption{Model input parameters and their investigated ranges in the global sensitivity analysis, both for the base and the modified model.}
@@ -215,7 +221,7 @@ For both models, the output variable describing the extent of violence that occu
 	1 & $\rho_\textrm{tot}$ & 0.1 & 0.9 & 1 & $\rho_\textrm{tot}$ & 0.1 & 0.9\\ 
 	2 & $\chi_1$                      &   0.1    &   0.9   & 2 & $\chi_1$  &   0.1    &   0.9   \\
 	3 & LEO/civilian &   0    &   0.1   & 3 & LEO/civilian &   0    &   0.1 \\
-	4 & $P$ &   0.001    &   0.05  & 4 & $P$ &   0.001    &   0.05 \\
+	4 & $P_c$ &   0.001    &   0.05  & 4 & $P_c$ &   0.001    &   0.05 \\
 	5 & $v$      &   1    &  5   & 5 & $v$      &   1    &  5  \\
 	6 & $v^\star$      &   1    &   5   & 6 & $v^\star$      &   1    &   5    \\
 	7 &$k_\mathrm{P}$  &   1    &   3  & 7 & $k_\mathrm{P}$  &   1    &   3 \\
@@ -234,14 +240,27 @@ For both models, the output variable describing the extent of violence that occu
 The size $N$ of the base sample generated was 100. The necessary $(N \times 2k)$ base sample matrix of random numbers, where $k$ is the number of parameters investigated, was generated as suggested in the literature using the sobolset class, which is an implementation of Sobol's random number generator in MATLAB. The procedure to obtain the matrix from a created point set object of this class was directly taken from the documentation of the software. This matrix was divided as described in literature into the two matrices $\boldsymbol{A}$ and $\boldsymbol{B}$, which in turn were used to construct the $k$ matrices $\boldsymbol{C_i}$. The matrix $\boldsymbol{C_i}$ corresponds to the generic parameter $i$ and contains all columns of $\boldsymbol{B}$ except the $i^{\text{th}}$, which is taken from the $i^{\text{th}}$ column of $\boldsymbol{A}$. The sample generation was done inside the program $sample\_generation$ and the created sample matrices were exported into .txt files.
 
 \subsubsection{Model Output Generation}
-The implemented models were integrated each into a function called $fun\_model()$ which takes the defined input parameters as arguments and returns the normalized cumulative number of kills. This function was used to generate the output values corresponding to the sets of input parameters contained in the rows of the matrices $\boldsymbol{A}$, $\boldsymbol{B}$ and $\boldsymbol{C_i}$. Sobol's quasi-random number generator produces numbers between 0 and 1. Therefore, the input parameters had to be converted inside the functions $fun\_model()$ in order have their values in the desired ranges. This was done using interval mapping, which here should be illustrated shortly:
+The implemented models were integrated each into a function called $fun\_model()$ which takes the defined input parameters as arguments and returns the normalized cumulative number of kills. This function was used to generate the output values corresponding to the sets of input parameters contained in the rows of the matrices $\boldsymbol{A}$, $\boldsymbol{B}$ and $\boldsymbol{C_i}$. Sobol's quasi-random number generator produces numbers between 0 and 1. Therefore, the input parameters had to be converted inside the functions $fun\_model()$ in order have their values in the desired ranges. This was done using interval mapping, which is shortly illustrated here:
 \begin{align*}
 & X_i^\prime \in [0,1] \longmapsto X_i \in [a_i,b_i]\\
 &X_i = (b_i-a_i) \cdot X_i^\prime + a_i
 \end{align*}
-For input parameters that should take integer values, the MATLAB function $round()$ was used. The interval $[a_i,b_i]$ was extended by 0.5 on both ends for those parameters in order not to increase the probability of having the parameter values $a_i$ and $b_i$ to the same level of the other values in the interval. The output values were stored in the $(N \times 1)$ vectors $\boldsymbol{y_A}$, $\boldsymbol{y_B}$ and $\boldsymbol{y_{C_i}}$. All of this was done inside the program $output\_generation$.
+For input parameters that should take integer values ($v$, $v^\star$ and $J_\mathrm{max}$), the MATLAB function $round()$ was used. The interval $[a_i,b_i]$ was extended by 0.5 on both ends for those parameters in order not to increase the probability of having the parameter values $a_i$ and $b_i$ to the same level of the other values in the interval. The output values were stored in the $(N \times 1)$ vectors $\boldsymbol{y_A}$, $\boldsymbol{y_B}$ and $\boldsymbol{y_{C_i}}$. All of this was done inside the program $output\_generation$.
 
 \subsubsection{Sensitivity Indices Computation}
+$S_i$ and $S_{T_i}$ were computed with using the generated model outputs $\boldsymbol{y_A}$, $\boldsymbol{y_B}$ and $\boldsymbol{y_{C_i}}$. The unconditional variance of the model output was computed as
+\begin{align}
+V(Y) = \frac{1}{N} \sum_{j = 1}^N {\left( y_A^{(j)} \right)}^2 - \left( \frac{1}{N} \sum_{j = 1}^N y_A^{(j)} \right)^2
+\end{align}
+The first term on the right-hand side is the estimate of $E(Y^2)$ and the second term is the estimate of $E(Y)^2$. The conditional variance $V[E(Y|X_i)]$ was calculated as
+\begin{align}
+V[E(Y|X_i)] = \frac{1}{N} \sum_{j = 1}^N y_A^{(j)} y_{C_i}^{(j)} - \left( \frac{1}{N} \sum_{j = 1}^N y_A^{(j)} \right)^2
+\end{align}
+and the other necessary conditional variance $V[E(Y|\textbf{X}_{\sim i})]$ was calculated as
+\begin{align}
+V[E(Y|\textbf{X}_{\sim i})] = \frac{1}{N} \sum_{j = 1}^N y_B^{(j)} y_{C_i}^{(j)} - \left( \frac{1}{N} \sum_{j = 1}^N y_A^{(j)} \right)^2
+\end{align}
+The first-order sensitivity and the total-effect indices were then calculated according to equations~\eqref{eqn:first_order} and \eqref{eqn:total_effect}.
 
 \subsection{Qualitative Assessment of the Input Parameters}
 After the global sensitivity analysis failed by yielding no sensible results, a more qualitative approach was taken to nevertheless be able to discuss the effect of certain input parameters on the simulation outcome, both of the base and the modified model. For the base model it was mainly tried to reproduce the observation made in literature regarding the dependence on the density of LEOs on the map. The values of the other model parameters that were fixed for this and the following examinations are shown in table \ref{tab:values_parameters}.
@@ -267,7 +286,7 @@ After the global sensitivity analysis failed by yielding no sensible results, a 
 	\end{tabular}
 	\label{tab:values_parameters}
 \end{table}
-In this frame it was renounced to normalize the cumulative number of kills to the initial population size, because this parameter was never varied. The initial LEO/civilian ratio was varied from 0 to 0.1 in steps of 0.004. The model was run 10 times at each input parameter value. The mean and the standard deviation of the output variables were taken. This is not an exact reproduction of the analysis done in the reference. There the number of iterations was set to 15000 and for each value of the initial LEO density the simulation was run 50 times. As measure for the extent of violence the time until one ethnic group is completely exterminated was taken (it was set to 15000, if there was no extinction of one group). In our opinion, this is not a very good way to assess the violence during the simulation. Very violent conflicts can never lead to the extinction of one ethnic group, but to very high number of casualties. Also this method was no feasible for us, given our computational resources. Therefore, we decided to let the simulation run for one generation of civilians.\\
+In this frame it was renounced to normalize the cumulative number of kills to the initial population size, because this parameter was never varied. The initial LEO/civilian ratio was varied from 0 to 0.1 in steps of 0.004. The model was run 10 times at each input parameter value. The mean and the standard deviation of the output variables were taken. This is not an exact reproduction of the analysis done in the reference. There, the number of iterations was set to 15'000 and for each value of the initial LEO density the simulation was run 50 times. As measure for the extent of violence the time until one ethnic group is completely exterminated was taken (it was set to 15000, if there was no extinction of one group). In our opinion, this is not a very good way to assess the violence during the simulation. Very violent conflicts can never lead to the extinction of one ethnic group, but to very high number of casualties. Also this method was no feasible for us, given our computational resources. Therefore, we decided to let the simulation run for one generation of civilians.\\
 \\
 An other minor difference to the reference is the selection of the LEO density. In the reference model, the LEO density on the map can be set independently from the population density of the civilians. In our implementation of the model, only the initial LEO/civilian ratio can be selected. This was mainly done in order to prevent situations where there are too many agents to be placed on the map upon initialization. However, this leads only to minor differences, the general trends should not be affected by this.\\
 \\
@@ -276,49 +295,30 @@ For comparison, the same analysis was done using the modified model. In this cas
 \section{Simulation Results and Discussion}
 
 \subsection{Global Sensitivity Analysis}
-The computed sensitivity indices of the input parameters of the base and the modified model are presented in tables~\ref{tab:si_base} and \ref{tab:si_modified}, respectively. It is right away obvious that those values cannot be correct. For instance, the $S_i$ have to take by definition values in the interval $[0,1]$ and the sum of the $S_i$ has to be equal to 1. Also, $S_i^T$ has to be larger or equal to $S_i$. To our knowledge, we have made no mistake in the implementation of the global sensitivity analysis in MATLAB. One possible explanation for the failure could be an insufficiently large base sample, leading to inaccurate estimates of the sensitivity indices. But it goes past our computational resources to increase the sample size significantly in order to check, if that is actually the case.
+The computed sensitivity indices of the input parameters of the base and the modified model are presented in table~\ref{tab:val_sen_ind}, respectively. It is right away obvious that those values cannot be correct. For instance, the $S_i$ have to take by definition values in the interval $[0,1]$ and the sum of the $S_i$ has to be equal to 1. Also, $S_i^T$ has to be larger or equal to $S_i$. To our knowledge, we have made no mistake in the implementation of the global sensitivity analysis in MATLAB. One possible explanation for the failure could be an insufficiently large base sample, leading to inaccurate estimates of the sensitivity indices. But it goes past our computational resources to increase the sample size significantly in order to check, if that is actually the case.
 \begin{table}[!htbp]
 	\centering
-	\caption{Sensitivity indices computed for the base model input parameters.}
+	\caption{Sensitivity indices computed for the input parameters of both models. The meaning of the parameter numbering is explained in table~\ref{tab:parameter_intervals}.}
 	\vspace{0.5 cm}
-		\begin{tabular}{c | c | c}
-		Parameter & $S_i$ & $S_i^T$\\
+		\begin{tabular}{c | c | c | c | c}
+		 & \multicolumn{2}{ c |}{\textbf{Base Model}} & \multicolumn{2}{c}{\textbf{Modified Model}}\\
+		Parameter & $S_i$ & $S_i^T$ & $S_i$ & $S_i^T$\\
 		\hline
-		1 & 0.4748 & 0.2421\\
-		2 & -0.0147 & -0.7522\\
-		3 & 0.0464 & -1.0529\\
-		4 & 0.0360 & -1.1220\\
-		5 & 0.0810 & -1.1282\\
-		6 & 0.0640 & -1.1080\\
-		7 & 0.0559 & -1.1037\\
-		8 & 0.0765 & -1.0351\\
-		9 & 0.3150 & -0.0658\\
-		10 & 0.1213 & -0.9992\\
+		1 & 0.4748 & 0.2421 & 0.3993 & 1.0651\\
+		2 & -0.0147 & -0.7522 & -0.1700 & 0.7317\\
+		3 & 0.0464 & -1.0529 & -0.2336 & 0.8763\\
+		4 & 0.0360 & -1.1220 & -0.1632 & 0.7517\\
+		5 & 0.0810 & -1.1282 & -0.1535 & 0.7772\\
+		6 & 0.0640 & -1.1080 & -0.1971 & 0.7879\\
+		7 & 0.0559 & -1.1037 & -0.1700 & 0.7482\\
+		8 & 0.0765 & -1.0351 & -0.2087 & 0.8419\\
+		9 & 0.3150 & -0.0658 & -0.2013 & 0.7784\\
+		10 & 0.1213 & -0.9992 & -0.2031 & 0.8355\\
+		11 & - & - & -0.0380 & 0.9466\\
+		12 & - & - & -0.1666 & 0.8387\\
+		13 & - & - & -0.1948 & 0.7765
 	\end{tabular}
-	\label{tab:si_base}
-\end{table}
-\begin{table}[!htbp]
-	\centering
-	\caption{Sensitivity indices computed for the modified model input parameters.}
-	\vspace{0.5 cm}
-		\begin{tabular}{c | c | c}
-		Parameter & $S_i$ & $S_i^T$\\
-		\hline
-		1 & 0.3993 & 1.0651\\
-		2 & -0.1700 & 0.7317\\
-		3 & -0.2336 & 0.8763\\
-		4 & -0.1632 & 0.7517\\
-		5 & -0.1535 & 0.7772\\
-		6 & -0.1971 & 0.7879\\
-		7 & -0.1700 & 0.7482\\
-		8 & -0.2087 & 0.8419\\
-		9 & -0.2013 & 0.7784\\
-		10 & -0.2031 & 0.8355\\
-		11 & -0.0380 & 0.9466\\
-		12 & -0.1666 & 0.8387\\
-		13 & -0.1948 & 0.7765
-	\end{tabular}
-	\label{tab:si_modified}
+	\label{tab:val_sen_ind}
 \end{table}
 
 \subsection{Qualitative Assessment of the Input Parameters}
@@ -328,14 +328,14 @@ The result of the analysis regarding the initial LEO/civilian ratio is shown in 
 \begin{figure}[!htbp]
 	\centering
 		\includegraphics[width=0.80\textwidth]{../../code/base_model/cum_kills_vs_LEO_civ.png}
-	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the base model. As expected, the mean formed out of 10 runs decreases with increasing LEO/civ ratio. The standard deviation on the other hand remains constant. It is shown via the error bars.}
+	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the base model. As expected, the mean formed out of 10 runs decreases with increasing LEO/civilian ratio. The standard deviation on the other hand remains constant. It is shown via the error bars.}
 	\label{fig:LEO_civ_base}
 \end{figure}
 The result of the similar analysis done for the modified model is shown in figure \ref{fig:LEO_civ_modified}. It does not differ from that using the base model. This implies that the heterogeneity of the perceived legitimacy and the violence threshold as well as the updating of the legitimacy has no effect on the dependency of the cumulative number of kills on the initial LEO/civilian ratio, at least not at those values of all the other parameters. 
 \begin{figure}[!htbp]
 	\centering
 		\includegraphics[width=0.80\textwidth]{../../code/modified_model/cum_kills_vs_LEO_civ.png}
-	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the modified model. Basically the same result as with the base model is obtained. Again, the mean formed out of 10 runs decreases with increasing LEO/civ ratio. The standard deviation shown through remains fairly constant.}
+	\caption{Effect of the initial LEO/civilian ratio on the cumulative number of kills at the end of the simulation using the modified model. Basically the same result as with the base model is obtained. Again, the mean formed out of 10 runs decreases with increasing LEO/civilian ratio. The standard deviation shown through remains fairly constant.}
 	\label{fig:LEO_civ_modified}
 \end{figure}
 
