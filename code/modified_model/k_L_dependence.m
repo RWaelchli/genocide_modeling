@@ -44,7 +44,7 @@ violence_std = std(y,0,2);
 f1 = figure(1);
 errorbar(k_L,violence_mean,violence_std,'ok')
 xlim([0 1])
-ylim([0 120])
+ylim([0 200])
 xlabel('k_L','FontSize',14)
 ylabel('Cumulative Kills','FontSize',14)
 
