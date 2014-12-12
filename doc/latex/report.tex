@@ -263,7 +263,10 @@ V[E(Y|\textbf{X}_{\sim i})] = \frac{1}{N} \sum_{j = 1}^N y_B^{(j)} y_{C_i}^{(j)}
 The first-order sensitivity and the total-effect indices were then calculated according to equations~\eqref{eqn:first_order} and \eqref{eqn:total_effect}.
 
 \subsection{Qualitative Assessment of the Input Parameters}
-After the global sensitivity analysis failed by yielding no sensible results, a more qualitative approach was taken to nevertheless be able to discuss the effect of certain input parameters on the simulation outcome, both of the base and the modified model. For the base model it was mainly tried to reproduce the observation made in literature regarding the dependence on the density of LEOs on the map. The values of the other model parameters that were fixed for this and the following examinations are shown in table \ref{tab:values_parameters}.
+After the global sensitivity analysis failed by yielding no sensible results, a more qualitative approach was taken to nevertheless be able to discuss the effect of certain input parameters on the simulation outcome, both of the base and the modified model. In the frame of the following analyses it was renounced to normalize the cumulative number of kills to the initial population size, because this parameter was never varied. The output variable of the models was directly the cumulative number of kills.
+
+\subsubsection{Reproduction of Literature Results}
+It was tried to reproduce the observations made in literature using the base model. The first reported observation is that peaceful coexistence (with or without LEOs) only prevails, when the perceived legitimacy is very high, i. e. $\geq 0.9$. When the legitimacy is slightly lower (e.g. 0.8) violence starts to break out. The presence of LEOs can prevent the complete extinction of one ethnic group, but not the omnipresence of ethnic violence. $T$/$\mu_T$ was set to 0.1 for the test of this finding. The values of the other model parameters are shown in table~\ref{tab:values_parameters}.
 \begin{table}[!htbp]
 	\centering
 	\caption{}
@@ -271,26 +274,35 @@ After the global sensitivity analysis failed by yielding no sensible results, a 
 		\begin{tabular}{l | l}
 		Parameter & Value\\
 		\hline
-		Size of the Map & $(40 \times 40)$\\
+		$N_{\text{map}}$ & 40\\
 		Max. Age & 200\\
-		Initial Pop. Density & 0.7\\
-		Initial Fraction of Ethinc Group 1 & 0.5\\
-		Cloning Probability & 0.025\\
-		Vision of the Civilians & 2\\
-		Vision of the LEOs & 3\\
+		$\rho_{\text{tot}}$ & 0.7\\
+		$\chi_1$ & 0.5\\
+		$P_c$ & 0.025\\
+		$v$ & 2\\
+		$v^\star$ & 3\\
 		$k_P$ & 2.3\\
-		Max. Jail Term & 30\\
-		Legitimacy & 0.8\\
-		Violence Threshold & 0.1\\
+		$J_{\text{max}}$ & 30\\
 		Number of Iterations & 200\\
 	\end{tabular}
 	\label{tab:values_parameters}
 \end{table}
-In this frame it was renounced to normalize the cumulative number of kills to the initial population size, because this parameter was never varied. The initial LEO/civilian ratio was varied from 0 to 0.1 in steps of 0.004. The model was run 10 times at each input parameter value. The mean and the standard deviation of the output variables were taken. This is not an exact reproduction of the analysis done in the reference. There, the number of iterations was set to 15'000 and for each value of the initial LEO density the simulation was run 50 times. As measure for the extent of violence the time until one ethnic group is completely exterminated was taken (it was set to 15000, if there was no extinction of one group). In our opinion, this is not a very good way to assess the violence during the simulation. Very violent conflicts can never lead to the extinction of one ethnic group, but to very high number of casualties. Also this method was no feasible for us, given our computational resources. Therefore, we decided to let the simulation run for one generation of civilians.\\
 \\
-An other minor difference to the reference is the selection of the LEO density. In the reference model, the LEO density on the map can be set independently from the population density of the civilians. In our implementation of the model, only the initial LEO/civilian ratio can be selected. This was mainly done in order to prevent situations where there are too many agents to be placed on the map upon initialization. However, this leads only to minor differences, the general trends should not be affected by this.\\
 \\
-For comparison, the same analysis was done using the modified model. In this case $\mu_L$ was set to 0.8, $\mu_T$ to 0.1 and both $\sigma_L$ and $\sigma_T$ to 0.1. The parameter $k_L$ was set to 0.1. The value for the standard deviations of those parameters was selected by evaluating the broadness of the distributions by eye and selecting a sensible value. The effect of $k_L$ will be discussed later and for the time being its value was just a guess.
+The second reported observation is regarding the dependence of the time it takes until the extinction of one group on the LEO density on the map. In the literature, the number of iterations was set to 15'000 and for each value of the initial LEO density the simulation was run 50 times. If no extinction happened, after 15'000 iteration the simulation was interrupted. The mean extinction time is reported to increase with increasing LEO density, whereat its standard deviation also increases. The procedure presented in literature was not exactly reproduced. In our opinion, it is not a very good way to assess the violence during the simulation. Very violent conflicts can never lead to the extinction of one ethnic group, but to very high number of casualties. Also this method was no feasible for us, given our computational resources.\\
+\\
+Therefore, we again decided to let the simulation run for one generation of civilians. The initial LEO/civilian ratio was varied from 0 to 0.1 in steps of 0.004. $L$/$\mu_L$ was set to 0.8 and $T$/$\mu_T$ to 0.1. $\sigma_L$ and $\sigma_T$ were both set to 0.1 in order to have moderately broad distributions. $k_L$ was set to 0.1 for a moderate effect of kills/arrests on the perceived legitimacy. The model was run 10 times at each input parameter value. The mean and the standard deviation of the output variables were taken.\\
+\\
+An other minor difference to the reference is the selection of the LEO density. In the reference model, the LEO density on the map can be set independently from the population density of the civilians. In our implementation of the model, only the initial LEO/civilian ratio can be selected. This was mainly done in order to prevent situations where there are too many agents to be placed on the map upon initialization. However, this leads only to minor differences, the general trends should not be affected by this.
+
+\subsubsection{Dependence on the Legitimacy and the Violence Threshold}
+The dependence on the values of the perceived legitimacy and the violence threshold was evaluated by simultaneously varying $L$/$\mu_L$ and $T$/$\mu_T$ in the range of $[0,1]$ and $[-1,1]$, respectively. For each combination of values, the simulation was run 10 times and the mean and the standard deviation of the resulting model outputs were computed. The LEO/civilian ratio was set to 0.05 and $\sigma_L$/$\sigma_T$ were again set to 0.1. $k_L$ was set to 0.1. The values of all the other model/simulation parameters were taken from table~\ref{tab:values_parameters}.
+
+\subsubsection{Dependence on the Parameters $\sigma_L$ and $\sigma_T$}
+For the modified model also the dependence of the model output on the standard deviations of the truncated normal distributions used to initialize the individual values of $L$ and $T$ of the civilians was investigated. For the sake of simplicity, it was assumed that they both take the same value. The LEO/civilian ratio and the means $\mu_L$ and $\mu_T$ as well as the parameter $k_L$ were set to the same values as in the previous section. The other parameter values were again taken from table~\ref{tab:values_parameters}. 
+
+\subsubsection{Dependence on the Parameter $k_L$}
+To finish the qualitative analysis, it was also tried to assess the dependence of the extent of violence in the simulation on the parameter $k_L$. Its value was varied in the range of $[0,1]$. Again, $\mu_L$ was set to 0.8, $\mu_T$ to 0.1, the LEO/civilian ratio to 0.05 and $\sigma_L$/$\sigma_T$ to 0.1.
 
 \section{Simulation Results and Discussion}
 
@@ -354,7 +366,7 @@ The result of the similar analysis done for the modified model is shown in figur
 \end{figure}
 
 \subsubsection{Dependence on the Parameters $\sigma_L$ and $\sigma_T$}
-The results of this analysis are shown in figure~\ref{fig:L_T_std_dep}. The mean number of cumulative kills increases with increasing value of the standard deviations $\sigma_L$ and $\sigma_T$. This is most probable due to the increase in the number of extreme individuals on the map, which have low values of $L$ and/or $T$, although the means of those characteristics over the population remain unchanged. Those extreme individuals will very often engage in violence when they are selected. Therefore it would be important to not only have high mean perceived legitimacy and violence threshold, but also to have a homogeneous society regarding those characteristics.
+The results of this analysis are shown in figure~\ref{fig:L_T_std_dep}. The mean number of cumulative kills increases with increasing value of the standard deviations $\sigma_L$ and $\sigma_T$. This is most probable due to the increase in the number of extreme individuals on the map, which have low values of $L$ and/or $T$, although the means of those characteristics over the population remain unchanged. Those extreme individuals will very often engage in violence when they are selected. Therefore it would be important to not only have high mean perceived legitimacy and violence threshold, but also to have a homogeneous society regarding those characteristics in order to prevent extensive violence.
 \begin{figure}[!htbp]
 	\centering
 		\includegraphics[width=0.80\textwidth]{../../code/modified_model/L_T_std_dep.png}
@@ -363,6 +375,13 @@ The results of this analysis are shown in figure~\ref{fig:L_T_std_dep}. The mean
 \end{figure}
 
 \subsubsection{Dependence on the Parameters $k_L$}
+The results are shown in figure~\ref{fig:k_L_dep}. As it can be seen, the parameter value seems to have almost no effect on the extent of violence encountered in the simulation. Based on the form of the equations~\eqref{eqn:update_violence} and \eqref{eqn:update_arrest}, one would expect an increase of the violence with increasing value of the parameter $k_L$. Kills have a stronger influence on the perceived legitimacy than arrests. Also are kills more likely to occur in the simulation because of the fewer selections of a LEO. That this was not observed might be mainly due to the fact, that the legitimacy is only updated in a rather short range around the killed/arrested civilian. Extending the range might increase the effect on the cumulative number of kills. It might make the model even more realistic, if the values of the constants $k_L$ in the two update equations can be different (increasing the relative effect of an arrest).
+\begin{figure}[!htbp]
+	\centering
+		\includegraphics[width=0.80\textwidth]{../../code/modified_model/k_L_dep.png}
+	\caption{Dependence of the mean cumulative number of kills on the value of the parameter $k_L$.}
+	\label{fig:k_L_dep}
+\end{figure}
 
 \section{Summary and Outlook}
 
