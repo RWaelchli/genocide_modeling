@@ -55,3 +55,17 @@ saveas(f1,'L_T_std_dep.png')
 output = [L_std' violence_mean violence_std];
 
 dlmwrite('L_T_std_dep.txt',output,'delimiter','\t','precision','%.6d')
+
+%% Import of the Data
+
+input = dlmread('L_T_std_dep.txt');
+
+f1 = figure(1);
+errorbar(input(2:end,1),input(2:end,2),input(2:end,3),'ok','LineWidth',1.5)
+xlim([0 1])
+ylim([0 120])
+xlabel('\sigma_L = \sigma_T','FontSize',16)
+ylabel('Cumulative Kills','FontSize',16)
+set(gca,'FontSize',16)
+
+saveas(f1,'L_T_std_dep.png')

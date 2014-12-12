@@ -56,3 +56,17 @@ saveas(f1,'cum_kills_vs_LEO_civ.png')
 output = [LEO_to_civ' violence_mean violence_std];
 
 dlmwrite('LEO_density_dependence.txt',output,'delimiter','\t','precision','%.6d')
+
+%% Import of the Data
+
+input = dlmread('LEO_density_dependence.txt');
+
+f1 = figure(1);
+errorbar(input(:,1),input(:,2),input(:,3),'ok','LineWidth',1.5)
+xlim([0 0.1])
+ylim([0 120])
+xlabel('LEO/Civilian','FontSize',16)
+ylabel('Cumulative Kills','FontSize',16)
+set(gca,'FontSize',16)
+
+saveas(f1,'cum_kills_vs_LEO_civ.png')

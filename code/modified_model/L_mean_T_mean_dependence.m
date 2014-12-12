@@ -49,9 +49,10 @@ surf(T_mean,L_mean,y_mean)
 xlim([-1 1])
 ylim([0 1])
 zlim([0 200])
-xlabel('\mu_T','FontSize',14)
-ylabel('\mu_L','FontSize',14)
-zlabel('Mean Cumulative Kills','FontSize',14)
+xlabel('\mu_T','FontSize',16)
+ylabel('\mu_L','FontSize',16)
+zlabel('Mean Cumulative Kills','FontSize',16)
+set(gca,'FontSize',16)
 [az,el] = view;
 az = az + 180;
 view(az, el);
@@ -63,9 +64,10 @@ surf(T_mean,L_mean,y_std)
 xlim([-1 1])
 ylim([0 1])
 zlim([0 20])
-xlabel('\mu_T','FontSize',14)
-ylabel('\mu_L','FontSize',14)
-zlabel('Standard Deviation Cumulative Kills','FontSize',14)
+xlabel('\mu_T','FontSize',16)
+ylabel('\mu_L','FontSize',16)
+zlabel('Standard Deviation Cumulative Kills','FontSize',16)
+set(gca,'FontSize',16)
 view(az, el);
 
 saveas(f2,'L_T_mean_dep_std.png')
@@ -83,3 +85,5 @@ y_mean = dlmread('L_T_mean_dep_mean.txt');
 y_std = dlmread('L_T_mean_dep_std.txt');
 L_mean = dlmread('L_T_mean_dep_L_val.txt');
 T_mean = dlmread('L_T_mean_dep_T_val.txt');
+
+

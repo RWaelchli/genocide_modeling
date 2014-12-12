@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.9)  12 DEC 2014 20:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.9)  12 DEC 2014 23:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -206,21 +206,71 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2013/08/25 v0.4v Insert pages of external PDF documents (AM)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count104
+\calc@Bcount=\count105
+\calc@Adimen=\dimen122
+\calc@Bdimen=\dimen123
+\calc@Askip=\skip48
+\calc@Bskip=\skip49
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
+\calc@Ccount=\count106
+\calc@Cskip=\skip50
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2013/10/06 v2.0d eso-pic (RN)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2013/08/25 v0.4v Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box28
+\AM@toc@title=\toks22
+\c@AM@survey=\count107
+\AM@templatesizebox=\box29
+)
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -258,18 +308,20 @@ LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
-\scratchdimen=\dimen122
-\scratchbox=\box28
-\nofMPsegments=\count105
-\nofMParguments=\count106
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count107
-\MPscratchDim=\dimen123
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
-\everyMPtoPDFconversion=\toks23
-) (./cover.tex
+\scratchcounter=\count108
+\scratchdimen=\dimen124
+\scratchbox=\box30
+\nofMPsegments=\count109
+\nofMParguments=\count110
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count111
+\MPscratchDim=\dimen125
+\MPnumerator=\count112
+\makeMPintoPDFobject=\count113
+\everyMPtoPDFconversion=\toks24
+)
+\AtBeginShipoutBox=\box31
+ (./cover.tex
 Package epstopdf Info: Source file: <ETHlogo.eps>
 (epstopdf)                    date: 2014-10-01 08:31:06
 (epstopdf)                    size: 179075 bytes
@@ -299,222 +351,305 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./ETHlo
 go-eps-converted-to.pdf>]
-Overfull \hbox (5.3226pt too wide) in paragraph at lines 42--60
+Overfull \hbox (5.3226pt too wide) in paragraph at lines 47--65
  [] 
  []
 
-[2] (./report.toc [3])
+[2] <declaration-originality.pdf, id=16, 597.55246pt x 845.07718pt>
+File: declaration-originality.pdf Graphic file (type pdf)
+
+<use declaration-originality.pdf>
+Package pdftex.def Info: declaration-originality.pdf used on input line 73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: declaration-originality.pdf Graphic file (type pdf)
+ <use declaration-originality.pdf>
+Package pdftex.def Info: declaration-originality.pdf used on input line 73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+<declaration-originality.pdf, id=19, page=1, 597.55246pt x 845.07718pt>
+File: declaration-originality.pdf Graphic file (type pdf)
+
+<use declaration-originality.pdf, page 1>
+Package pdftex.def Info: declaration-originality.pdf, page1 used on input line 
+73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: declaration-originality.pdf Graphic file (type pdf)
+
+<use declaration-originality.pdf, page 1>
+Package pdftex.def Info: declaration-originality.pdf, page1 used on input line 
+73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: declaration-originality.pdf Graphic file (type pdf)
+
+<use declaration-originality.pdf, page 1>
+Package pdftex.def Info: declaration-originality.pdf, page1 used on input line 
+73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: declaration-originality.pdf Graphic file (type pdf)
+
+<use declaration-originality.pdf, page 1>
+Package pdftex.def Info: declaration-originality.pdf, page1 used on input line 
+73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: declaration-originality.pdf Graphic file (type pdf)
+
+<use declaration-originality.pdf, page 1>
+Package pdftex.def Info: declaration-originality.pdf, page1 used on input line 
+73.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+ [3 <./declaration-originality.pdf>]
+(./report.toc [4])
 \tf@toc=\write3
 \openout3 = `report.toc'.
 
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 84--89
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 87--92
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--89
+Underfull \hbox (badness 10000) in paragraph at lines 87--92
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--99
+Underfull \hbox (badness 10000) in paragraph at lines 96--101
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--99
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 111--115
+Underfull \hbox (badness 10000) in paragraph at lines 96--101
 
  []
 
 [6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 133--138
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--138
+Underfull \hbox (badness 10000) in paragraph at lines 113--117
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 153--156
+Underfull \hbox (badness 10000) in paragraph at lines 135--140
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--140
 
  []
 
 [9]
-Overfull \hbox (4.2331pt too wide) in paragraph at lines 159--167
-\OT1/cmr/m/n/12 tioned on $\OML/cmm/m/it/12 X[]$ \OT1/cmr/m/n/12 and $\OML/cmm/
-m/it/12 V\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 E\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 Y
-\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 X[]\OT1/cmr/m/n/12 )]$ the vari-ance of the 
-con-di-tional ex-pec-ta-tion (fixed/known
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--167
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--167
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--167
+Underfull \hbox (badness 10000) in paragraph at lines 155--158
 
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 175--206
+Underfull \hbox (badness 10000) in paragraph at lines 161--169
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--206
+Underfull \hbox (badness 10000) in paragraph at lines 161--169
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--206
+Underfull \hbox (badness 10000) in paragraph at lines 161--169
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 178--204
+
+ []
+
+[12] [13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 236--264
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--206
-
- []
-
-[11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 217--243
-
- []
-
-[13] [14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 275--303
+Underfull \hbox (badness 10000) in paragraph at lines 236--264
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 275--303
+Underfull \hbox (badness 10000) in paragraph at lines 236--264
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--303
-
- []
-
-[16] [17]
-<../../code/base_model/cum_kills_vs_LEO_civ.png, id=75, 578.16pt x 433.62pt>
+[15] [16]
+<../../code/base_model/cum_kills_vs_LEO_civ.png, id=115, 578.16pt x 433.62pt>
 File: ../../code/base_model/cum_kills_vs_LEO_civ.png Graphic file (type png)
 
 <use ../../code/base_model/cum_kills_vs_LEO_civ.png>
 Package pdftex.def Info: ../../code/base_model/cum_kills_vs_LEO_civ.png used on
- input line 324.
-(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
+ input line 287.
+(pdftex.def)             Requested size: 258.00539pt x 193.49953pt.
 
-<../../code/modified_model/cum_kills_vs_LEO_civ.png, id=76, 578.16pt x 433.62pt
->
+<../../code/modified_model/cum_kills_vs_LEO_civ.png, id=116, 578.16pt x 433.62p
+t>
 File: ../../code/modified_model/cum_kills_vs_LEO_civ.png Graphic file (type png
 )
  <use ../../code/modified_model/cum_kills_vs_LEO_civ.png>
 Package pdftex.def Info: ../../code/modified_model/cum_kills_vs_LEO_civ.png use
-d on input line 331.
-(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
- [18] [19 <../../code/base_model/cum_kills_vs_LEO_civ.png (PNG copy)>]
-<../../code/base_model/L_T_dep_mean.png, id=84, 578.16pt x 433.62pt>
+d on input line 294.
+(pdftex.def)             Requested size: 258.00539pt x 193.49953pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--298
+
+ []
+
+[17] <../../code/base_model/L_T_dep_mean.png, id=120, 578.16pt x 433.62pt>
 File: ../../code/base_model/L_T_dep_mean.png Graphic file (type png)
 
 <use ../../code/base_model/L_T_dep_mean.png>
 Package pdftex.def Info: ../../code/base_model/L_T_dep_mean.png used on input l
-ine 342.
-(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
+ine 305.
+(pdftex.def)             Requested size: 258.00539pt x 193.49953pt.
 
-<../../code/modified_model/L_T_mean_dep_mean.png, id=85, 578.16pt x 433.62pt>
+<../../code/modified_model/L_T_mean_dep_mean.png, id=121, 578.16pt x 433.62pt>
 File: ../../code/modified_model/L_T_mean_dep_mean.png Graphic file (type png)
 
 <use ../../code/modified_model/L_T_mean_dep_mean.png>
 Package pdftex.def Info: ../../code/modified_model/L_T_mean_dep_mean.png used o
-n input line 348.
-(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
+n input line 311.
+(pdftex.def)             Requested size: 258.00539pt x 193.49953pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--352
+Underfull \hbox (badness 10000) in paragraph at lines 300--315
 
  []
 
-[20 <../../code/modified_model/cum_kills_vs_LEO_civ.png (PNG copy)>]
-<../../code/modified_model/L_T_std_dep.png, id=89, 578.16pt x 433.62pt>
+[18 <../../code/base_model/cum_kills_vs_LEO_civ.png (PNG copy)>]
+<../../code/modified_model/L_T_std_dep.png, id=125, 578.16pt x 433.62pt>
 File: ../../code/modified_model/L_T_std_dep.png Graphic file (type png)
 
 <use ../../code/modified_model/L_T_std_dep.png>
 Package pdftex.def Info: ../../code/modified_model/L_T_std_dep.png used on inpu
-t line 357.
-(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
- [21 <../../code/base_model/L_T_dep_mean.png (PNG copy)>] [22 <../../code/modif
-ied_model/L_T_mean_dep_mean.png (PNG copy)>]
-<../../code/modified_model/k_L_dep.png, id=96, 578.16pt x 433.62pt>
+t line 320.
+(pdftex.def)             Requested size: 258.00539pt x 193.49953pt.
+ [19 <../../code/modified_model/cum_kills_vs_LEO_civ.png (PNG copy)>] [20 <../.
+./code/base_model/L_T_dep_mean.png (PNG copy)> <../../code/modified_model/L_T_m
+ean_dep_mean.png (PNG copy)>]
+<../../code/modified_model/k_L_dep.png, id=133, 578.16pt x 433.62pt>
 File: ../../code/modified_model/k_L_dep.png Graphic file (type png)
 
 <use ../../code/modified_model/k_L_dep.png>
 Package pdftex.def Info: ../../code/modified_model/k_L_dep.png used on input li
-ne 366.
+ne 329.
+(pdftex.def)             Requested size: 258.00539pt x 193.49953pt.
+ [21 <../../code/modified_model/L_T_std_dep.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 335--346
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--346
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--346
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--346
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--346
+
+ []
+
+[22 <../../code/modified_model/k_L_dep.png (PNG copy)>] [23] (./report.bbl)
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 358--389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--389
+
+ []
+
+[25] [26] [27]
+<../../code/base_model/map_end_L_09.png, id=157, 578.16pt x 433.62pt>
+File: ../../code/base_model/map_end_L_09.png Graphic file (type png)
+
+<use ../../code/base_model/map_end_L_09.png>
+Package pdftex.def Info: ../../code/base_model/map_end_L_09.png used on input l
+ine 404.
 (pdftex.def)             Requested size: 344.005pt x 258.0038pt.
- [23 <../../code/modified_model/L_T_std_dep.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 372--381
 
- []
+<../../code/base_model/grevance_end_L_09.png, id=158, 578.16pt x 433.62pt>
+File: ../../code/base_model/grevance_end_L_09.png Graphic file (type png)
 
+<use ../../code/base_model/grevance_end_L_09.png>
+Package pdftex.def Info: ../../code/base_model/grevance_end_L_09.png used on in
+put line 410.
+(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--381
+<../../code/modified_model/map_end_L_09.png, id=159, 578.16pt x 433.62pt>
+File: ../../code/modified_model/map_end_L_09.png Graphic file (type png)
 
- []
+<use ../../code/modified_model/map_end_L_09.png>
+Package pdftex.def Info: ../../code/modified_model/map_end_L_09.png used on inp
+ut line 416.
+(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
 
+<../../code/modified_model/grevance_end_L_09.png, id=160, 578.16pt x 433.62pt>
+File: ../../code/modified_model/grevance_end_L_09.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 372--381
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 372--381
-
- []
-
-[24 <../../code/modified_model/k_L_dep.png (PNG copy)>] [25] [26] (./report.aux
-) ) 
+<use ../../code/modified_model/grevance_end_L_09.png>
+Package pdftex.def Info: ../../code/modified_model/grevance_end_L_09.png used o
+n input line 422.
+(pdftex.def)             Requested size: 344.005pt x 258.0038pt.
+ [28 <../../code/base_model/map_end_L_09.png (PNG copy)>] [29 <../../code/base_
+model/grevance_end_L_09.png (PNG copy)>] [30 <../../code/modified_model/map_end
+_L_09.png (PNG copy)>]
+[31 <../../code/modified_model/grevance_end_L_09.png (PNG copy)>] [32]
+(./report.aux) ) 
 Here is how much of TeX's memory you used:
- 3283 strings out of 493117
- 44745 string characters out of 6135433
- 122704 words of memory out of 5000000
- 6681 multiletter control sequences out of 15000+600000
- 16128 words of font info for 61 fonts, out of 8000000 for 9000
+ 4575 strings out of 493117
+ 64046 string characters out of 6135433
+ 148585 words of memory out of 5000000
+ 7936 multiletter control sequences out of 15000+600000
+ 16475 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,13n,26p,1918b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
-b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pf
-b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
-ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on report.pdf (26 pages, 563827 bytes).
+ 42i,19n,48p,1918b,424s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib
+10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/
+cmmib6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmex
+tra/cmmib8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pf
+b>
+Output written on report.pdf (32 pages, 989258 bytes).
 PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
- 109 compressed objects within 2 object streams
+ 232 PDF objects out of 1000 (max. 8388607)
+ 155 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

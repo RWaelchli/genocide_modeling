@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{Epstein2002}
+J.~M. Epstein, ``{Modeling civil violence: an agent-based computational
+  approach.},'' {\em Proceedings of the National Academy of Sciences of the
+  United States of America}, vol.~99 Suppl 3, pp.~7243--7250, 2002.
+
+\bibitem{Fonoberova2013}
+M.~Fonoberova, V.~a. Fonoberov, and I.~Mezi\'{c}, ``{Global
+  sensitivity/uncertainty analysis for agent-based models},'' {\em Reliability
+  Engineering \& System Safety}, vol.~118, pp.~8--17, Oct. 2013.
+
+\bibitem{Bennett2008}
+D.~S. Bennett, ``{Governments, Civilians, and the Evolution of Insurgency:
+  Modeling the Early Dynamics of Insurgencies},'' {\em Journal of Artificial
+  Societies and Social Simulation}, vol.~11, 2008.
+
+\bibitem{Bhavnani2000}
+R.~Bhavnani and D.~Backer, ``{Localized Ethnic Conflict and Genocide:
+  Accounting for Differences in Rwanda and Burundi},'' 2000.
+
+\bibitem{Saltelli2002}
+A.~Saltelli, ``{Making best use of model evaluations to compute sensitivity
+  indices},'' {\em Computer Physics Communications}, vol.~145, pp.~280--297,
+  2002.
+
+\bibitem{Saltelli2008}
+A.~Saltelli, M.~Ratto, T.~Andres, F.~Campolongo, J.~Cariboni, D.~Gatelli,
+  M.~Saisana, and S.~Tarantola, {\em {Global sensitivity analysis: the
+  primer}}.
+\newblock 2008.
+
+\end{thebibliography}
