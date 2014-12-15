@@ -18,8 +18,8 @@ max_age = 200;
 v_civ = 2; % vision
 k_P = 2.3; % parameter to estimate arrest probability P
 P = 0.025; % probability of the civilians to clone themselves in one iteration
-k_L = 0.1;
-L_mean = 0.4;
+k_L = 0.5;
+L_mean = 0.75;
 L_std = 0.1;
 T_mean = 0.1;
 T_std = 0.1;
@@ -37,9 +37,9 @@ jail = fun_init_jail(default_struct,J_max);
 
 %% Preallocation Storage Variables
 
-nIter = 15*max_age;
+nIter = 0.5.*max_age;
 
-% movie_test(nIter) = struct('cdata',[],'colormap',[]);
+movie_pres(nIter) = struct('cdata',[],'colormap',[]);
 
 n_1 = zeros(1,nIter+1);
 n_2 = zeros(1,nIter+1);
@@ -153,6 +153,38 @@ for n=1:nIter
 %     if n < nIter
 %         delete(f2) % deleting figure to have correct results
 %     end
+
+    f = figure(1);
+    set(f,'units','normalized', 'Position', [.1 .1 .7 .4])
+    s1 = subplot(1,2,1);
+    cla(s1)
+    hold on
+    scatter(C1_quiet(:,1), C1_quiet(:,2),80,'filled','s','MarkerFaceColor','y');
+    scatter(C1_active(:,1), C1_active(:,2),80,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r','LineWidth',2);
+    scatter(C2_quiet(:,1), C2_quiet(:,2),80,'filled','s','MarkerFaceColor','g');
+    scatter(C2_active(:,1), C2_active(:,2),80,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r','LineWidth',2);
+    scatter(Cops(:,1), Cops(:,2),80,'filled','s','MarkerFaceColor','k');
+    xlim([1 N])
+    ylim([1 N])
+    axis('square')
+    set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
+    grid on
+    hold off
+    
+    subplot(1,2,2)
+    scatter(G(:,1), G(:,2),80,G(:,3),'filled','s');
+    xlim([1 N])
+    ylim([1 N])
+    axis('square')
+    caxis([0 1]);
+    colormap(cool);
+    ch = colorbar;
+    set(ch, 'YTick', [0:0.1:1]);
+    set(get(ch, 'ylabel'), 'string', 'Grievance','FontSize',14);
+    set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
+    grid on
+    
+    movie_pres(n) = getframe(gcf);
     
     %% Updating The Count Of The Civilians
     
@@ -174,80 +206,80 @@ for n=1:nIter
 
 end
 
-f3 = figure(3);
-subplot(1,2,1)
-hold on
-plot(1:nIter,sum_kills,1:nIter,sum_arrests)
-xlim([1 nIter])
-ylim([0 nIter])
-xlabel('Turn','FontSize',14)
-ylabel('Cumulative Number','FontSize',14)
-legend({'Killings','Arrests'},'FontSize',14,'location','NorthWest')
-hold off
+% f3 = figure(3);
+% subplot(1,2,1)
+% hold on
+% plot(1:nIter,sum_kills,1:nIter,sum_arrests)
+% xlim([1 nIter])
+% ylim([0 nIter])
+% xlabel('Turn','FontSize',14)
+% ylabel('Cumulative Number','FontSize',14)
+% legend({'Killings','Arrests'},'FontSize',14,'location','NorthWest')
+% hold off
+% 
+% subplot(1,2,2)
+% hold on
+% plot(0:nIter,n_1,0:nIter,n_2)
+% xlim([0 nIter])
+% ylim([0 N^2])
+% xlabel('Turn','FontSize',14)
+% ylabel('Population','FontSize',14)
+% legend({'Ethnicity 1','Ethnicity 2'},'FontSize',14,'location','SouthEast')
+% hold off
+% 
+% saveas(f3,'kills_arrests_L_04.png')
 
-subplot(1,2,2)
-hold on
-plot(0:nIter,n_1,0:nIter,n_2)
-xlim([0 nIter])
-ylim([0 N^2])
-xlabel('Turn','FontSize',14)
-ylabel('Population','FontSize',14)
-legend({'Ethnicity 1','Ethnicity 2'},'FontSize',14,'location','SouthEast')
-hold off
+% f4 = figure(4);
+% plot(1:nIter,n1_active,1:nIter,n2_active,1:nIter,n_jail)
+% xlim([0 nIter])
+% ylim([0 nIter])
+% xlabel('Turn','FontSize',14)
+% ylabel('Number [-]','FontSize',14)
+% legend({'Actives Ethnicity 1','Actives Ethnicity 2','Civilians in Jail'},'FontSize',14,'location','best')
+% 
+% saveas(f4,'active_jail_L_04.png')
 
-saveas(f3,'kills_arrests_L_04.png')
-
-f4 = figure(4);
-plot(1:nIter,n1_active,1:nIter,n2_active,1:nIter,n_jail)
-xlim([0 nIter])
-ylim([0 nIter])
-xlabel('Turn','FontSize',14)
-ylabel('Number [-]','FontSize',14)
-legend({'Actives Ethnicity 1','Actives Ethnicity 2','Civilians in Jail'},'FontSize',14,'location','best')
-
-saveas(f4,'active_jail_L_04.png')
-
-f5 = figure(5);
-hold on
-scatter(C1_quiet(:,1), C1_quiet(:,2),100,'filled','s','MarkerFaceColor','y');
-scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r','LineWidth',2);
-scatter(C2_quiet(:,1), C2_quiet(:,2),100,'filled','s','MarkerFaceColor','g');
-scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r','LineWidth',2);
-scatter(Cops(:,1), Cops(:,2),100,'filled','s','MarkerFaceColor','k');
-xlim([1 N])
-ylim([1 N])
-grid on
-
-set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
-
-hold off
-
-saveas(f5,'map_end_L_04.png')
+% f5 = figure(5);
+% hold on
+% scatter(C1_quiet(:,1), C1_quiet(:,2),100,'filled','s','MarkerFaceColor','y');
+% scatter(C1_active(:,1), C1_active(:,2),100,'filled','s','MarkerFaceColor','y','MarkerEdgeColor','r','LineWidth',2);
+% scatter(C2_quiet(:,1), C2_quiet(:,2),100,'filled','s','MarkerFaceColor','g');
+% scatter(C2_active(:,1), C2_active(:,2),100,'filled','s','MarkerFaceColor','g','MarkerEdgeColor','r','LineWidth',2);
+% scatter(Cops(:,1), Cops(:,2),100,'filled','s','MarkerFaceColor','k');
+% xlim([1 N])
+% ylim([1 N])
+% grid on
+% 
+% set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
+% 
+% hold off
+% 
+% saveas(f5,'map_end_L_04.png')
 
 % movie(gcf,M,2,1);
 
-f6 = figure(6);
-plot(1:nIter,L1,1:nIter,L2)
-xlim([0 nIter])
-ylim([0 1])
-xlabel('Turn [-]','FontSize',14)
-ylabel('Mean Perceived Legitimacy','FontSize',14)
+% f6 = figure(6);
+% plot(1:nIter,L1,1:nIter,L2)
+% xlim([0 nIter])
+% ylim([0 1])
+% xlabel('Turn [-]','FontSize',14)
+% ylabel('Mean Perceived Legitimacy','FontSize',14)
+% 
+% saveas(f6,'legitimacy_L_04.png')
 
-saveas(f6,'legitimacy_L_04.png')
+% f7 = figure(7);
+% scatter(G(:,1), G(:,2),100,G(:,3),'filled','s');
+% xlim([1 N])
+% ylim([1 N])
+% 
+% caxis([0 1]);
+% colormap(cool);
+% ch = colorbar;
+% set(ch, 'YTick', [0:0.1:1]);
+% set(get(ch, 'ylabel'), 'string', 'Grievance','FontSize',14);
+% set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
+% grid on
+% 
+% saveas(f7,'grevance_end_L_04.png')
 
-f7 = figure(7);
-scatter(G(:,1), G(:,2),100,G(:,3),'filled','s');
-xlim([1 N])
-ylim([1 N])
-
-caxis([0 1]);
-colormap(cool);
-ch = colorbar;
-set(ch, 'YTick', [0:0.1:1]);
-set(get(ch, 'ylabel'), 'string', 'Grievance','FontSize',14);
-set(gca,'XTickLabel',[],'YTickLabel',[],'XTick',1:N,'YTick',1:N);
-grid on
-
-saveas(f7,'grevance_end_L_04.png')
-
-% movie2avi(movie_test,'movie_test','fps',1)
+movie2avi(movie_pres,'movie_pres','fps',1)
